@@ -1,0 +1,4 @@
+ng g module extension/xx --module extension/extension.module
+ng g c extension/xx --module extension/extension.module
+C:\Github\UAT new UI>ng g c extension/events/create-event/event-members --module extension/events/create-event.module
+ng g c extension/events/create-event/event-description/create-event-description --module extension/events/create-event.module

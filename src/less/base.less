@@ -1,0 +1,70 @@
+.uat-body {
+  height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  .header {
+    display: flex;
+    //justify-content: center;
+    align-items: center;
+    .brand {
+      flex-basis: 33%;
+      text-align: right;
+      h2 {
+        color: var(--primary);
+      }
+    }
+    .menu {
+      flex-basis: 67%;
+      max-width: 960px;
+    }
+  }
+  .main-container {
+    display: flex;
+    height: calc(100vh - 60px);
+    background-color: #f3f4f5;
+    .left-container {
+      height: 100%;
+      width: 100%;
+      flex-basis: 33%;
+      background-color: #363636;
+      color: #dddddd;
+      overflow: auto;
+      .left-navigation {
+        max-width: 600px;
+      }
+    }
+
+    .right-container {
+      width: 100%;
+      flex-basis: 67%;
+      overflow: auto;
+      .content {
+        max-width: 960px;
+      }
+      &::-webkit-scrollbar {
+        width: 5px;
+        height: 3px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: #949494;
+      }
+      &::-webkit-scrollbar-thumb:hover {
+        background: #64866b;
+      }
+    }
+  }
+
+}
+
+.left-container::-webkit-scrollbar {
+  width: 5px;
+  height: 3px;
+}
+.left-container::-webkit-scrollbar-thumb {
+  background-color: #949494;
+}
+.left-container::-webkit-scrollbar-thumb:hover {
+  background: #64866b;
+}

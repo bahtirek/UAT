@@ -1,0 +1,15 @@
+<div class="folder-tree">
+  <div class="folder-name">
+    <span class="folder-svg cursor-pointer" [ngClass]="{'expand': expand}" (click)="toggleFolder()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#17b546" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </span>
+    <div class="folder-settings">
+      <span class="folder-name cursor-pointer" (click)="chooseDirectory()">{{directory.name}}</span>
+      <app-more-button-menu [actions]="actions" (onAction)="onAction($event)"></app-more-button-menu>
+    </div>
+  </div>
+  <div class="sub-folders" *ngIf="expand">
+    <app-test-case *ngFor="let testCase of directory.testCases; index as i" [testCase]="testCase"></app-test-case>
+    <app-directory *ngFor="let dir of directory.childDirectories; index as i" [directory]="dir"></app-directory>
+  </div>
+</div>

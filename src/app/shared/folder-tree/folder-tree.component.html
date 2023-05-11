@@ -1,0 +1,22 @@
+<div class="case-title flex items-center">
+  <ng-container *ngIf="folder?.path">
+    <span class="title-sm ">Group: </span>
+    <span>{{folder?.path}}</span>
+  </ng-container>
+  <ng-container *ngIf="!folder?.path">
+    <span class="title-sm ">Choose group </span>
+  </ng-container>
+  
+  <app-more-button-menu [actions]="actions" (onAction)="onAction($event)"></app-more-button-menu>
+</div>
+<div *ngIf="showFolders">
+  <app-folder-node *ngFor="let folder of folders; index as i" [folder]="folder"></app-folder-node>
+  <div class="btn-group">
+    <button class=""  data-listener="off" (click)="onSaveFolder()"  >
+        <span>Save</span> 
+    </button>
+    <button class="btn-danger"  data-listener="off" (click)="onCancel()"  >
+        <span>Cancel</span> 
+    </button>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+
+<div class="width-full">
+    <div class="form-container">
+        <label for="label">Test case title</label>
+        <input type="text" name="label" [(ngModel)]="title" (ngModelChange)="titleSearch.next($event)"/>
+        <div  class="form-error-message" *ngIf="searchError">{{searchError}}</div>
+        <span class="search-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00ad55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </span >
+        <div class="search-results" *ngIf="testCases && testCases.length > 0">
+            <ul>
+                <li *ngFor="let testCase of testCases; index as i" [ngClass]="{'ui-br-ext-hide': testCase.testCaseId == testCaseId}" (click)="onImport(testCase)">
+                    <span class="ui-br-ext-module-label">{{testCase.title}}</span>
+                    <span [ngClass]="submitInProgress == testCase.testCaseId ? 'spinner' : ''"  ></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<h3>{{testCase.title}} - <span class="note-message-2">{{testCase.testStepOrder.length}} steps</span></h3>
+<div class="ui-uat-ext-step" *ngFor="let step of testCase?.testStepOrder; index as i">
+    <ng-container *ngIf="!step.importedTestCaseId">
+        <div class="ui-uat-ext-step-number">{{i + 1}}</div>
+        <div class="ui-uat-ext-step-description">{{step.test_step.description}}</div>
+        <div class="ui-uat-ext-step-expectedResults">{{step.test_step.expected}}</div>
+    </ng-container>
+    <ng-container  *ngIf="step.importedTestCaseId">
+        <div class="ui-uat-ext-step-number">{{i + 1}}</div>
+        <div class="ui-uat-ext-step-description width-full text-bold">{{step.importedCaseTitle}} <span class="note-message">(Imported case)</span></div>
+    </ng-container>
+</div>

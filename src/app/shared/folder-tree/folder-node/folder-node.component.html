@@ -1,0 +1,22 @@
+<div class="folder-tree">
+  <ng-container *ngIf="!folder.subFolders">
+    <div class="folder-name">
+      <span class="folder-svg">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#17b546" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/></svg>
+      </span>
+      <span class="folder-name cursor-pointer" (click)="chooseFolder()" [ngClass]="{'active': folder?.folderId == activeFolder?.folderId}">{{folder.name}}</span>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="folder.subFolders">
+    <div class="folder-name">
+      <span class="folder-svg cursor-pointer" [ngClass]="{'expand': expand}" (click)="toggleFolder()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#17b546" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </span>
+      <span class="folder-name cursor-pointer" (click)="chooseFolder()"[ngClass]="{'active': folder?.folderId == activeFolder?.folderId}">{{folder.name}}</span>
+    </div>
+    <div class="sub-folders" *ngIf="expand">
+      <app-folder-node *ngFor="let folderItem of folder.subFolders; index as i" [folder]="folderItem" [path]="folder.path"></app-folder-node>
+    </div>
+  </ng-container>
+</div>
+

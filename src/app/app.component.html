@@ -1,0 +1,5 @@
+<div class="uat-body">
+  <router-outlet></router-outlet>
+</div>
+<app-toaster-container></app-toaster-container>
+<app-loader *ngIf="loading | async"></app-loader>

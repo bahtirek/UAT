@@ -1,0 +1,10 @@
+
+<div class="width-full">
+  <div class="form-container">
+      <label for="label">Environment</label>
+      <select id="ui-br-ext-status" name="status" [(ngModel)]="environmentId" (change)="onSaveEnvironment()">
+        <option *ngFor="let env of environments; index as i" [ngValue]="env.environmentId">{{env.name}}</option>
+      </select>
+      <div class="note-message" *ngIf="searchError">{{searchError}}</div>
+  </div>
+</div>

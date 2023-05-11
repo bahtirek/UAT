@@ -1,0 +1,11 @@
+<div class="ui-br-ext-modal">
+    <div class="ui-br-ext-modal-content" [ngClass]="propClass">
+        <span class="ui-br-ext-modal-close-btn"  id="ui-br-ext-close-button" (click)="onCloseBtnClick()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1e1e1e" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="ui-br-ext-feather feather-x">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" /></svg>
+        </span>
+        <ng-content></ng-content>
+    </div>
+</div>

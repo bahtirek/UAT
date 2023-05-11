@@ -1,0 +1,13 @@
+<div class="drop-menu" (mouseleave)="onMouseLeave()">
+    <span class="more-btn" (click)="onButtonClick($event)" #moreButton>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+    </span>
+    <div class="drop-menu-body" [ngClass]="align" *ngIf="showMenu" (mouseenter)="onMouseEnter()">
+        <ul>
+            <ng-container *ngFor="let action of actions; index as i">
+                <li (click)="onActionClick(i)" *ngIf="action.display">{{action.name}}</li>
+            </ng-container>
+        </ul>
+    </div>
+</div>
+
