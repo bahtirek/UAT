@@ -9,14 +9,14 @@
     //justify-content: center;
     align-items: center;
     .brand {
-      flex-basis: 33%;
+      flex-basis: 30%;
       text-align: right;
       h2 {
         color: var(--primary);
       }
     }
     .menu {
-      flex-basis: 67%;
+      flex-basis: 70%;
       max-width: 960px;
     }
   }
@@ -27,21 +27,50 @@
     .left-container {
       height: 100%;
       width: 100%;
-      flex-basis: 33%;
+      min-width: 300px;
+      flex-basis: 30%;
       background-color: #363636;
+      background-color: #464646;
       color: #dddddd;
       overflow: auto;
+      display: flex;
+      flex-direction: column;
+      .left-top-navigation {
+        padding: 0px 20px 0px 20px;
+        ul {
+          list-style-type: none;
+          li {
+            padding-block: 10px;
+            border-bottom: 1px solid #fff;
+            text-align: right;
+            font-size: 17px;
+            cursor: pointer;
+            &:hover {
+              background-color: #565656;
+            }
+          }
+        }
+      }
       .left-navigation {
+        padding: 20px;
         max-width: 600px;
       }
     }
 
     .right-container {
       width: 100%;
-      flex-basis: 67%;
+      flex-basis: 70%;
       overflow: auto;
-      .content {
+      .right-content {
+        padding: 40px 14px 40px 40px;
         max-width: 960px;
+        box-sizing: border-box;
+        .header {
+          h2 {
+            margin-top: 0;
+            margin-bottom: 30px;
+          }
+        }
       }
       &::-webkit-scrollbar {
         width: 5px;

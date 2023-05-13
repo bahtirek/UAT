@@ -1,0 +1,16 @@
+<ng-container *ngIf="testCase?.title">
+  <div>
+    <div class="card ">
+      <div class="case-title flex items-center">
+        <span class="title-sm ">Case title: </span>
+        <span>{{testCase.title}}</span>
+        <app-more-button-menu [actions]="actions" (onAction)="onAction($event)"></app-more-button-menu>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<app-modal *ngIf="isCaseTitleModalOn" (closeModal)="onCreateCancel()">
+  <app-create-case-title (cancel)="onCreateCancel()" (onTestCaseTitleSaved)="onTestCaseTitleSaved($event)"
+    [testCase]="testCaseToEdit"></app-create-case-title>
+</app-modal>

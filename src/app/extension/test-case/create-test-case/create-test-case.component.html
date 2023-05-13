@@ -1,0 +1,8 @@
+
+<div class="card no-left-margin">
+    <app-folder-tree [showFolders]="showFolders" (folderSaved)="folderSaved($event)"></app-folder-tree>
+</div>
+<app-case-title [onCreate]="onCreate" [testCaseProp]="testCase"></app-case-title>
+<ng-container *ngIf="testCase.title">
+    <app-case-steps></app-case-steps>
+</ng-container>

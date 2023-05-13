@@ -1,0 +1,166 @@
+.main-container {
+
+    button {
+        font-family: Roboto, Arial!important;
+        font-size: 14px !important;
+        height: 29px !important;
+        padding: 7px 12px !important;
+        border-radius: 4px !important;
+        display: block !important;
+        border: none !important;
+        background-color: #ffffff !important;
+        font-weight: bold !important;
+        color: @primary-color !important;
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px !important;
+        cursor: pointer;
+        white-space: nowrap;
+
+        &:hover:not(:disabled) {
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
+        }
+
+        &:active:not(:disabled) {
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px !important;
+        }
+
+        &:disabled {
+            color: #c4c8c7;
+            pointer-events: none;
+        }
+
+        &.btn-danger {
+            color: @danger-color !important;
+        }
+
+        &.btn-link {
+            border: none !important;
+            background: none;
+            color: #00ad55 !important;
+            margin-right: 0px;
+            padding: 0 !important;
+            cursor: pointer !important;
+            box-sizing: border-box;
+            height: 17px !important;
+            font-size: 14px !important;
+            box-shadow: none !important;
+            display: inline-block !important;
+            &:hover {
+                box-shadow: none !important;
+                text-shadow: 1px 1px 1px #bdd9ca;
+            }
+        }
+    }
+
+    .icon-btn {
+        &::before {
+            color: var(--primary);
+        }
+        svg {
+            stroke: var(--primary);
+            transform: scale(1.4);
+        }
+    }
+    
+    button[aria-busy=true] {
+        pointer-events: none;
+        cursor: progress;
+
+        ::before {
+            display: inline-block;
+            width: 0.8em;
+            height: 0.8em;
+            border: 0.1875em solid currentColor;
+            border-radius: 1em;
+            border-right-color: transparent;
+            content: "";
+            vertical-align: text-bottom;
+            vertical-align: -0.125em;
+            animation: spinner .75s linear infinite;
+            opacity: var(--loading-spinner-opacity);
+            margin-right: 8px;
+            margin-left: 0;
+            -webkit-margin-start: 0;
+            margin-inline-start: 0;
+            -webkit-margin-end: 8px;
+            margin-inline-end: 8px;
+        }
+    }
+
+    .btn-group {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
+        padding-top: 10px;
+
+        button:not(:last-child) {
+            margin-right: 28px;
+        }
+    }
+    
+    .spinner {
+        pointer-events: none;
+        cursor: progress;
+
+        &::before {
+            display: inline-block;
+            width: 0.8em;
+            height: 0.8em;
+            border: 0.1875em solid currentColor;
+            border-radius: 1em;
+            border-right-color: transparent;
+            content: "";
+            vertical-align: text-bottom;
+            vertical-align: -0.125em;
+            animation: spinner .75s linear infinite;
+            opacity: var(--loading-spinner-opacity);
+            margin-right: 8px;
+            margin-left: 0;
+            -webkit-margin-start: 0;
+            margin-inline-start: 0;
+            -webkit-margin-end: 8px;
+            margin-inline-end: 8px;
+        }
+    }
+
+    a {
+        font-weight: bold;
+        color: var(--primary);
+        white-space: nowrap;
+        text-decoration: none;
+        cursor: pointer;
+        &:hover {
+          color: var(--primary-hover);
+        }
+        &:active, &:focus {
+          color: var(--primary-focus);
+        }
+        &.active {
+          color: var(--primary-focus);
+          text-decoration: underline;
+        }
+
+        &.link-danger {
+            color: var(--danger);
+
+            &:hover {
+                color: var(--danger-light);
+            }
+        }
+      }
+      
+      .link-group {
+        a:not(:last-child) {
+          margin-right: 15px;
+          padding-right: 16px;
+          border-right: 1px solid var(--text-lightest);
+        }
+      }
+    
+}
+
+@keyframes spinner {
+    to {
+      transform: rotate(360deg);
+    }
+}

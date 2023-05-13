@@ -1,0 +1,20 @@
+<div >
+    <h3>Case title</h3>
+    <div class="width-full">
+        <div class="form-container">
+            <label for="label">Title</label>
+            <input type="text" name="label" [(ngModel)]="testCase.title" />
+            <span class="form-error-message">
+                <span *ngFor="let error of formError.title; index as i">{{error}}</span>
+            </span>
+        </div>
+        <div class="btn-group">
+            <button class=""  data-listener="off" (click)="onSaveTestCase()"  >
+                <span>Save</span> 
+            </button>
+            <button class="btn-danger"  data-listener="off" (click)="onCancel()"  >
+                <span>Cancel</span> 
+            </button>
+        </div>
+    </div>
+</div>

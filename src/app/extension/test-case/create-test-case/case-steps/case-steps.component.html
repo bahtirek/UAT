@@ -1,0 +1,56 @@
+<div>
+    <div class="card">
+      <div class="case-title">
+        <span class="title-sm">Steps: </span>
+      </div>
+    <div class="ui-uat-ext-steps">
+      <div class="ui-uat-ext-step ui-uat-ext-table-header">
+        <div class="ui-uat-ext-step-number">#</div>
+        <div class="ui-uat-ext-step-description">Description</div>
+        <div class="ui-uat-ext-step-expectedResults">Expected Results</div>
+        <div class="ui-uat-ext-step-more"></div>
+      </div>
+      <div class="ui-uat-ext-step" *ngFor="let step of testCase?.testStepOrder; index as i">
+        <ng-container *ngIf="!step.importedTestCaseId">
+          <div class="ui-uat-ext-step-number">{{i + 1}}</div>
+          <div class="ui-uat-ext-step-description">{{step.test_step?.description}}</div>
+          <div class="ui-uat-ext-step-expectedResults">{{step.test_step?.expected}}</div>
+          <div class="ui-uat-ext-step-more">
+            <app-more-button-menu [actions]="actions" (onAction)="onAction($event, i)" class="flex justify-center">
+            </app-more-button-menu>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="step.importedTestCaseId">
+          <div class="ui-uat-ext-step-number">{{i + 1}}</div>
+          <div class="ui-uat-ext-step-description width-full text-bold">{{step?.importedCaseTitle}} <span
+              class="note-message">(Imported case)</span></div>
+          <div class="ui-uat-ext-step-more">
+            <app-more-button-menu [actions]="importActions" (onAction)="onImportAction($event, step, i)"
+              class="flex justify-center"></app-more-button-menu>
+          </div>
+        </ng-container>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="flex justify-between">
+  <a [routerLink]="['../../dashboard']" [skipLocationChange]="true" routerLinkActive="active">Back to Dashboard</a>
+
+  <div class="link-group flex justify-end">
+    <a (click)="onImportSteps()">Import steps</a>
+    <a (click)="onStepAdd()">Add new step</a>
+  </div>
+</div>
+<app-modal *ngIf="isAddStepModalOn" (closeModal)="toggleModal('addNewStepModal')" [propClass]="'width-full'">
+  <app-create-step (cancel)="toggleModal('addNewStepModal')" [stepToEdit]="stepToEdit" [stepOrder]="stepOrder"
+    [testCaseId]="testCase?.testCaseId"></app-create-step>
+</app-modal>
+<app-modal *ngIf="isDeleteModalOn" (closeModal)="toggleModal('deleteStepModal')">
+  <app-delete-step (cancel)="toggleModal('deleteStepModal')" [stepToDelete]="stepToDelete"></app-delete-step>
+</app-modal>
+<app-modal *ngIf="importsReviewModalOn" (closeModal)="toggleModal('importsReviewModal')" [propClass]="'width-full'">
+  <app-review-steps [testCase]="testCaseToReview"></app-review-steps>
+</app-modal>
+<app-import-steps></app-import-steps>

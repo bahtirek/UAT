@@ -1,0 +1,36 @@
+
+
+<div class="form-container">
+    <h3>Step</h3>
+    <div class="width-full">
+        <form [formGroup]="stepForm" novalidate #form autocomplete="off">
+            <div class="ui-br-ext-flex ui-br-ext-nowrap ui-br-ext-gap-12">
+                <div class="form-container">
+                    <label for="ui-br-ext-description">Description</label>
+                    <textarea name="ui-br-ext-description" rows="3" data-gramm="false" maxlength="1000" formControlName="description" id="description" required></textarea>
+                    <span class="form-error-message" *ngIf="(description.dirty || submitClicked) && description.invalid">
+                        <div>Field is required</div>
+                    </span>
+                </div>
+                <div class="spacer-1"></div>
+                <div class="form-container">
+                    <label for="ui-br-ext-description">Expected results</label>
+                    <textarea name="ui-br-ext-description" rows="3" data-gramm="false" maxlength="1000" formControlName="expected" id="expected" required></textarea>
+                    <span class="form-error-message" *ngIf="(expected.dirty || submitClicked) && expected.invalid">
+                        <div>Field is required</div>
+                    </span>
+                </div>
+            </div>
+        </form>
+        <div class="btn-group">
+            <button class=""  data-listener="off" (click)="onStepSave()" (keyup.enter)="onStepSave()">
+                <span class="ui-br-ext-spinner"></span>
+                <span>Save</span> 
+            </button>
+            <button class="btn-danger"  data-listener="off" (click)="onCancel()" >
+                <span class="ui-br-ext-spinner"></span>
+                <span>Cancel</span> 
+            </button>
+        </div>
+    </div>
+</div>

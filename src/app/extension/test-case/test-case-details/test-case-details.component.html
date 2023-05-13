@@ -1,0 +1,59 @@
+<div>
+  <div class="card">
+    <h3>Test case title</h3>
+    <ul>
+      <li>Total steps .... 20</li>
+      <li>Imported cases</li>
+      <li>Average execution time</li>
+      <li>Recent executed</li>
+      <li>Created on</li>
+      <li>Created by</li>
+    </ul>
+  </div>
+</div>
+<div>
+  <div class="card">
+    <div class="ui-uat-ext-steps">
+      <div class="ui-uat-ext-step ui-uat-ext-table-header">
+        <div class="ui-uat-ext-step-number">#</div>
+        <div class="ui-uat-ext-step-description">Description</div>
+        <div class="ui-uat-ext-step-expectedResults">Expected Results</div>
+      </div>
+      <div class="ui-uat-ext-step" *ngFor="let step of testCase?.testStepOrder; index as i">
+        <ng-container *ngIf="!step.importedTestCaseId">
+          <div class="ui-uat-ext-step-number">{{i + 1}}</div>
+          <div class="ui-uat-ext-step-description">{{step.test_step?.description}}</div>
+          <div class="ui-uat-ext-step-expectedResults">{{step.test_step?.expected}}</div>
+        </ng-container>
+        <ng-container *ngIf="step.importedTestCaseId">
+          <div class="ui-uat-ext-step-number">{{i + 1}}</div>
+          <div class="ui-uat-ext-step-description width-full text-bold pointer" (click)="onImportsReview(step)">
+            {{step.importedCaseTitle}} 
+            <span class="note-message">(Imported case)</span></div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="flex justify-between">
+  <a [routerLink]="['../dashboard']" [skipLocationChange]="true" routerLinkActive="active">Back to Dashboard</a>
+  <div class="link-group flex justify-end">
+    <a (click)="onEdit()">Edit</a>
+    <a class="link-danger" (click)="toggleDeleteModal()">Delete</a>
+  </div>
+</div>
+<app-modal *ngIf="importsReviewModalOn" (closeModal)="toggleModal()"  [propClass]="'width-full'">
+  <app-review-steps [testCase]="testCaseToReview"></app-review-steps>
+</app-modal>
+
+<app-modal *ngIf="deleteModalOn" (closeModal)="toggleDeleteModal()" >
+  <h3>Delete test case</h3>
+  <div class="btn-group">
+    <button class=""  data-listener="off" (click)="onDeleteTestCase()"  >
+        <span>Delete</span> 
+    </button>
+    <button class="btn-danger"  data-listener="off" (click)="toggleDeleteModal()">
+        <span>Cancel</span> 
+    </button>
+</div>
+</app-modal>

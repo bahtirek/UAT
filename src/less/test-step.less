@@ -1,0 +1,44 @@
+.ui-uat-ext-step {
+    display: flex;
+    padding: 5px 0 10px;
+    border-top: 1px solid #cdcdcd;
+    &:last-child {
+        border-bottom: 1px solid #cdcdcd;
+        margin-bottom: 20px;
+    }
+    &:hover {
+        background-color: #f7f7f7;
+    }
+    .ui-uat-ext-step-number {
+        width: 50px;
+        border-left: none !important;
+    }
+    .ui-uat-ext-step-description {
+        width: 50%;
+    }
+    .ui-uat-ext-step-expectedResults {
+        width: 50%;
+    }
+    .ui-uat-ext-step-more {
+        width: 50px;
+    }
+    .ui-uat-ext-step-number, .ui-uat-ext-step-description, .ui-uat-ext-step-expectedResults, .ui-uat-ext-step-more {
+        border-left: 1px solid #dcdcdc;
+        padding: 5px 10px;
+    }
+    &.ui-uat-ext-table-header {
+        border-top: none;
+        background-color: #ededed;
+        padding: 10px 0px;
+    }
+}
+
+.case-title {
+    display: flex;
+    flex-wrap: nowrap;
+    padding-block: 5px;
+    app-more-button-menu {
+        margin-left: auto;
+        margin-right: 12px;
+    }
+}
