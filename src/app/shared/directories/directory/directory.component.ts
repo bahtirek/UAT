@@ -31,17 +31,16 @@ export class DirectoryComponent implements OnInit {
 
   constructor(private testCaseService: TestCaseService, private router: Router, private route: ActivatedRoute) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.expand = this.directory.expand
+  }
 
   @Input() directory: Directory;
   @Input() folderType: string;
 
-  chooseDirectory(){
-
-  }
-
   toggleFolder(){
     this.expand = !this.expand
+    this.directory.expand = this.expand;
   }
 
   onFolderEdit(){}

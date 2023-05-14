@@ -5,6 +5,7 @@ export interface Directory {
   directoryId?: number,
   isProject?: boolean,
   parentDirectoryId?: number,
+  expand?: boolean,
   childDirectories?: Directory[]
   testCases?: TestCase[]
 }

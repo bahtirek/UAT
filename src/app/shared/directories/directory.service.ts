@@ -9,6 +9,7 @@ import { Directory } from '../../interfaces/directory.interface';
 })
 export class DirectoryService {
 
+
   url = api.url;
 
   constructor(private http: HttpClient) { }
@@ -17,6 +18,45 @@ export class DirectoryService {
     return this.http.get<any>(this.url + '/project-directories')
   }
 
-  directorySource = new Subject<Directory>();
+  setDirectories(directoryId?: number) {
+    this.getAllDirectories().subscribe({
+      next: (response) => {
+        if(directoryId){
+          for (let i = 0; i < response.length; i++) {
+            const childDir = response[i];
+            let result = this.expand(childDir, directoryId);
+            if(result){
+              childDir.expand = true;
+            }
+          }
+        }
+        console.log(response);
+
+        this.directoriesSource.next(response);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
+
+  expand(directory: Directory, directoryId: number){
+    if(directory.directoryId === directoryId) {
+      directory.expand = true;
+      return true;
+    }
+    if(directory.childDirectories && directory.childDirectories.length > 0) {
+      for (let i = 0; i < directory.childDirectories.length; i++) {
+        const childDir = directory.childDirectories[i];
+        let result = this.expand(childDir, directoryId);
+        if(result){
+          childDir.expand = true;
+          return true;
+        }
+      }
+    }
+  }
+
+  directoriesSource = new Subject<Directory[]>();
 
 }

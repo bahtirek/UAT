@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TestCase } from 'src/app/interfaces/test-case.interface';
 import { TestCaseService } from 'src/app/services/test-case.service';
+import { DirectoryService } from 'src/app/shared/directories/directory.service';
 
 @Component({
   selector: 'app-create-case-title',
@@ -13,7 +14,7 @@ export class CreateCaseTitleComponent implements OnInit {
   formError: FormError = {};
   submitInProgress: boolean = false;
 
-  constructor(private testCaseService: TestCaseService) { }
+  constructor(private testCaseService: TestCaseService, private directoryService: DirectoryService) { }
 
   ngOnInit(): void {
   }
@@ -58,7 +59,7 @@ export class CreateCaseTitleComponent implements OnInit {
         console.log(response);
         this.submitInProgress = false;
         this.onTestCaseTitleSaved.emit(response);
-        //this.testCaseService.setTestCase(response)
+        this.directoryService.setDirectories(this.testCaseService.directory.directoryId);
       },
       error => {
         this.submitInProgress = false;

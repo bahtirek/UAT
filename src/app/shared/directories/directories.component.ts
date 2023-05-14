@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterContentChecked, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Directory } from 'src/app/interfaces/directory.interface';
 import { DirectoryService } from './directory.service';
 
@@ -16,18 +16,11 @@ export class DirectoriesComponent implements OnInit {
   @Input() folderType: string;
 
   ngOnInit(): void {
-    this.directoryService.getAllDirectories().subscribe({
+    this.directoryService.directoriesSource.subscribe({
       next: (response) => {
-        console.log(response);
         this.directories = response;
-      },
-      error: (error) => {
-        console.log(error);
-
       }
     })
+    this.directoryService.setDirectories()
   }
-
-
-
 }
