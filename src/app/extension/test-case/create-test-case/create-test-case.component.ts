@@ -31,19 +31,6 @@ export class CreateTestCaseComponent implements OnInit {
 
   editOrNew(){
     if(!this.testCaseService.testCaseDetails?.testCaseId){
-      this.showFolders = true;
-    } else {
-      this.testCase = this.testCaseService.getTestCase();
-    }
-  }
-
-  folderSaved(folder: Folder){
-    this.folder = folder;
-    if(!this.testCase?.testCaseId) this.onCreate = true;
-  }
-
-  editOrNew2(){
-    if(!this.testCaseService.testCaseDetails?.testCaseId){
       this.onCreate = true;
     } else {
       this.testCase = this.testCaseService.getTestCase();

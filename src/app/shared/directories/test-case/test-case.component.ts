@@ -10,9 +10,11 @@ export class TestCaseComponent implements OnInit {
 
   constructor() { }
 
+
   ngOnInit(): void {
   }
 
+  @Input() folderType: string;
   @Input() testCase: TestCase;
 
 }

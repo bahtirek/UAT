@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Directory } from 'src/app/interfaces/directory.interface';
 import { MoreButtonAction } from 'src/app/interfaces/more-button-action.interface';
+import { TestCaseService } from 'src/app/services/test-case.service';
 
 @Component({
   selector: 'app-directory',
@@ -27,36 +29,36 @@ export class DirectoryComponent implements OnInit {
     },
   ]
 
-  constructor() { }
+  constructor(private testCaseService: TestCaseService, private router: Router, private route: ActivatedRoute) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  @Input() directory: Directory;
+  @Input() folderType: string;
+
+  chooseDirectory(){
+
+  }
+
+  toggleFolder(){
+    this.expand = !this.expand
+  }
+
+  onFolderEdit(){}
+  onFolderAdd(){}
+  onTestCaseAdd() {
     console.log(this.directory);
-
+    this.testCaseService.directory = {directoryId: this.directory.directoryId, name: this.directory.name};
+    this.router.navigate(['test-case/create'], { skipLocationChange: true });
   }
 
-@Input() directory: Directory;
-
-chooseDirectory(){
-
-}
-
-toggleFolder(){
-  this.expand = !this.expand
-}
-
-onFolderEdit(){}
-onFolderAdd(){}
-onTestCaseAdd() {
-  throw new Error('Method not implemented.');
-}
-
-onAction(event: string){
-  switch (event) {
-    case 'edit': this.onFolderEdit(); break;
-    case 'addFolder': this.onFolderAdd(); break;
-    case 'addFTestCase': this.onTestCaseAdd(); break;
+  onAction(event: string){
+    switch (event) {
+      case 'edit': this.onFolderEdit(); break;
+      case 'addFolder': this.onFolderAdd(); break;
+      case 'addFTestCase': this.onTestCaseAdd(); break;
+    }
   }
-}
 
 
 }

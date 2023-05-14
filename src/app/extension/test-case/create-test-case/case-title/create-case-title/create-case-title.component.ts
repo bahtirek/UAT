@@ -11,7 +11,7 @@ export class CreateCaseTitleComponent implements OnInit {
 
   error: string[] = [];
   formError: FormError = {};
-  submitInProgress: boolean = false; 
+  submitInProgress: boolean = false;
 
   constructor(private testCaseService: TestCaseService) { }
 

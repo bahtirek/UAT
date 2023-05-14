@@ -7,6 +7,7 @@ export interface TestCase {
     created_at?: number,
     deleted?: boolean,
     importedTestCaseId?: number,
+    directoryId?: number,
     importedTestCases?: TestCase[],
     testStepOrder?: TestStepOrder[]
 }

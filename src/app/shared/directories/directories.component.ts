@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Directory } from 'src/app/interfaces/directory.interface';
 import { DirectoryService } from './directory.service';
 
@@ -12,6 +12,8 @@ export class DirectoriesComponent implements OnInit {
   directories: Directory[];
 
   constructor(private directoryService: DirectoryService) { }
+
+  @Input() folderType: string;
 
   ngOnInit(): void {
     this.directoryService.getAllDirectories().subscribe({

@@ -5,6 +5,7 @@ import { TestCase, ServerResponse, TestStepOrder } from '../interfaces/test-case
 import { api } from '../data/api-url';
 import { TestStep } from '../interfaces/test-step.interface';
 import { ImportedTestCase } from '../interfaces/imported-test-case.interface';
+import { Directory } from '../interfaces/directory.interface';
 
 
 @Injectable({
@@ -15,6 +16,8 @@ export class TestCaseService {
   url = api.url;
   stepOrderForImport: number;
   testCaseDetails: TestCase;
+  directory: Directory;
+
 
   constructor(private http: HttpClient) { }
 
@@ -36,6 +39,7 @@ export class TestCaseService {
   }
 
   addTestCase(testCase: TestCase): Observable<TestCase> {
+    testCase.directoryId = this.directory.directoryId;
     return this.http.post<ServerResponse<TestCase>>(this.url + '/test-case', testCase)
     .pipe(map(response => response?.result))
   }
@@ -110,9 +114,9 @@ export class TestCaseService {
       testCase.testStepOrder.splice(importedIndex, 1);
       testCase.testStepOrder.splice(importedIndex, 0, ...steps.testStepOrder );
       console.log(importedIndex);
-      
+
       this.createStepsArray(testCase, importedCases);
-    } 
+    }
   }
 
   createStepsArray2(testCase: TestCase){
@@ -121,9 +125,9 @@ export class TestCaseService {
       const steps = testCase.importedTestCases.find((importedCase: TestCase) => importedCase.testCaseId == testCase.testStepOrder[importedIndex].importedTestCaseId);
       testCase.testStepOrder.splice(importedIndex, 1);
       testCase.testStepOrder.splice(importedIndex, 0, ...steps.testStepOrder );
-      
+
       this.createStepsArray2(testCase);
-    } 
+    }
   }
 
   createStepsArrayPromise(testCase: TestCase, importedCases: TestCase[]){
