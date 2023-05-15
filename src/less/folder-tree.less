@@ -27,13 +27,8 @@
       padding-top: 1px;
     }
 
-    &.active {
-      background-color: #565656;
-      color: var(--primary-inverse);
-    }
-
-    &:hover {
-      background-color: #565656;
+    &.active, &:hover {
+      background-color: #dddddd;
     }
 
     .folder-settings {
@@ -58,5 +53,20 @@
   }
 
   .sub-folders {
+  }
+}
+
+.dark-mode {
+  .folder-tree {
+    .folder-name {
+      &.active {
+        background-color: #565656;
+        color: var(--primary-inverse);
+      }
+
+      &:hover {
+        background-color: #565656;
+      }
+    }
   }
 }
