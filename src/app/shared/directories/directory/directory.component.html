@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="sub-folders" *ngIf="expand">
-    <app-test-case *ngFor="let testCase of directory.testCases; index as i" [testCase]="testCase" [folderType]="folderType"></app-test-case>
     <app-directory *ngFor="let dir of directory.childDirectories; index as i" [directory]="dir" [folderType]="folderType"></app-directory>
+    <app-test-case *ngFor="let testCase of directory.testCases; index as i" [testCase]="testCase" [folderType]="folderType"></app-test-case>
   </div>
 </div>
