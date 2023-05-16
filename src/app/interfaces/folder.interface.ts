@@ -3,5 +3,6 @@ export interface Folder {
   folderId: number,
   state: boolean,
   path?: string,
+  projectId?: number,
   subFolders?: Folder[]
 }

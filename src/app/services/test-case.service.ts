@@ -39,7 +39,6 @@ export class TestCaseService {
   }
 
   addTestCase(testCase: TestCase): Observable<TestCase> {
-    testCase.directoryId = this.directory.directoryId;
     return this.http.post<ServerResponse<TestCase>>(this.url + '/test-case', testCase)
     .pipe(map(response => response?.result))
   }

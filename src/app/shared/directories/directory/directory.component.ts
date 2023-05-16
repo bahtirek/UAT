@@ -12,19 +12,25 @@ import { TestCaseService } from 'src/app/services/test-case.service';
 export class DirectoryComponent implements OnInit {
   expand: boolean;
   actions: MoreButtonAction[] = [
+
+    {
+      name: 'New folder',
+      action: 'addFolder',
+      display: true
+    },
+    {
+      name: 'New test case',
+      action: 'addTestCase',
+      display: true
+    },
     {
       name: 'Edit',
       action: 'edit',
       display: true
     },
     {
-      name: 'Add folder',
-      action: 'addFolder',
-      display: true
-    },
-    {
-      name: 'Create test case',
-      action: 'addFTestCase',
+      name: 'Delete',
+      action: 'deleteFolder',
       display: true
     },
   ]
@@ -44,10 +50,17 @@ export class DirectoryComponent implements OnInit {
   }
 
   onFolderEdit(){}
+
   onFolderAdd(){}
+
   onTestCaseAdd() {
-    console.log(this.directory);
-    this.testCaseService.directory = {directoryId: this.directory.directoryId, name: this.directory.name};
+    let projectId;
+    if(this.directory.isProject) {
+      projectId = this.directory.directoryId
+    } else {
+      projectId = this.directory.projectId
+    }
+    this.testCaseService.directory = {directoryId: this.directory.directoryId, name: this.directory.name, projectId: projectId};
     this.router.navigate(['test-case/create'], { skipLocationChange: true });
   }
 
@@ -55,9 +68,14 @@ export class DirectoryComponent implements OnInit {
     switch (event) {
       case 'edit': this.onFolderEdit(); break;
       case 'addFolder': this.onFolderAdd(); break;
-      case 'addFTestCase': this.onTestCaseAdd(); break;
+      case 'deleteFolder': this.onFolderDelete(); break;
+      case 'addTestCase': this.onTestCaseAdd(); break;
     }
   }
+  onFolderDelete() {
+    throw new Error('Method not implemented.');
+  }
+
 
 
 }

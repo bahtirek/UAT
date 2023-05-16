@@ -18,20 +18,16 @@ export class DirectoryService {
     return this.http.get<any>(this.url + '/project-directories')
   }
 
-  setDirectories(directoryId?: number) {
+  setDirectories(directoryId?: number, projectId?: number) {
     this.getAllDirectories().subscribe({
       next: (response) => {
         if(directoryId){
-          for (let i = 0; i < response.length; i++) {
-            const childDir = response[i];
-            let result = this.expand(childDir, directoryId);
-            if(result){
-              childDir.expand = true;
-            }
+          const childDir = response.find((dir: Directory) => dir.directoryId == projectId);
+          let result = this.expand(childDir, directoryId);
+          if(result){
+            childDir.expand = true;
           }
         }
-        console.log(response);
-
         this.directoriesSource.next(response);
       },
       error: (error) => {

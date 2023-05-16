@@ -8,6 +8,7 @@ export interface TestCase {
     deleted?: boolean,
     importedTestCaseId?: number,
     directoryId?: number,
+    projectId?: number,
     importedTestCases?: TestCase[],
     testStepOrder?: TestStepOrder[]
 }
