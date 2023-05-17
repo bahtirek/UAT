@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { take } from 'rxjs';
 import { Folder } from 'src/app/interfaces/folder.interface';
 import { TestCase } from 'src/app/interfaces/test-case.interface';
@@ -19,14 +19,27 @@ export class CreateTestCaseComponent implements OnInit {
   onCreate: boolean = false;
   showFolders: boolean = false;
   folder: Folder;
+  navigationSubscription;
 
-  constructor(private testCaseService: TestCaseService, private router: Router) { }
+  constructor(private testCaseService: TestCaseService, private router: Router) {
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.onInit()
+      }
+    });
+   }
 
-  ngOnInit(): void {
+  onInit() {
     this.editOrNew();
     this.testCaseService.testCaseSource.pipe(take(2)).subscribe((testCase: TestCase) => {
       this.testCase = testCase;
+      this.onCreate = false;
     })
+  }
+
+  ngOnInit(): void {
+    this.onInit()
   }
 
   editOrNew(){
@@ -47,6 +60,12 @@ export class CreateTestCaseComponent implements OnInit {
   }
   toggleModal(){
     this.caseChoiceModalOn = !this.caseChoiceModalOn;
+  }
+
+  ngOnDestroy() {
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+   }
   }
 
 }

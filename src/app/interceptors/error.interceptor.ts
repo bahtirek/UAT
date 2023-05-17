@@ -9,11 +9,11 @@ import {
 import { Observable, throwError } from "rxjs";
 import { catchError, retry } from "rxjs/operators";
 import { ToasterService } from "../shared/toaster/toaster.service";
-import { paths } from "../data/paths";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private toastr: ToasterService) {}
+  constructor(private toastr: ToasterService, private router: Router) {}
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
@@ -21,8 +21,10 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       /* retry(2), */
       catchError((error: HttpErrorResponse) => {
-        if (error.status !== 401) {
-          // 401 handled in auth.interceptor
+        if (error.status == 401) {
+          // 401 should be handled in auth.interceptor
+          this.router.navigate(['/'], { skipLocationChange: true });
+        } else {
           this.toastr.show('error', 'Sorry!', 'Something went wrong. Please try later. ')
         }
         return throwError(error);

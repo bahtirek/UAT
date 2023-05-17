@@ -60,6 +60,7 @@ export class DirectoryComponent implements OnInit {
     } else {
       projectId = this.directory.projectId
     }
+    this.testCaseService.testCaseDetails = {};
     this.testCaseService.directory = {directoryId: this.directory.directoryId, name: this.directory.name, projectId: projectId};
     this.router.navigate(['test-case/create'], { skipLocationChange: true });
   }

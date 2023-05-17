@@ -10,7 +10,7 @@ import { TestCaseService } from 'src/app/services/test-case.service';
   styleUrls: ['./case-title.component.less']
 })
 export class CaseTitleComponent implements OnInit {
-  
+
   createCase: boolean = false;
   testCase: TestCase;
   testCaseToEdit: TestCase = {};
@@ -50,10 +50,9 @@ export class CaseTitleComponent implements OnInit {
     this.testCaseToEdit = {...this.testCase};
     this.toggleAddTestCaseModal();
   }
-  
+
   onTestCaseTitleSaved(testCase: TestCase){
     this.testCaseService.setTestCase(testCase);
-    //this.testCase = testCase;
     this.toggleAddTestCaseModal();
   }
 

@@ -45,7 +45,6 @@ export class CreateCaseTitleComponent implements OnInit {
         console.log(response);
         this.submitInProgress = false;
         this.onTestCaseTitleSaved.emit(response);
-        //this.testCaseService.setTestCase(response)
       },
       error => {
         this.submitInProgress = false;
@@ -54,12 +53,15 @@ export class CreateCaseTitleComponent implements OnInit {
   }
 
   addTestCase(){
+    this.testCase.directoryId = this.testCaseService.directory.directoryId;
+    this.testCase.projectId = this.testCaseService.directory.projectId;
     this.testCaseService.addTestCase(this.testCase).subscribe(
       response => {
         console.log(response);
         this.submitInProgress = false;
         this.onTestCaseTitleSaved.emit(response);
-        this.directoryService.setDirectories(this.testCaseService.directory.directoryId);
+        this.testCase = {};
+        this.directoryService.setDirectories(this.testCaseService.directory.directoryId, this.testCaseService.directory.projectId);
       },
       error => {
         this.submitInProgress = false;

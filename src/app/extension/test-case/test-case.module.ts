@@ -15,6 +15,7 @@ import { DirectoriesModule } from 'src/app/shared/directories/directories.module
 const routes: Routes = [
   {
     path: '', component: TestCaseComponent,
+    runGuardsAndResolvers: 'always',
     children: [
       {
         path: 'dashboard', component: TestCaseDashComponent

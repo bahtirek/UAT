@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { TestCase, TestStepOrder } from 'src/app/interfaces/test-case.interface';
 import { TestCaseService } from 'src/app/services/test-case.service';
 
@@ -14,21 +14,35 @@ export class TestCaseDetailsComponent implements OnInit {
   importsReviewModalOn: boolean = false;
   deleteModalOn: boolean = false;
   submitInProgress: boolean = false;
+  navigationSubscription;
 
-  constructor(private router: Router, private testCaseService: TestCaseService) { }
+  constructor(private router: Router, private testCaseService: TestCaseService) {
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.onInit()
+      }
+    });
+   }
 
   ngOnInit(): void {
-    const testCaseId = this.testCaseService.testCaseDetails.testCaseId;
-    console.log(this.testCase);
-    this.testCaseService.getTestCaseById(testCaseId).subscribe(
-      response => {
-        this.testCase = this.testCaseService.setTitleForImportedCase(response);
-      },
-      error => {
-        console.log(error);
-        
-      }
-    )
+    this.onInit()
+  }
+
+  onInit(){
+    if(this.testCaseService.testCaseDetails && this.testCaseService.testCaseDetails.testCaseId) {
+      const testCaseId = this.testCaseService.testCaseDetails.testCaseId;
+      this.testCaseService.getTestCaseById(testCaseId).subscribe(
+        response => {
+          this.testCase = this.testCaseService.setTitleForImportedCase(response);
+        },
+        error => {
+          console.log(error);
+        }
+      )
+    } else {
+      this.router.navigate(['test-case/dashboard'], { skipLocationChange: true });
+    }
   }
 
   onImportsReview(importedCase: TestStepOrder) {
@@ -42,13 +56,13 @@ export class TestCaseDetailsComponent implements OnInit {
 
   onEdit(){
     this.testCaseService.setTestCase(this.testCase);
-    this.router.navigate(['test-case/create/edit'], { skipLocationChange: true });
+    this.router.navigate(['test-case/create'], { skipLocationChange: true });
   }
 
   onDelete(){
     this.deleteModalOn = false
   }
-  
+
   onDeleteTestCase(){
     console.log('deleted');
     this.deleteModalOn = false
@@ -60,5 +74,11 @@ export class TestCaseDetailsComponent implements OnInit {
 
   toggleModal(){
     this.importsReviewModalOn = !this.importsReviewModalOn;
+  }
+
+  ngOnDestroy() {
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+   }
   }
 }
