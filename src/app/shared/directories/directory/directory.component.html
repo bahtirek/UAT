@@ -19,3 +19,23 @@
     [parentDirectoryId]="parentDirectoryId"
     [directoryToEdit]="directoryToEdit"></app-create-directory>
 </app-modal>
+<app-modal *ngIf="isDeleteModalOn" (closeModal)="toggleDeleteModal()" >
+  <h3>Delete folder</h3>
+  <div class="btn-group">
+    <button class=""  data-listener="off" (click)="deleteFolder()"  >
+        <span>Delete</span>
+    </button>
+    <button class="btn-danger"  data-listener="off" (click)="toggleDeleteModal()">
+        <span>Cancel</span>
+    </button>
+</div>
+</app-modal>
+<app-modal *ngIf="isCantDeleteModalOn" (closeModal)="toggleCantDeleteModal()" >
+  <h3>Can't Delete folder</h3>
+  <p>Folder is not empty</p>
+  <div class="btn-group">
+    <button class=""  data-listener="off" (click)="toggleCantDeleteModal()">
+        <span>Ok</span>
+    </button>
+</div>
+</app-modal>

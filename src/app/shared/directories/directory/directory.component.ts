@@ -35,8 +35,10 @@ export class DirectoryComponent implements OnInit {
     },
   ]
   isModalOn: boolean;
+  isDeleteModalOn: boolean;
   projectId: number;
   parentDirectoryId: number;
+  isCantDeleteModalOn: any;
 
   constructor(private testCaseService: TestCaseService, private router: Router, private route: ActivatedRoute) { }
 
@@ -88,7 +90,11 @@ export class DirectoryComponent implements OnInit {
     }
   }
   onFolderDelete() {
-    throw new Error('Method not implemented.');
+    if(this.directory.childDirectories.length == 0 && this.directory.testCases.length == 0){
+      this.toggleDeleteModal()
+    } else {
+      this.toggleCantDeleteModal()
+    }
   }
 
   onCreateCancel(){
@@ -106,5 +112,14 @@ export class DirectoryComponent implements OnInit {
 
   toggleAddDirectoryModal(){
     this.isModalOn = !this.isModalOn;
+  }
+  toggleDeleteModal(){
+    this.isDeleteModalOn = !this.isDeleteModalOn
+  }
+  toggleCantDeleteModal(){
+    this.isCantDeleteModalOn = !this.isCantDeleteModalOn
+  }
+  deleteFolder(){
+
   }
 }
