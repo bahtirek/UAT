@@ -1,3 +1,11 @@
 <div>
   <app-directory *ngFor="let directory of directories; index as i" [directory]="directory" [folderType]="folderType"></app-directory>
+  <div class="spacer-2"></div>
+  <div class="flex">
+    <a (click)="newProject()">New project</a>
+    <app-modal *ngIf="isModalOn" (closeModal)="onCreateCancel()">
+      <app-create-project (cancel)="onCreateCancel()" (onProjectSaved)="onProjectSaved()"
+        [projectToEdit]="projectToEdit"></app-create-project>
+    </app-modal>
+  </div>
 </div>

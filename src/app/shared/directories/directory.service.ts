@@ -14,6 +14,14 @@ export class DirectoryService {
 
   constructor(private http: HttpClient) { }
 
+  postProject(project: Directory){
+    return this.http.post<string>(this.url + '/project', project)
+  }
+
+  postDirectory(directory: Directory){
+    return this.http.post<string>(this.url + '/directory', directory)
+  }
+
   getAllDirectories(){
     return this.http.get<any>(this.url + '/project-directories')
   }
