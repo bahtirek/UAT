@@ -7,6 +7,7 @@ import { MoreButtonMenuModule } from '../more-button-menu/more-button-menu.modul
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from '../modal/modal.module';
+import { CreateDirectoryComponent } from './directory/create-directory/create-directory.component';
 
 
 
@@ -15,7 +16,8 @@ import { ModalModule } from '../modal/modal.module';
     DirectoriesComponent,
     DirectoryComponent,
     TestCaseComponent,
-    CreateProjectComponent
+    CreateProjectComponent,
+    CreateDirectoryComponent
   ],
   imports: [
     CommonModule,

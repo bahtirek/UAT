@@ -34,6 +34,9 @@ export class DirectoryComponent implements OnInit {
       display: true
     },
   ]
+  isModalOn: boolean;
+  projectId: number;
+  parentDirectoryId: number;
 
   constructor(private testCaseService: TestCaseService, private router: Router, private route: ActivatedRoute) { }
 
@@ -42,6 +45,7 @@ export class DirectoryComponent implements OnInit {
   }
 
   @Input() directory: Directory;
+  @Input() directoryToEdit: Directory;
   @Input() folderType: string;
 
   toggleFolder(){
@@ -51,7 +55,17 @@ export class DirectoryComponent implements OnInit {
 
   onFolderEdit(){}
 
-  onFolderAdd(){}
+  onFolderAdd(){
+    if(this.directory.isProject) {
+      this.parentDirectoryId = this.directory.directoryId
+      this.projectId = this.directory.directoryId
+    } else {
+      this.parentDirectoryId = this.directory.directoryId
+      this.projectId = this.directory.projectId
+    }
+
+    this.toggleAddDirectoryModal()
+  }
 
   onTestCaseAdd() {
     let projectId;
@@ -77,6 +91,20 @@ export class DirectoryComponent implements OnInit {
     throw new Error('Method not implemented.');
   }
 
+  onCreateCancel(){
+    this.toggleAddDirectoryModal();
+  }
 
+  onCaseDirectoryEdit(){
+    this.directoryToEdit = {...this.directory};
+    this.toggleAddDirectoryModal();
+  }
 
+  onDirectorySaved(){
+    this.toggleAddDirectoryModal();
+  }
+
+  toggleAddDirectoryModal(){
+    this.isModalOn = !this.isModalOn;
+  }
 }

@@ -19,7 +19,7 @@ export class DirectoryService {
   }
 
   postDirectory(directory: Directory){
-    return this.http.post<string>(this.url + '/directory', directory)
+    return this.http.post<Directory>(this.url + '/directory', directory)
   }
 
   getAllDirectories(){

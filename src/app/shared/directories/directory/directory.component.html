@@ -13,3 +13,9 @@
     <app-test-case *ngFor="let testCase of directory.testCases; index as i" [testCase]="testCase" [folderType]="folderType"></app-test-case>
   </div>
 </div>
+<app-modal *ngIf="isModalOn" (closeModal)="onCreateCancel()">
+  <app-create-directory (cancel)="onCreateCancel()" (onDirectorySaved)="onDirectorySaved()"
+    [projectId]="projectId"
+    [parentDirectoryId]="parentDirectoryId"
+    [directoryToEdit]="directoryToEdit"></app-create-directory>
+</app-modal>
