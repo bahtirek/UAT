@@ -55,7 +55,11 @@ export class DirectoryComponent implements OnInit {
     this.directory.expand = this.expand;
   }
 
-  onFolderEdit(){}
+  onFolderEdit(){
+    const {name, directoryId} = this.directory;
+    this.directoryToEdit = {name:  name, directoryId: directoryId};
+    this.toggleAddDirectoryModal();
+  }
 
   onFolderAdd(){
     if(this.directory.isProject) {
@@ -98,15 +102,12 @@ export class DirectoryComponent implements OnInit {
   }
 
   onCreateCancel(){
-    this.toggleAddDirectoryModal();
-  }
-
-  onCaseDirectoryEdit(){
-    this.directoryToEdit = {...this.directory};
+    this.directoryToEdit = null;
     this.toggleAddDirectoryModal();
   }
 
   onDirectorySaved(){
+    this.directoryToEdit = null;
     this.toggleAddDirectoryModal();
   }
 

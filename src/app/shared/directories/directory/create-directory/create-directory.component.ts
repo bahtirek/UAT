@@ -21,6 +21,9 @@ export class CreateDirectoryComponent implements OnInit {
   constructor(private fb: FormBuilder, private directoryService: DirectoryService) { }
 
   ngOnInit(): void {
+    if(this.directoryToEdit && this.directoryToEdit.directoryId) {
+      this.name.setValue(this.directoryToEdit.name)
+    }
   }
 
   @Input() directoryToEdit: Directory;
