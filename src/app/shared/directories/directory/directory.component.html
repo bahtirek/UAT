@@ -10,7 +10,7 @@
   </div>
   <div class="sub-folders" *ngIf="expand">
     <app-directory *ngFor="let dir of directory.childDirectories; index as i" [directory]="dir" [folderType]="folderType"></app-directory>
-    <app-test-case *ngFor="let testCase of directory.testCases; index as i" [testCase]="testCase" [folderType]="folderType"></app-test-case>
+    <app-test-case *ngFor="let testCase of directory.testCases; index as i" [testCase]="testCase" [folderType]="folderType" [directoryId]="directory.directoryId"></app-test-case>
   </div>
 </div>
 <app-modal *ngIf="isModalOn" (closeModal)="onCreateCancel()">

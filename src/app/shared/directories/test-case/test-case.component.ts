@@ -17,8 +17,10 @@ export class TestCaseComponent implements OnInit {
 
   @Input() folderType: string;
   @Input() testCase: TestCase;
+  @Input() directoryId: number;
 
   testCaseDetails(){
+    this.testCaseService.directory = {directoryId: this.directoryId}
     this.testCaseService.testCaseDetails = this.testCase;
     this.router.navigate(['test-case/details'], { skipLocationChange: true });
   }

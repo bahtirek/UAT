@@ -1,7 +1,7 @@
 import { TestCase } from "./test-case.interface"
 
 export interface Directory {
-  name: string,
+  name?: string,
   directoryId?: number,
   isProject?: boolean,
   parentDirectoryId?: number,

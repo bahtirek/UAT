@@ -40,6 +40,7 @@ export class CreateCaseTitleComponent implements OnInit {
   }
 
   updateTestCase() {
+    this.testCase.directoryId = this.testCaseService.directory.directoryId;
     this.testCaseService.updateTestCase(this.testCase).subscribe(
       response => {
         console.log(response);
