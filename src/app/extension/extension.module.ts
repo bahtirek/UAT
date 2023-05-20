@@ -10,6 +10,7 @@ import { MenuModule } from './menu/menu.module';
 import { TestCaseModule } from './test-case/test-case.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SearchTestCaseModule } from '../shared/search-test-case/search-test-case.module';
+import { ExecutionModule } from './execution/execution.module';
 
 
 const routes: Routes = [
@@ -36,11 +37,11 @@ const routes: Routes = [
           {
             path: 'settings',
             loadChildren: () => SettingsModule
-          },
-          {
-            path: 'execute',
-            loadChildren: () => ExecuteModule
           }, */
+          {
+            path: 'execution',
+            loadChildren: () => ExecutionModule
+          },
           {
             path: 'dashboard', component: DashboardComponent,
           },
