@@ -15,12 +15,12 @@ browser.windows.getLastFocused(
 
 browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.todo == 'getImage') {
-    browser.tabs.captureVisibleTab(null, {format: 'png'}, (dataUrl) => {
-      sendResponse({imgSrc:dataUrl});
-    }
-  );
+      browser.tabs.captureVisibleTab(lastWindowId, {format: 'png'}, (dataUrl) => {
+        sendResponse({imgSrc:dataUrl});
+      }
+    );
 
-  return true;
+    return true;
   }
 })
 

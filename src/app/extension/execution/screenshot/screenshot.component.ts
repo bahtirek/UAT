@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MoreButtonAction } from 'src/app/interfaces/more-button-action.interface';
 
 @Component({
@@ -26,6 +26,11 @@ export class ScreenshotComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  @Input() screenshot: string;
+  //@Input() index: number;
+
+  @Output() deleteScreenshot = new EventEmitter<void>()
+
   onAction(event: string){
     switch (event) {
       case 'edit': this.onEdit(); break;
@@ -36,7 +41,7 @@ export class ScreenshotComponent implements OnInit {
     throw new Error('Method not implemented.');
   }
   onDelete() {
-    throw new Error('Method not implemented.');
+    this.deleteScreenshot.emit()
   }
 
 }

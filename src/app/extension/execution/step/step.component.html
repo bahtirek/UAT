@@ -18,12 +18,6 @@
           </div>
         </div>
         <div class="btn-group">
-          <button class=""  data-listener="off"  >
-              <span>Actual result</span>
-          </button>
-          <button class=""  data-listener="off"  >
-              <span>Jira</span>
-          </button>
           <button class=""  data-listener="off" (click)="getScreenshot()" >
               <span>Screenshot</span>
           </button>
@@ -37,7 +31,11 @@
       </div>
     </div>
     <div class="screenshots-container">
-      <app-screenshot></app-screenshot>
+      <ng-container *ngIf="step && step.screenshots">
+        <ng-container *ngFor="let screenshot of step.screenshots; index as i">
+          <app-screenshot [screenshot]="screenshot" (deleteScreenshot)="deleteScreenshot(i)"></app-screenshot>
+        </ng-container>
+      </ng-container>
     </div>
   </div>
 

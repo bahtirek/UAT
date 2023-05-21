@@ -9,17 +9,21 @@ import { ScreenshotService } from 'src/app/services/screenshot.service';
 })
 export class StepComponent implements OnInit {
 
-  step: TestStep;
+  step: TestStep = {};
 
   constructor(private screenshotService: ScreenshotService) { }
 
   ngOnInit(): void {
+    this.step.screenshots = []
   }
 
   async getScreenshot (){
-    const screenshot = this.screenshotService.getScreenshot();
-    console.log('screenshot', screenshot);
+    const screenshot = await this.screenshotService.getScreenshot();
+    this.step.screenshots.push(screenshot) ;
+  }
 
+  deleteScreenshot(index: number){
+    this.step.screenshots.splice(index, 1);
   }
 
 }
