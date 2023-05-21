@@ -1,0 +1,109 @@
+
+.ui-br-ext-dropdown.ui-br-uat-editor {
+    
+    .ui-br-ext-drop-body.ui-br-aut-canvas-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: calc(100vh - 57px);
+
+        .editing-item {
+            position: absolute;
+            top: calc(50% - 50px);
+            left: calc(50% - 50px);
+            .resize-element {
+                resize: both;
+                overflow: auto;
+                height: 50px;
+                width: 100px;
+                cursor: grab;
+
+                &.line-container {
+                    padding: 10px 20px;
+                    height: 25px;
+                    resize: initial;
+                    overflow: initial;
+                    display: flex;
+                    align-items: center;
+                    width: initial;
+                    position: relative;
+                    
+                    .line {
+                        width: 200px;
+                        resize: horizontal;
+                        height: 2px;
+                        background-color: red;
+                        overflow: auto;
+                        z-index: 10000;
+                    }
+                    .chevron-right, .chevron-left {
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        display: none;
+                    }
+                    .chevron-right {
+                        right: 9px;
+                    }
+                    .chevron-left {
+                        left: 9px;
+                    }
+                }
+
+                &.highlight {
+                    background-color: yellow;
+                    mix-blend-mode: multiply;
+                    opacity: 0.7;
+                }
+            }
+            &:hover {
+                app-editor-menu {
+                    display: block;
+                }
+            }
+            app-editor-menu {
+                display: none;
+                position: absolute;
+                top: 2px;
+                left: 2px;
+                &.stick-to-bottom {
+                    top: unset ;
+                    bottom: 2px;
+                }
+                &.above {
+                    top: 8px;
+                    left: -18px;
+                }
+            }
+        }
+
+        .editor-canvas {
+            position: relative;
+
+            img {
+                pointer-events: none;
+            }
+        }
+
+        
+        .border-1 {
+            border: 2px solid red;
+        }
+
+        .circle {
+            border-radius: 50%;
+        }
+
+        .contenteditable {
+            color: red;
+        }
+        
+        .copy {
+            cursor: copy !important;
+        }
+    }
+}
+
+
+ 

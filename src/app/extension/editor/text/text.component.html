@@ -1,0 +1,6 @@
+<div class="editing-item" (mousedown)="onMouseDown($event)" (mouseup)="onMouseUp($event)" #editingParent>
+  <app-editor-menu (onDelete)="onDelete()" [editorMenu]="editorMenu" (onColor)="onColor($event)" (onFontSize)="fontSizeUpdate($event)" (onInvert)="onInvert()" class="stick-to-bottom" (mousedown)="onMouseDown($event)"></app-editor-menu>
+  <div class="resize-element" contenteditable="true" #editingItem style="color: red">
+    Text
+  </div>
+</div>

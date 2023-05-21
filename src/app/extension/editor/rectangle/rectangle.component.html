@@ -1,0 +1,10 @@
+<div class="editing-item" (mousedown)="onMouseDown($event)" (mouseup)="onMouseUp($event)" #editingParent>
+  <app-editor-menu 
+  [editorMenu]="editorMenu" 
+  (onDelete)="onDelete()" 
+  (onBorder)="onBorder($event)" 
+  (onColor)="onColor($event)" 
+  (onStroke)="strokeUpdate($event)"></app-editor-menu>
+  <div class="resize-element border-1" #editingItem>
+  </div>
+</div>
