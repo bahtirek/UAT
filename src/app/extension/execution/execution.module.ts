@@ -4,6 +4,8 @@ import { ExecutionComponent } from './execution.component';
 import { StepListComponent } from './step-list/step-list.component';
 import { StepComponent } from './step/step.component';
 import { RouterModule, Routes } from '@angular/router';
+import { ScreenshotComponent } from './screenshot/screenshot.component';
+import { MoreButtonMenuModule } from 'src/app/shared/more-button-menu/more-button-menu.module';
 
 const routes: Routes = [
   {
@@ -16,10 +18,12 @@ const routes: Routes = [
   declarations: [
     ExecutionComponent,
     StepListComponent,
-    StepComponent
+    StepComponent,
+    ScreenshotComponent
   ],
   imports: [
     CommonModule,
+    MoreButtonMenuModule,
     RouterModule.forChild(routes)
   ],
   exports: [

@@ -6,5 +6,6 @@ export interface TestStep {
     order?: number,
     createdBY?: number,
     deleted?: boolean,
+    screenshots?: string[],
     importedTestCaseId?: number
 }

@@ -9,7 +9,10 @@ export class ScreenshotService {
   constructor() { }
 
   async getScreenshot(){
-    return chrome.runtime.sendMessage({todo: "getImage"})
+    chrome.runtime.sendMessage({todo: "getImage"}, response => {
+      console.log('service-2',response.imgSrc);
+      return response.imgSrc
+    });
   }
 
   setDelay(timeout: number){

@@ -13,15 +13,14 @@ browser.windows.getLastFocused(
   }
 )
 
-browser.runtime.onMessage.addListener(async function (request, sender, sendResponse) {
-
-  // Capture screenshot
+browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.todo == 'getImage') {
-    browser.tabs.captureVisibleTab(lastWindowId, {format: 'png'}, (dataUrl) => {
-      console.log(dataUrl);
+    browser.tabs.captureVisibleTab(null, {format: 'png'}, (dataUrl) => {
       sendResponse({imgSrc:dataUrl});
-    });
-    return true;
+    }
+  );
+
+  return true;
   }
 })
 
