@@ -1,10 +1,28 @@
-<div class="ui-br-ext-dropdown-item">
-    <div class="ui-br-ext-page-content">
-        <div class="ui-br-ext-drop-body ui-br-aut-canvas-container" #canvas>
-            <div id="editorCanvas" class="editor-canvas">
-                <img src="../../../assets/image.png" class="editor-canvas-img">
-                <ng-template #viewContainerRef></ng-template>
-            </div>
-        </div>
+<div class="header">
+  <div class="brand">
+    <h2>Brand</h2>
+  </div>
+  <div class="menu">
+    <div class="flex justify-end">
+      <app-text-btn></app-text-btn>
+      <app-square-btn></app-square-btn>
+      <app-circle-btn></app-circle-btn>
+      <app-line-btn></app-line-btn>
+      <app-highlight-btn></app-highlight-btn>
+      <app-save-btn></app-save-btn>
+      <app-close-btn></app-close-btn>
     </div>
+  </div>
+
 </div>
+<div class="main-content">
+  <div class="editor">
+    <div class="canvas-container" #canvas>
+      <div id="editorCanvas" class="editor-canvas">
+          <img src="../../../assets/image.png" class="editor-canvas-img">
+          <ng-template #viewContainerRef></ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+

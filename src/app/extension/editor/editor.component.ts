@@ -23,9 +23,9 @@ export class EditorComponent implements OnInit {
   editorClass: string = '';
 
   constructor(
-    private circleService: CircleService, 
-    private rectangleService: RectangleService, 
-    private textService: TextService, 
+    private circleService: CircleService,
+    private rectangleService: RectangleService,
+    private textService: TextService,
     private editorService: EditorService,
     private lineService: LineService,
     private highlightService: HighlightService,
@@ -46,7 +46,7 @@ export class EditorComponent implements OnInit {
   @ViewChild("viewContainerRef", { read: ViewContainerRef }) vcr!: ViewContainerRef;
 
   action(btn: string) {
-    
+
     switch (btn) {
       case 'ui-br-ext-square-button': this.rectangleService.addComponent(this.vcr.createComponent(RectangleComponent)); break;
       case 'ui-br-ext-circle-button': this.circleService.addComponent(this.vcr.createComponent(CircleComponent)); break;
@@ -54,7 +54,7 @@ export class EditorComponent implements OnInit {
       case 'ui-br-ext-line-button': this.lineService.addComponent(this.vcr.createComponent(LineComponent)); break;
       case 'ui-br-ext-highlight-button': this.highlightService.addComponent(this.vcr.createComponent(HighlightComponent)); break;
       case 'ui-br-ext-save-button': this.getImage(); break;
-    
+
       default: return false; break;
     }
   }
@@ -62,7 +62,7 @@ export class EditorComponent implements OnInit {
   async getImage(){
     const canvasWidth = this.canvasEl.nativeElement.scrollWidth
     const canvasHeight = this.canvasEl.nativeElement.scrollHeight
-    
+
     const dataUrl = await htmlToImage.toPng(this.canvasEl.nativeElement, {width: canvasWidth, height: canvasHeight})
     this.saveAs(dataUrl, 'my-node.png');
   }

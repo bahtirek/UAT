@@ -1,7 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { EditorMenu } from 'src/app/interfaces/editor-menu.interface';
-import { DragService } from 'src/app/services/drag.service';
+
 import { RectangleService } from './rectangle.service';
+import { DragService } from 'src/app/services/drag.service';
 
 @Component({
   selector: 'app-rectangle',
@@ -31,7 +32,7 @@ export class RectangleComponent implements OnInit {
     const rect = this.parent.nativeElement.getBoundingClientRect();
     if(event.offsetX < rect.width - 16 && event.offsetY < rect.height - 16) {
       this.dragService.onMouseDown(event, this.parent.nativeElement);
-    } 
+    }
   }
 
   onMouseUp(event: any) {
@@ -46,7 +47,7 @@ export class RectangleComponent implements OnInit {
   strokeUpdate(stroke: any){
     this.el.nativeElement.style.borderWidth = stroke.width;
   }
-  
+
   onColor(color: any){
     console.log(color);
     this.el.nativeElement.style.borderColor = color.color;
