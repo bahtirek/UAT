@@ -33,7 +33,7 @@
     <div class="screenshots-container">
       <ng-container *ngIf="step && step.screenshots">
         <ng-container *ngFor="let screenshot of step.screenshots; index as i">
-          <app-screenshot [screenshot]="screenshot" (deleteScreenshot)="deleteScreenshot(i)"></app-screenshot>
+          <app-screenshot [screenshot]="screenshot" (deleteScreenshot)="deleteScreenshot(i)" (edit)="edit(i)"></app-screenshot>
         </ng-container>
       </ng-container>
     </div>

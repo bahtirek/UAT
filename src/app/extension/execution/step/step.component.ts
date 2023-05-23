@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { TestStep } from 'src/app/interfaces/test-step.interface';
 import { ScreenshotService } from 'src/app/services/screenshot.service';
 
@@ -17,9 +17,21 @@ export class StepComponent implements OnInit {
     this.step.screenshots = []
   }
 
+  @Output() editScreenshot = new EventEmitter<string>();
+
+
+  edit(index: number){
+    const dataUrl = this.step.screenshots[index];
+    this.editScreenshot.emit(dataUrl);
+  }
+
+  saveEditedScreenshot(dataUrl: string){
+    this.step.screenshots.push(dataUrl) ;
+  }
+
   async getScreenshot (){
     const screenshot = await this.screenshotService.getScreenshot();
-    this.step.screenshots.push(screenshot) ;
+    this.step.screenshots.push(screenshot);
   }
 
   deleteScreenshot(index: number){

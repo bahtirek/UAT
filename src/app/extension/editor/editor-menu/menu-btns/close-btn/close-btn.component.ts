@@ -11,12 +11,13 @@ export class CloseBtnComponent implements OnInit {
 
   constructor(private editorService: EditorService) { }
 
+  currentBtn = "ui-br-ext-close-button";
 
   ngOnInit(): void {
   }
 
-  async onMenuBtnClick(){
-
+  onMenuBtnClick () {
+    this.editorService.activeBtnSubject.next(this.currentBtn);
   }
 
 }

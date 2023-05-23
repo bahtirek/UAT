@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 import { AuthModule } from './auth/auth.module';
 import { ExtensionModule } from './extension/extension.module';
-import { EditorModule } from './extension/editor/editor.module';
 
 
 const routes: Routes = [
@@ -14,10 +13,6 @@ const routes: Routes = [
   {
     path: 'extension',
     loadChildren: () => ExtensionModule,
-  },
-  {
-    path: 'editor',
-    loadChildren: () => EditorModule
   },
   {
     path: 'auth',

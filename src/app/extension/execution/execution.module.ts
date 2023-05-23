@@ -6,6 +6,7 @@ import { StepComponent } from './step/step.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ScreenshotComponent } from './screenshot/screenshot.component';
 import { MoreButtonMenuModule } from 'src/app/shared/more-button-menu/more-button-menu.module';
+import { EditorModule } from '../editor/editor.module';
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     MoreButtonMenuModule,
+    EditorModule,
     RouterModule.forChild(routes)
   ],
   exports: [

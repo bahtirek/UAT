@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, ViewContainerRef, ComponentRef, } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ViewContainerRef, ComponentRef, Output, EventEmitter, Input, } from '@angular/core';
 import * as htmlToImage from 'html-to-image';
 import { EditorService } from 'src/app/services/editor.service';
 import { CircleComponent } from './circle/circle.component';
@@ -41,6 +41,10 @@ export class EditorComponent implements OnInit {
     this.vcr.remove(vcrIndex);
   }
 
+  @Input() screenshot: string;
+  @Output() closeEditor = new EventEmitter<void>();
+  @Output() saveScreenshot = new EventEmitter<string>();
+
   @ViewChild('downloadImage', {static: true}) downloadImage!: ElementRef<HTMLAnchorElement>;
   @ViewChild('canvas', {static: true}) canvasEl!: ElementRef<HTMLImageElement>;
   @ViewChild("viewContainerRef", { read: ViewContainerRef }) vcr!: ViewContainerRef;
@@ -53,10 +57,24 @@ export class EditorComponent implements OnInit {
       case 'ui-br-ext-text-button': this.textService.addComponent(this.vcr.createComponent(TextComponent)); break;
       case 'ui-br-ext-line-button': this.lineService.addComponent(this.vcr.createComponent(LineComponent)); break;
       case 'ui-br-ext-highlight-button': this.highlightService.addComponent(this.vcr.createComponent(HighlightComponent)); break;
-      case 'ui-br-ext-save-button': this.getImage(); break;
+      case 'ui-br-ext-close-button': this.close(); break;
+      case 'ui-br-ext-save-button': this.save(); break;
 
       default: return false; break;
     }
+  }
+  async save() {
+    const canvasWidth = this.canvasEl.nativeElement.scrollWidth
+    const canvasHeight = this.canvasEl.nativeElement.scrollHeight
+
+    const dataUrl = await htmlToImage.toPng(this.canvasEl.nativeElement, {width: canvasWidth, height: canvasHeight})
+    this.saveScreenshot.emit(dataUrl)
+  }
+
+  close() {
+    console.log('close');
+
+    this.closeEditor.emit();
   }
 
   async getImage(){

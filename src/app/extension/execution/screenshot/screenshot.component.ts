@@ -30,6 +30,7 @@ export class ScreenshotComponent implements OnInit {
   //@Input() index: number;
 
   @Output() deleteScreenshot = new EventEmitter<void>()
+  @Output() edit = new EventEmitter<void>()
 
   onAction(event: string){
     switch (event) {
@@ -38,7 +39,7 @@ export class ScreenshotComponent implements OnInit {
     }
   }
   onEdit() {
-    throw new Error('Method not implemented.');
+    this.edit.emit()
   }
   onDelete() {
     this.deleteScreenshot.emit()
