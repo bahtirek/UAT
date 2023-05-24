@@ -72,8 +72,6 @@ export class EditorComponent implements OnInit {
   }
 
   close() {
-    console.log('close');
-
     this.closeEditor.emit();
   }
 
