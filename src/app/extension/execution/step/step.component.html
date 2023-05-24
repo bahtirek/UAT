@@ -24,7 +24,7 @@
           <button class=""  data-listener="off"  >
               <span>Pass</span>
           </button>
-          <button class="btn-danger"  data-listener="off"  >
+          <button class="btn-danger"  data-listener="off" (click)="toggleModal()" >
               <span>Fail</span>
           </button>
       </div>
@@ -38,5 +38,7 @@
       </ng-container>
     </div>
   </div>
-
 </div>
+<app-modal *ngIf="isModalOn" (closeModal)="toggleModal()" [propClass]="'width-full'">
+  <app-actual-result (cancel)="toggleModal()"></app-actual-result>
+</app-modal>

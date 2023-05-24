@@ -10,6 +10,7 @@ import { ScreenshotService } from 'src/app/services/screenshot.service';
 export class StepComponent implements OnInit {
 
   step: TestStep = {};
+  isModalOn: boolean = false;
 
   constructor(private screenshotService: ScreenshotService) { }
 
@@ -36,6 +37,14 @@ export class StepComponent implements OnInit {
 
   deleteScreenshot(index: number){
     this.step.screenshots.splice(index, 1);
+  }
+
+  onFail(){
+
+  }
+
+  toggleModal(){
+    this.isModalOn = !this.isModalOn
   }
 
 }
