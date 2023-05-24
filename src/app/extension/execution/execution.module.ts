@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ScreenshotComponent } from './screenshot/screenshot.component';
 import { MoreButtonMenuModule } from 'src/app/shared/more-button-menu/more-button-menu.module';
 import { EditorModule } from '../editor/editor.module';
+import { ModalModule } from 'src/app/shared/modal/modal.module';
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
     CommonModule,
     MoreButtonMenuModule,
     EditorModule,
+    ModalModule,
     RouterModule.forChild(routes)
   ],
   exports: [

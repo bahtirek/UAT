@@ -10,6 +10,8 @@ export class ScreenshotComponent implements OnInit {
 
   constructor() { }
 
+  showImage: boolean = false;
+
   actions: MoreButtonAction[] = [
     {
       name: 'Edit',
@@ -43,6 +45,14 @@ export class ScreenshotComponent implements OnInit {
   }
   onDelete() {
     this.deleteScreenshot.emit()
+  }
+
+  toggleImage(){
+    if(this.showImage) {
+      this.showImage = false;
+    } else {
+      this.showImage = true;
+    }
   }
 
 }

@@ -1,6 +1,7 @@
-<div class="screenshot-box">
-  <img [src]="screenshot" alt="screenshot">
+<div class="screenshot-box" [ngClass]="{'display-image': showImage}">
+  <img [src]="screenshot" alt="screenshot" (click)="toggleImage()">
   <div class="screenshot-more-btn">
     <app-more-button-menu [actions]="actions" (onAction)="onAction($event)"></app-more-button-menu>
   </div>
 </div>
+

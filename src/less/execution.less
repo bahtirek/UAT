@@ -1,10 +1,14 @@
 .screenshots-container {
   width: 100%;
   max-width: 200px;
-  margin-left: 20px;
+  margin-left: 40px;
+  img {
+    cursor: pointer;
+  }
 
   .screenshot-box {
     position: relative;
+    margin-bottom: 20px;
     .screenshot-more-btn {
       position: absolute;
       top: 15px;
@@ -21,6 +25,22 @@
     &:hover {
       .screenshot-more-btn {
         display: block;
+      }
+    }
+
+    &.display-image {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      z-index: 100;
+      background-color: rgb(124 124 124 / 72%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .screenshot-more-btn {
+        display: none;
       }
     }
   }
