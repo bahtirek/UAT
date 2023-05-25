@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MoreButtonAction } from 'src/app/interfaces/more-button-action.interface';
 import { TestStep } from 'src/app/interfaces/test-step.interface';
 import { ScreenshotService } from 'src/app/services/screenshot.service';
 
@@ -11,6 +12,14 @@ export class StepComponent implements OnInit {
 
   step: TestStep = {};
   isModalOn: boolean = false;
+  actualResultsToEdit: string;
+  actions: MoreButtonAction[] = [
+    {
+      name: 'Edit',
+      action: 'edit',
+      display: true
+    },
+  ]
 
   constructor(private screenshotService: ScreenshotService) { }
 
@@ -21,7 +30,7 @@ export class StepComponent implements OnInit {
   @Output() editScreenshot = new EventEmitter<string>();
 
 
-  edit(index: number){
+  onScreenshotEdit(index: number){
     const dataUrl = this.step.screenshots[index];
     this.editScreenshot.emit(dataUrl);
   }
@@ -39,12 +48,33 @@ export class StepComponent implements OnInit {
     this.step.screenshots.splice(index, 1);
   }
 
-  onFail(){
+  editActualResults(){
+    this.actualResultsToEdit = this.step.actualResults;
+    this.toggleModal();
+  }
 
+  saveActualResults(actualResults: string){
+    this.step.actualResults = actualResults;
+    this.actualResultsToEdit = '';
+    this.toggleModal();
+  }
+
+  onFail(){
+    if(this.step.actualResults) {
+      this.editActualResults();
+    } else {
+      this.toggleModal();
+    }
   }
 
   toggleModal(){
     this.isModalOn = !this.isModalOn
+  }
+
+  onAction(event: string){
+    switch (event) {
+      case 'edit': this.editActualResults(); break;
+    }
   }
 
 }

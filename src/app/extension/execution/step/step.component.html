@@ -8,13 +8,25 @@
         <div class="card ">
           <div class="">
             <div class="title-sm ">Descriprion: </div>
+            <div class="spacer-05"></div>
             <div>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </div>
           </div>
         </div>
         <div class="card ">
           <div class="">
             <div class="title-sm ">Expected result: </div>
+            <div class="spacer-05"></div>
             <div>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore, recusandae cupiditate quia vitae quisquam excepturi iusto molestiae exercitationem voluptates provident nobis numquam, sequi corrupti nesciunt veritatis perspiciatis rem neque aliquid.</div>
+          </div>
+        </div>
+        <div class="card" *ngIf="step.actualResults">
+          <div class="">
+            <div class="case-title flex items-center">
+              <div class="title-sm ">Actual result: </div>
+              <app-more-button-menu [actions]="actions" (onAction)="onAction($event)"></app-more-button-menu>
+            </div>
+            <div class="spacer-05"></div>
+            <div class="text-pre">{{step.actualResults}}</div>
           </div>
         </div>
         <div class="btn-group">
@@ -24,7 +36,7 @@
           <button class=""  data-listener="off"  >
               <span>Pass</span>
           </button>
-          <button class="btn-danger"  data-listener="off" (click)="toggleModal()" >
+          <button class="btn-danger"  data-listener="off" (click)="onFail()" >
               <span>Fail</span>
           </button>
       </div>
@@ -33,12 +45,12 @@
     <div class="screenshots-container">
       <ng-container *ngIf="step && step.screenshots">
         <ng-container *ngFor="let screenshot of step.screenshots; index as i">
-          <app-screenshot [screenshot]="screenshot" (deleteScreenshot)="deleteScreenshot(i)" (edit)="edit(i)"></app-screenshot>
+          <app-screenshot [screenshot]="screenshot" (deleteScreenshot)="deleteScreenshot(i)" (edit)="onScreenshotEdit(i)"></app-screenshot>
         </ng-container>
       </ng-container>
     </div>
   </div>
 </div>
 <app-modal *ngIf="isModalOn" (closeModal)="toggleModal()" [propClass]="'width-full'">
-  <app-actual-result (cancel)="toggleModal()"></app-actual-result>
+  <app-actual-result (cancel)="toggleModal()" (save)="saveActualResults($event)" [resultsToEdit]="actualResultsToEdit"></app-actual-result>
 </app-modal>

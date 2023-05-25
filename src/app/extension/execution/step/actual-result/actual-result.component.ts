@@ -31,26 +31,31 @@ export class ActualResultComponent implements OnInit {
 
   @Input() resultsToEdit: string;
   @Output() cancel = new EventEmitter<null>();
-  @Output() save = new EventEmitter<null>();
+  @Output() save = new EventEmitter<string>();
 
   onResultsSave(){
     if(this.resultsForm.valid) {
       if(this.resultsToEdit) {
-
+        this.updateResults()
       } else {
-
+        this.addResults()
       }
     }
   }
 
-  updateResults(results: string){
-
+  addResults() {
+    console.log(this.actualResults);
+    this.save.emit(this.actualResults.value);
   }
 
+  updateResults(){
+    console.log(this.actualResults);
+    this.save.emit(this.actualResults.value);
+  }
 
   setStepFormValue() {
     if(this.resultsToEdit){
-      this.resultsForm.controls['actualResults'].setValue(this.actualResults);
+      this.resultsForm.controls['actualResults'].setValue(this.resultsToEdit);
     }
   }
 
