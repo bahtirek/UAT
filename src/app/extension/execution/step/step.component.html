@@ -1,22 +1,22 @@
-<div class="right-content">
+<div class="right-content" *ngIf="step?.index >= 0">
   <div class="header">
-    <h2>Step #</h2>
+    <h2>Step # {{1 + step.index}}</h2>
   </div>
   <div class="flex">
-    <div>
-      <div>
+    <div  class="width-full">
+      <div class="width-full">
         <div class="card ">
           <div class="">
             <div class="title-sm ">Descriprion: </div>
             <div class="spacer-05"></div>
-            <div>Lorem, ipsum dolor sit amet consectetur adipisicing elit. </div>
+            <div>{{step.description}}</div>
           </div>
         </div>
-        <div class="card ">
+        <div class="card">
           <div class="">
             <div class="title-sm ">Expected result: </div>
             <div class="spacer-05"></div>
-            <div>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore, recusandae cupiditate quia vitae quisquam excepturi iusto molestiae exercitationem voluptates provident nobis numquam, sequi corrupti nesciunt veritatis perspiciatis rem neque aliquid.</div>
+            <div>{{step.expected}}</div>
           </div>
         </div>
         <div class="card" *ngIf="step.actualResults">
@@ -33,7 +33,7 @@
           <button class=""  data-listener="off" (click)="getScreenshot()" >
               <span>Screenshot</span>
           </button>
-          <button class=""  data-listener="off"  >
+          <button class=""  data-listener="off" (click)="onPass()" >
               <span>Pass</span>
           </button>
           <button class="btn-danger"  data-listener="off" (click)="onFail()" >

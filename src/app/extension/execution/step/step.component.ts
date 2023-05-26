@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MoreButtonAction } from 'src/app/interfaces/more-button-action.interface';
 import { TestStep } from 'src/app/interfaces/test-step.interface';
+import { ExecutionService } from 'src/app/services/execution.service';
 import { ScreenshotService } from 'src/app/services/screenshot.service';
 
 @Component({
@@ -21,14 +22,20 @@ export class StepComponent implements OnInit {
     },
   ]
 
-  constructor(private screenshotService: ScreenshotService) { }
+  constructor(private screenshotService: ScreenshotService, private executionService: ExecutionService) { }
 
   ngOnInit(): void {
-    this.step.screenshots = []
+    this.executionService.activeStepSource.subscribe({
+      next: (response) => {
+        this.step = response;
+        if(!this.step.screenshots) {
+          this.step.screenshots = []
+        }
+      }
+    })
   }
 
   @Output() editScreenshot = new EventEmitter<string>();
-
 
   onScreenshotEdit(index: number){
     const dataUrl = this.step.screenshots[index];
@@ -55,6 +62,7 @@ export class StepComponent implements OnInit {
 
   saveActualResults(actualResults: string){
     this.step.actualResults = actualResults;
+    this.step.status = 1;
     this.actualResultsToEdit = '';
     this.toggleModal();
   }
@@ -65,6 +73,10 @@ export class StepComponent implements OnInit {
     } else {
       this.toggleModal();
     }
+  }
+
+  onPass(){
+    this.step.status = 0
   }
 
   toggleModal(){

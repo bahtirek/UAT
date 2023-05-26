@@ -1,0 +1,49 @@
+.uat-body {
+  .step-tree {
+    padding-left: 10px;
+    .step-name {
+      display: flex;
+      align-items: center;
+      margin-block: 4px;
+      white-space: nowrap;
+      padding-block: 5px;
+
+      .step-svg  {
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
+      }
+
+      &.active, &:hover {
+        background-color: #dddddd;
+      }
+    }
+
+    .pass {
+      color: #17b546;
+    }
+
+    .fail {
+      color: #e04414;
+    }
+
+    .hide {
+      display: none;
+    }
+  }
+
+  .dark-mode {
+    .step-tree {
+      .step-name {
+        &.active {
+          background-color: #565656;
+          color: var(--primary-inverse);
+        }
+
+        &:hover {
+          background-color: #565656;
+        }
+      }
+    }
+  }
+}

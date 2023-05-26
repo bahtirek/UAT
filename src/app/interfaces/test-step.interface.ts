@@ -8,5 +8,7 @@ export interface TestStep {
     deleted?: boolean,
     actualResults?: string,
     screenshots?: string[],
-    importedTestCaseId?: number
+    importedTestCaseId?: number,
+    status?: number,
+    index?: number
 }

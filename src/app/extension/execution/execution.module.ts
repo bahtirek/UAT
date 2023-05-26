@@ -10,6 +10,7 @@ import { EditorModule } from '../editor/editor.module';
 import { ModalModule } from 'src/app/shared/modal/modal.module';
 import { ActualResultComponent } from './step/actual-result/actual-result.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { StepDetailsComponent } from './step-list/step-details/step-details.component';
 
 const routes: Routes = [
   {
@@ -24,7 +25,8 @@ const routes: Routes = [
     StepListComponent,
     StepComponent,
     ScreenshotComponent,
-    ActualResultComponent
+    ActualResultComponent,
+    StepDetailsComponent
   ],
   imports: [
     CommonModule,
