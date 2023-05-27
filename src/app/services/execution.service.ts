@@ -10,4 +10,6 @@ export class ExecutionService {
   constructor() { }
 
   activeStepSource = new Subject<TestStep>();
+  nextStepSource = new Subject<number>();
+
 }

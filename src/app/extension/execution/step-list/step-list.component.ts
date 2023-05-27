@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TestStep } from 'src/app/interfaces/test-step.interface';
+import { ExecutionService } from 'src/app/services/execution.service';
 
 @Component({
   selector: 'app-step-list',
@@ -8,7 +9,7 @@ import { TestStep } from 'src/app/interfaces/test-step.interface';
 })
 export class StepListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private executionService: ExecutionService) { }
 
   steps: TestStep[] = [
     {
@@ -38,6 +39,22 @@ export class StepListComponent implements OnInit {
   ]
 
   ngOnInit(): void {
+    this.executionService.nextStepSource.subscribe({
+      next: (response) => {
+        this.switchStep(response + 1)
+      }
+    })
+  }
+
+
+  switchStep(index: number){
+    const step = this.steps[index];
+    if(step.status == null) {
+      step.index = index;
+      this.executionService.activeStepSource.next(step)
+    } else {
+      this.switchStep(step.index + 1)
+    }
   }
 
 }

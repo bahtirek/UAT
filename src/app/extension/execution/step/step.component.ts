@@ -77,6 +77,7 @@ export class StepComponent implements OnInit {
 
   onPass(){
     this.step.status = 0
+    this.executionService.nextStepSource.next(this.step.index);
   }
 
   toggleModal(){
