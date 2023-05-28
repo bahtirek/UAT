@@ -1,4 +1,4 @@
-if (typeof browser === "undefined") {
+if (typeof browser === "undefined" && typeof chrome !== "undefined") {
   var browser = chrome;
 }
 browser.action.onClicked.addListener(getCurrentWindow);

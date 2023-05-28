@@ -7,7 +7,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "less", 
+          "style": "less",
           "skipTests": true
         }
       },
@@ -27,17 +27,21 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.json",
               "src/background.js",
               "src/content.js",
               "src/popup.html",
-              "src/popup.js"
+              "src/popup.js",
+              {
+                "glob" : "manifest.json",
+                "input": "src/manifest/chrome",
+                "output": "."
+              }
             ],
             "styles": [
               "src/styles.less"
             ],
             "scripts": [
-             
+
             ],
             "optimization": {
               "styles": {

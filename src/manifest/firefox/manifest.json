@@ -1,0 +1,39 @@
+{
+  "name": "UAT Angular",
+  "description": "UAT Angular",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "content_scripts": [
+      {
+          "matches": [
+              "<all_urls>"
+          ],
+          "js": [
+              "content.js",
+              "popup.js"
+          ],
+          "css": ["styles.css"]
+      }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "assets/spinner.svg"
+  ],
+  "permissions": ["alarms", "storage", "activeTab", "declarativeContent", "scripting", "<all_urls>"],
+
+
+  "icons": {
+    "48":  "assets/icon.png",
+    "128":  "assets/icon.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "48":  "assets/icon.png",
+      "128":  "assets/icon.png"
+    }
+  }
+}

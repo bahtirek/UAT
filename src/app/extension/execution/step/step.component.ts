@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MoreButtonAction } from 'src/app/interfaces/more-button-action.interface';
 import { TestStep } from 'src/app/interfaces/test-step.interface';
 import { ExecutionService } from 'src/app/services/execution.service';
-import { ScreenshotService } from 'src/app/services/screenshot.service';
+import  screenshotService  from 'src/app/services/screenshot';
 
 @Component({
   selector: 'app-step',
@@ -22,7 +22,7 @@ export class StepComponent implements OnInit {
     },
   ]
 
-  constructor(private screenshotService: ScreenshotService, private executionService: ExecutionService) { }
+  constructor(private executionService: ExecutionService) { }
 
   ngOnInit(): void {
     this.executionService.activeStepSource.subscribe({
@@ -47,7 +47,7 @@ export class StepComponent implements OnInit {
   }
 
   async getScreenshot (){
-    const screenshot = await this.screenshotService.getScreenshot();
+    const screenshot = await screenshotService.getScreenshot();
     this.step.screenshots.push(screenshot);
   }
 
