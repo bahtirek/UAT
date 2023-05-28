@@ -1,21 +1,24 @@
 if (typeof browser === "undefined") {
   var browser = chrome;
 }
-browser.action.onClicked.addListener(openNewWindow);
+browser.action.onClicked.addListener(getCurrentWindow);
 
 let lastWindowId;
+let currentWindowId;
 
 //save last focused window to get the screenshots
-browser.windows.getLastFocused(
-  null, (window)=>{
-    console.log('last focused window', window);
-    lastWindowId = window.id
-  }
-)
+function getCurrentWindow() {
+  browser.windows.getCurrent(
+    null, (window)=>{
+      currentWindowId = window.id;
+      openNewWindow();
+    }
+  )
+}
 
 browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.todo == 'getImage') {
-      browser.tabs.captureVisibleTab(lastWindowId, {format: 'png'}, (dataUrl) => {
+      browser.tabs.captureVisibleTab(currentWindowId, {format: 'png'}, (dataUrl) => {
         sendResponse({imgSrc:dataUrl});
       }
     );
