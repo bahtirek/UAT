@@ -1,0 +1,8 @@
+<div class="editing-item" (mousedown)="onMouseDown($event)" (mouseup)="onMouseUp($event)" #editingParent>
+  <app-editor-menu 
+  [editorMenu]="editorMenu" 
+  (onDelete)="onDelete()" 
+  (onColor)="onColor($event)"></app-editor-menu>
+  <div class="resize-element highlight" #editingItem>
+  </div>
+</div>

@@ -6,6 +6,12 @@
     </div>
   </div>
   <div class="right-container">
-    <app-step></app-step>
+    <app-step (editScreenshot)="edit($event)"></app-step>
   </div>
 </div>
+<app-editor
+  *ngIf="isEditing"
+  [screenshot]="screenshotToEdit"
+  (closeEditor)="closeEditor()"
+  (saveScreenshot)="saveScreenshot($event)">
+</app-editor>

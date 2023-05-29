@@ -12,7 +12,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SearchTestCaseModule } from '../shared/search-test-case/search-test-case.module';
 import { ExecutionModule } from './execution/execution.module';
 
-
 const routes: Routes = [
   {
     path: '',

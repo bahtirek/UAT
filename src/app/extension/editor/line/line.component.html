@@ -1,0 +1,17 @@
+<div class="editing-item" (mousedown)="onMouseDown($event)" (mouseup)="onMouseUp($event)" #editingParent>
+  <app-editor-menu 
+    [editorMenu]="editorMenu" 
+    (onDelete)="onDelete()" 
+    (onColor)="onColor($event)" 
+    (onStroke)="strokeUpdate($event)" 
+    (onRotate)="onRotate($event)"
+    (onArrow)="onArrow($event)"
+    class="above">
+  </app-editor-menu>
+  <div class="resize-element line-container" #lineContainer>
+    <div class="line" #editingItem>
+    </div>
+    <svg class="chevron-left" #chevronLeft xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <svg class="chevron-right" #chevronRight xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </div>
+</div>

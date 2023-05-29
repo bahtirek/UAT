@@ -1,6 +1,7 @@
 ///<reference types="chrome"/>
 import { Injectable } from '@angular/core';
 import { dataUrl } from '../data/dataUrl';
+import  screenshot  from './screenshot';
 
 @Injectable({
   providedIn: 'root'
@@ -13,18 +14,12 @@ export class ScreenshotService {
 
   async getScreenshot(){
 
-    return new Promise<string>((resolve, reject) => {
-      if(chrome && chrome.runtime){
-        chrome.runtime.sendMessage({todo: "getImage"}, response => {
-          if(response.imgSrc) {
-            resolve(response.imgSrc);
-          } else {
-            reject();
-          }
-        });
+    return new Promise<string>(async (resolve, reject) => {
+      const dataUrl = await screenshot.getScreenshot()
+      if(dataUrl) {
+        resolve(dataUrl);
       } else {
-        // for testing purpose
-        resolve(this.dataUrl)
+        reject();
       }
     })
   }

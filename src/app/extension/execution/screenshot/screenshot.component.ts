@@ -10,6 +10,8 @@ export class ScreenshotComponent implements OnInit {
 
   constructor() { }
 
+  showImage: boolean = false;
+
   actions: MoreButtonAction[] = [
     {
       name: 'Edit',
@@ -30,6 +32,7 @@ export class ScreenshotComponent implements OnInit {
   //@Input() index: number;
 
   @Output() deleteScreenshot = new EventEmitter<void>()
+  @Output() edit = new EventEmitter<void>()
 
   onAction(event: string){
     switch (event) {
@@ -38,10 +41,18 @@ export class ScreenshotComponent implements OnInit {
     }
   }
   onEdit() {
-    throw new Error('Method not implemented.');
+    this.edit.emit()
   }
   onDelete() {
     this.deleteScreenshot.emit()
+  }
+
+  toggleImage(){
+    if(this.showImage) {
+      this.showImage = false;
+    } else {
+      this.showImage = true;
+    }
   }
 
 }

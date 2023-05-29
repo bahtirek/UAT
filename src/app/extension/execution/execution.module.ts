@@ -6,6 +6,11 @@ import { StepComponent } from './step/step.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ScreenshotComponent } from './screenshot/screenshot.component';
 import { MoreButtonMenuModule } from 'src/app/shared/more-button-menu/more-button-menu.module';
+import { EditorModule } from '../editor/editor.module';
+import { ModalModule } from 'src/app/shared/modal/modal.module';
+import { ActualResultComponent } from './step/actual-result/actual-result.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { StepDetailsComponent } from './step-list/step-details/step-details.component';
 
 const routes: Routes = [
   {
@@ -19,11 +24,16 @@ const routes: Routes = [
     ExecutionComponent,
     StepListComponent,
     StepComponent,
-    ScreenshotComponent
+    ScreenshotComponent,
+    ActualResultComponent,
+    StepDetailsComponent
   ],
   imports: [
     CommonModule,
     MoreButtonMenuModule,
+    EditorModule,
+    ModalModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
   exports: [

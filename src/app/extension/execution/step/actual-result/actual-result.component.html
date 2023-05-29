@@ -1,0 +1,28 @@
+<div class="form-container">
+  <h3>Actual results</h3>
+  <div class="width-full">
+      <form [formGroup]="resultsForm" novalidate #form autocomplete="off">
+          <div class="ui-br-ext-flex ui-br-ext-nowrap ui-br-ext-gap-12">
+              <div class="form-container">
+                  <label for="ui-br-ext-description"></label>
+                  <textarea name="ui-br-ext-description" rows="6" data-gramm="false" maxlength="1000" formControlName="actualResults" id="actualResults" required></textarea>
+                  <span class="form-error-message" *ngIf="actualResults.dirty  && actualResults.invalid">
+                      <div>Field is required</div>
+                  </span>
+              </div>
+              <div class="form-container checkbox flex items-center">
+                <input type="checkbox" name="jira" formControlName="jira">
+                <label for="jira" class="checkbox">Create Jira ticket</label>
+              </div>
+          </div>
+      </form>
+      <div class="btn-group">
+          <button class=""  data-listener="off" (click)="onResultsSave()" (keyup.enter)="onResultsSave()">
+              <span>Save</span>
+          </button>
+          <button class="btn-danger"  data-listener="off" (click)="onCancel()" >
+              <span>Cancel</span>
+          </button>
+      </div>
+  </div>
+</div>
