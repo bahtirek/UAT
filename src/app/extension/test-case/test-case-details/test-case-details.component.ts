@@ -58,18 +58,8 @@ export class TestCaseDetailsComponent implements OnInit {
   }
 
   onExecute(){
-    this.executionService.executeTest(this.testCase.testCaseId).subscribe({
-      next: (response) => {
-        console.log(response);
-        this.executionService.testCaseExecution = response.testCaseExecution;
-        this.executionService.executionSteps = response.executionSteps;
-        this.router.navigate(['execution'], { skipLocationChange: true });
-      },
-      error: (error) => {
-        console.log(error);
-
-      },
-    })
+    this.executionService.testCaseToExecute = this.testCase;
+    this.router.navigate(['execution'], { skipLocationChange: true });
   }
 
   onEdit(){

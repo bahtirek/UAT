@@ -9,7 +9,7 @@ export interface TestStep {
     actualResult?: string,
     screenshots?: string[],
     importedTestCaseId?: number,
-    status?: number,
+    status?: string,
     index?: number,
     result?: string,
     sequence?: number,

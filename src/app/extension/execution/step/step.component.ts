@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ExecutionHistory } from 'src/app/interfaces/execution-history.interface';
 import { MoreButtonAction } from 'src/app/interfaces/more-button-action.interface';
 import { TestStep } from 'src/app/interfaces/test-step.interface';
 import { ExecutionService } from 'src/app/services/execution.service';
@@ -21,6 +22,8 @@ export class StepComponent implements OnInit {
       display: true
     },
   ]
+
+  @Input() executionHistory: ExecutionHistory;
 
   constructor(private executionService: ExecutionService) { }
 
@@ -62,7 +65,7 @@ export class StepComponent implements OnInit {
 
   saveActualResults(actualResult: string){
     this.step.actualResult = actualResult;
-    this.step.status = 1;
+    this.step.result = "Fail";
     this.actualResultToEdit = '';
     this.toggleModal();
   }
@@ -76,7 +79,7 @@ export class StepComponent implements OnInit {
   }
 
   onPass(){
-    this.step.status = 0
+    this.step.result = "Pass"
     this.executionService.nextStepSource.next(this.step.index);
   }
 
