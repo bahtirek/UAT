@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { TestCase, TestStepOrder } from 'src/app/interfaces/test-case.interface';
+import { ExecutionService } from 'src/app/services/execution.service';
 import { TestCaseService } from 'src/app/services/test-case.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class TestCaseDetailsComponent implements OnInit {
   submitInProgress: boolean = false;
   navigationSubscription;
 
-  constructor(private router: Router, private testCaseService: TestCaseService) {
+  constructor(private router: Router, private testCaseService: TestCaseService, private executionService: ExecutionService) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initalise the component
       if (e instanceof NavigationEnd) {
@@ -34,6 +35,8 @@ export class TestCaseDetailsComponent implements OnInit {
       const testCaseId = this.testCaseService.testCaseDetails.testCaseId;
       this.testCaseService.getTestCaseById(testCaseId).subscribe(
         response => {
+          console.log(response);
+
           this.testCase = this.testCaseService.setTitleForImportedCase(response);
         },
         error => {
@@ -52,6 +55,21 @@ export class TestCaseDetailsComponent implements OnInit {
         this.toggleModal();
       }
     )
+  }
+
+  onExecute(){
+    this.executionService.executeTest(this.testCase.testCaseId).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.executionService.testCaseExecution = response.testCaseExecution;
+        this.executionService.executionSteps = response.executionSteps;
+        this.router.navigate(['execution'], { skipLocationChange: true });
+      },
+      error: (error) => {
+        console.log(error);
+
+      },
+    })
   }
 
   onEdit(){

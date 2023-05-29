@@ -44,6 +44,7 @@
   <div class="flex justify-between">
     <a [routerLink]="['../dashboard']" [skipLocationChange]="true" routerLinkActive="active">Back to Dashboard</a>
     <div class="link-group flex justify-end">
+      <a (click)="onExecute()">Execute</a>
       <a (click)="onEdit()">Edit</a>
       <a (click)="onEdit()">Move</a>
       <a class="link-danger" (click)="toggleDeleteModal()">Delete</a>

@@ -13,7 +13,7 @@ export class StepComponent implements OnInit {
 
   step: TestStep = {};
   isModalOn: boolean = false;
-  actualResultsToEdit: string;
+  actualResultToEdit: string;
   actions: MoreButtonAction[] = [
     {
       name: 'Edit',
@@ -56,19 +56,19 @@ export class StepComponent implements OnInit {
   }
 
   editActualResults(){
-    this.actualResultsToEdit = this.step.actualResults;
+    this.actualResultToEdit = this.step.actualResult;
     this.toggleModal();
   }
 
-  saveActualResults(actualResults: string){
-    this.step.actualResults = actualResults;
+  saveActualResults(actualResult: string){
+    this.step.actualResult = actualResult;
     this.step.status = 1;
-    this.actualResultsToEdit = '';
+    this.actualResultToEdit = '';
     this.toggleModal();
   }
 
   onFail(){
-    if(this.step.actualResults) {
+    if(this.step.actualResult) {
       this.editActualResults();
     } else {
       this.toggleModal();

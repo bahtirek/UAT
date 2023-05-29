@@ -10,8 +10,8 @@ export class ActualResultComponent implements OnInit {
 
   editing: boolean = false;
 
-  get actualResults() {
-    return this.resultsForm.get('actualResults');
+  get actualResult() {
+    return this.resultsForm.get('actualResult');
   }
 
   get jira() {
@@ -19,7 +19,7 @@ export class ActualResultComponent implements OnInit {
   }
 
   resultsForm: FormGroup = this.fb.group({
-    actualResults: ['', [Validators.required, ]],
+    actualResult: ['', [Validators.required, ]],
     jira: [false]
   });
 
@@ -44,18 +44,18 @@ export class ActualResultComponent implements OnInit {
   }
 
   addResults() {
-    console.log(this.actualResults);
-    this.save.emit(this.actualResults.value);
+    console.log(this.actualResult);
+    this.save.emit(this.actualResult.value);
   }
 
   updateResults(){
-    console.log(this.actualResults);
-    this.save.emit(this.actualResults.value);
+    console.log(this.actualResult);
+    this.save.emit(this.actualResult.value);
   }
 
   setStepFormValue() {
     if(this.resultsToEdit){
-      this.resultsForm.controls['actualResults'].setValue(this.resultsToEdit);
+      this.resultsForm.controls['actualResult'].setValue(this.resultsToEdit);
     }
   }
 
