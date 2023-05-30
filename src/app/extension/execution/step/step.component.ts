@@ -14,6 +14,7 @@ export class StepComponent implements OnInit {
 
   step: TestStep = {};
   isModalOn: boolean = false;
+  isPassModalOn: boolean = false;
   actualResultToEdit: string;
   actions: MoreButtonAction[] = [
     {
@@ -79,8 +80,23 @@ export class StepComponent implements OnInit {
   }
 
   onPass(){
-    this.step.result = "Pass"
+    if(this.step.result == "Fail") {
+      this.togglePassModal();
+    } else {
+      this.step.result = "Pass"
+      this.executionService.nextStepSource.next(this.step.index);
+    }
+  }
+
+  passFailed() {
+    this.step.actualResult = '';
+    this.step.result = "Pass";
     this.executionService.nextStepSource.next(this.step.index);
+    this.togglePassModal();
+  }
+
+  togglePassModal() {
+    this.isPassModalOn = !this.isPassModalOn
   }
 
   toggleModal(){

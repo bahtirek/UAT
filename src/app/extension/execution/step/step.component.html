@@ -65,3 +65,15 @@
 <app-modal *ngIf="isModalOn" (closeModal)="toggleModal()" [propClass]="'width-full'">
   <app-actual-result (cancel)="toggleModal()" (save)="saveActualResults($event)" [resultsToEdit]="actualResultToEdit"></app-actual-result>
 </app-modal>
+<app-modal *ngIf="isPassModalOn" (closeModal)="togglePassModal()" >
+  <h3>Result update</h3>
+  <p>Actual results will be lost</p>
+  <div class="btn-group">
+    <button class=""  data-listener="off" (click)="passFailed()"  >
+        <span>Pass</span>
+    </button>
+    <button class="btn-danger"  data-listener="off" (click)="togglePassModal()">
+        <span>Cancel</span>
+    </button>
+</div>
+</app-modal>
