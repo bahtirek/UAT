@@ -16,6 +16,7 @@ export class TestCaseDetailsComponent implements OnInit {
   deleteModalOn: boolean = false;
   submitInProgress: boolean = false;
   navigationSubscription;
+  lastExecutedOn: string;
 
   constructor(private router: Router, private testCaseService: TestCaseService, private executionService: ExecutionService) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
@@ -34,10 +35,10 @@ export class TestCaseDetailsComponent implements OnInit {
     if(this.testCaseService.testCaseDetails && this.testCaseService.testCaseDetails.testCaseId) {
       const testCaseId = this.testCaseService.testCaseDetails.testCaseId;
       this.testCaseService.getTestCaseById(testCaseId).subscribe(
-        response => {
-          console.log(response);
-
-          this.testCase = this.testCaseService.setTitleForImportedCase(response);
+        response => {this.testCase = this.testCaseService.setTitleForImportedCase(response);
+          if(this.testCase.executionHistory && this.testCase.executionHistory.length > 0) {
+            this.lastExecutedOn = this.testCase.executionHistory[this.testCase.executionHistory.length - 1].updated_at;
+          }
         },
         error => {
           console.log(error);

@@ -93,4 +93,8 @@ export class StepComponent implements OnInit {
     }
   }
 
+  onComplete(){
+
+  }
+
 }

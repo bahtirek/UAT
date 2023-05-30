@@ -8,12 +8,11 @@
     <div class="card">
       <h3>{{testCase?.title}}</h3>
       <ul>
-        <li>Total steps .... 20</li>
-        <li>Imported cases</li>
-        <li>Average execution time</li>
-        <li>Recent executed</li>
-        <li>Created on</li>
-        <li>Created by</li>
+        <li>Test steps - {{testCase?.testStepOrder.length}}</li>
+        <li>Created at - {{testCase?.created_at | date:'short':'-0500'}}</li>
+        <li>Last executed at - {{lastExecutedOn | date:'short':'-0500'}}</li>
+        <li>Executed times - {{testCase?.executionHistory?.length}}</li>
+        <li>Average execution time - </li>
       </ul>
     </div>
   </div>
