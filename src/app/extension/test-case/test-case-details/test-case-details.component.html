@@ -40,13 +40,13 @@
       </div>
     </div>
   </div>
-  <div class="flex justify-between">
+  <div class="flex justify-between items-center btn-link-group">
     <a [routerLink]="['../dashboard']" [skipLocationChange]="true" routerLinkActive="active">Back to Dashboard</a>
-    <div class="link-group flex justify-end">
-      <a (click)="onExecute()">Execute</a>
-      <a (click)="onEdit()">Edit</a>
-      <a (click)="onEdit()">Move</a>
-      <a class="link-danger" (click)="toggleDeleteModal()">Delete</a>
+    <div class="btn-group">
+      <button (click)="onExecute()">Execute</button>
+      <button (click)="onEdit()">Edit</button>
+      <button (click)="onEdit()">Move</button>
+      <button class="btn-danger" (click)="toggleDeleteModal()">Delete</button>
     </div>
   </div>
 </div>
