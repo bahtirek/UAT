@@ -21,7 +21,8 @@ export class ExecutionComponent implements OnInit {
   @ViewChild(StepComponent, {static: false}) step: StepComponent;
 
   ngOnInit(): void {
-    this.executionService.executeTest().subscribe({
+    const testCaseId = this.executionService.testCaseId;
+    this.executionService.executeTest(testCaseId).subscribe({
       next: (response) => {
         console.log(response);
         this.executionHistory = response.testCaseExecution;

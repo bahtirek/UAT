@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, map } from 'rxjs';
 import { TestStep } from '../interfaces/test-step.interface';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { TestCase } from '../interfaces/test-case.interface';
 import { api } from '../data/api-url';
 
 @Injectable({
@@ -11,14 +10,13 @@ import { api } from '../data/api-url';
 export class ExecutionService {
 
   url = api.url;
-  testCaseToExecute: TestCase;
   activeStepSource = new Subject<TestStep>();
   nextStepSource = new Subject<number>();
+  testCaseId: number;
 
   constructor(private http: HttpClient) { }
 
-  executeTest(testCaseId?: number): Observable<any> {
-    if(!testCaseId) testCaseId = this.testCaseToExecute.testCaseId
+  executeTest(testCaseId: number): Observable<any> {
     return this.http.post<any>(this.url + '/test-case-execution', {testCaseId: testCaseId})
     .pipe(map(response => response?.result))
   }

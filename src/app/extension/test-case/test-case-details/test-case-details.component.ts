@@ -17,6 +17,7 @@ export class TestCaseDetailsComponent implements OnInit {
   submitInProgress: boolean = false;
   navigationSubscription;
   lastExecutedOn: string;
+  testCaseId: any;
 
   constructor(private router: Router, private testCaseService: TestCaseService, private executionService: ExecutionService) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
@@ -59,7 +60,7 @@ export class TestCaseDetailsComponent implements OnInit {
   }
 
   onExecute(){
-    this.executionService.testCaseToExecute = this.testCase;
+    this.executionService.testCaseId = this.testCase.testCaseId;
     this.router.navigate(['execution'], { skipLocationChange: true });
   }
 
