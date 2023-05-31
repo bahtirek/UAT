@@ -14,7 +14,6 @@ export class TestCaseDashComponent implements OnInit {
 
   ngOnInit(): void {
     this.testCaseService.clearTestCase();
-    this.testCaseService.clearTestCase();
   }
 
   onTestCaseFound(testCase: TestCase){

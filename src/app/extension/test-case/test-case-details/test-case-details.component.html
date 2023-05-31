@@ -8,12 +8,11 @@
     <div class="card">
       <h3>{{testCase?.title}}</h3>
       <ul>
-        <li>Total steps .... 20</li>
-        <li>Imported cases</li>
-        <li>Average execution time</li>
-        <li>Recent executed</li>
-        <li>Created on</li>
-        <li>Created by</li>
+        <li>Test steps - {{testCase?.testStepOrder.length}}</li>
+        <li>Created at - {{testCase?.created_at | date:'short':'-0500'}}</li>
+        <li>Last executed at - {{lastExecutedOn | date:'short':'-0500'}}</li>
+        <li>Executed times - {{testCase?.executionHistory?.length}}</li>
+        <li>Average execution time - </li>
       </ul>
     </div>
   </div>
@@ -41,12 +40,13 @@
       </div>
     </div>
   </div>
-  <div class="flex justify-between">
+  <div class="flex justify-between items-center btn-link-group">
     <a [routerLink]="['../dashboard']" [skipLocationChange]="true" routerLinkActive="active">Back to Dashboard</a>
-    <div class="link-group flex justify-end">
-      <a (click)="onEdit()">Edit</a>
-      <a (click)="onEdit()">Move</a>
-      <a class="link-danger" (click)="toggleDeleteModal()">Delete</a>
+    <div class="btn-group">
+      <button (click)="onExecute()">Execute</button>
+      <button (click)="onEdit()">Edit</button>
+      <button (click)="onEdit()">Move</button>
+      <button class="btn-danger" (click)="toggleDeleteModal()">Delete</button>
     </div>
   </div>
 </div>

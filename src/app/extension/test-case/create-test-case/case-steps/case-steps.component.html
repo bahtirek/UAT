@@ -34,13 +34,11 @@
     </div>
   </div>
 </div>
-
-<div class="flex justify-between">
+<div class="flex justify-between items-center btn-link-group">
   <a [routerLink]="['../dashboard']" [skipLocationChange]="true" routerLinkActive="active">Back to Dashboard</a>
-
-  <div class="link-group flex justify-end">
-    <a (click)="onImportSteps()">Import steps</a>
-    <a (click)="onStepAdd()">Add new step</a>
+  <div class="btn-group">
+    <button (click)="onImportSteps()">Import steps</button>
+    <button (click)="onStepAdd()">Add new step</button>
   </div>
 </div>
 <app-modal *ngIf="isAddStepModalOn" (closeModal)="toggleModal('addNewStepModal')" [propClass]="'width-full'">

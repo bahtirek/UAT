@@ -1,12 +1,12 @@
 <div class="main-container">
   <div class="left-container dark-mode">
     <div class="left-navigation">
-      <app-step-list></app-step-list>
+      <app-step-list [steps]="steps"></app-step-list>
 
     </div>
   </div>
   <div class="right-container">
-    <app-step (editScreenshot)="edit($event)"></app-step>
+    <app-step (editScreenshot)="edit($event)" [executionHistory]="executionHistory"></app-step>
   </div>
 </div>
 <app-editor

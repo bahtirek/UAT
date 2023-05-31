@@ -1,56 +1,79 @@
-<div class="right-content" *ngIf="step?.index >= 0">
-  <div class="header">
-    <h2>Step # {{1 + step.index}}</h2>
+<div class="right-content">
+  <div class="card">
+    <h3>Test case execution</h3>
+    <ul>
+      <li>{{executionHistory?.testCaseTitle}}</li>
+    </ul>
   </div>
-  <div class="flex">
-    <div  class="width-full">
-      <div class="width-full">
-        <div class="card ">
-          <div class="">
-            <div class="title-sm ">Descriprion: </div>
-            <div class="spacer-05"></div>
-            <div>{{step.description}}</div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="">
-            <div class="title-sm ">Expected result: </div>
-            <div class="spacer-05"></div>
-            <div>{{step.expected}}</div>
-          </div>
-        </div>
-        <div class="card" *ngIf="step.actualResults">
-          <div class="">
-            <div class="case-title flex items-center">
-              <div class="title-sm ">Actual result: </div>
-              <app-more-button-menu [actions]="actions" (onAction)="onAction($event)"></app-more-button-menu>
-            </div>
-            <div class="spacer-05"></div>
-            <div class="text-pre">{{step.actualResults}}</div>
-          </div>
-        </div>
-        <div class="btn-group">
-          <button class=""  data-listener="off" (click)="getScreenshot()" >
-              <span>Screenshot</span>
-          </button>
-          <button class=""  data-listener="off" (click)="onPass()" >
-              <span>Pass</span>
-          </button>
-          <button class="btn-danger"  data-listener="off" (click)="onFail()" >
-              <span>Fail</span>
-          </button>
-      </div>
-      </div>
+  <div *ngIf="step?.index >= 0">
+    <div class="header">
+      <h2>Step # {{1 + step.index}}</h2>
     </div>
-    <div class="screenshots-container">
-      <ng-container *ngIf="step && step.screenshots">
-        <ng-container *ngFor="let screenshot of step.screenshots; index as i">
-          <app-screenshot [screenshot]="screenshot" (deleteScreenshot)="deleteScreenshot(i)" (edit)="onScreenshotEdit(i)"></app-screenshot>
+    <div class="flex">
+      <div  class="width-full">
+        <div class="width-full">
+          <div class="card ">
+            <div class="">
+              <div class="title-sm ">Descriprion: </div>
+              <div class="spacer-05"></div>
+              <div>{{step.description}}</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="">
+              <div class="title-sm ">Expected result: </div>
+              <div class="spacer-05"></div>
+              <div>{{step.expected}}</div>
+            </div>
+          </div>
+          <div class="card" *ngIf="step.actualResult">
+            <div class="">
+              <div class="case-title flex items-center">
+                <div class="title-sm ">Actual result: </div>
+                <app-more-button-menu [actions]="actions" (onAction)="onAction($event)"></app-more-button-menu>
+              </div>
+              <div class="spacer-05"></div>
+              <div class="text-pre">{{step.actualResult}}</div>
+            </div>
+          </div>
+          <div class="btn-group">
+            <button class="margin-auto-right"  data-listener="off" (click)="onComplete()" >
+                <span>Complete execution</span>
+            </button>
+            <button class=""  data-listener="off" (click)="getScreenshot()" >
+                <span>Screenshot</span>
+            </button>
+            <button class=""  data-listener="off" (click)="onPass()" >
+                <span>Pass</span>
+            </button>
+            <button class="btn-danger"  data-listener="off" (click)="onFail()" >
+                <span>Fail</span>
+            </button>
+        </div>
+        </div>
+      </div>
+      <div class="screenshots-container" *ngIf="step && step.screenshots && step.screenshots.length > 0">
+        <ng-container *ngIf="step && step.screenshots">
+          <ng-container *ngFor="let screenshot of step.screenshots; index as i">
+            <app-screenshot [screenshot]="screenshot" (deleteScreenshot)="deleteScreenshot(i)" (edit)="onScreenshotEdit(i)"></app-screenshot>
+          </ng-container>
         </ng-container>
-      </ng-container>
+      </div>
     </div>
   </div>
 </div>
 <app-modal *ngIf="isModalOn" (closeModal)="toggleModal()" [propClass]="'width-full'">
-  <app-actual-result (cancel)="toggleModal()" (save)="saveActualResults($event)" [resultsToEdit]="actualResultsToEdit"></app-actual-result>
+  <app-actual-result (cancel)="toggleModal()" (save)="saveActualResults($event)" [resultsToEdit]="actualResultToEdit"></app-actual-result>
+</app-modal>
+<app-modal *ngIf="isPassModalOn" (closeModal)="togglePassModal()" >
+  <h3>Result update</h3>
+  <p>Actual results will be lost</p>
+  <div class="btn-group">
+    <button class=""  data-listener="off" (click)="passFailed()"  >
+        <span>Pass</span>
+    </button>
+    <button class="btn-danger"  data-listener="off" (click)="togglePassModal()">
+        <span>Cancel</span>
+    </button>
+</div>
 </app-modal>

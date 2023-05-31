@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { TestCase, TestStepOrder } from 'src/app/interfaces/test-case.interface';
+import { ExecutionService } from 'src/app/services/execution.service';
 import { TestCaseService } from 'src/app/services/test-case.service';
 
 @Component({
@@ -15,8 +16,10 @@ export class TestCaseDetailsComponent implements OnInit {
   deleteModalOn: boolean = false;
   submitInProgress: boolean = false;
   navigationSubscription;
+  lastExecutedOn: string;
+  testCaseId: any;
 
-  constructor(private router: Router, private testCaseService: TestCaseService) {
+  constructor(private router: Router, private testCaseService: TestCaseService, private executionService: ExecutionService) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initalise the component
       if (e instanceof NavigationEnd) {
@@ -33,8 +36,10 @@ export class TestCaseDetailsComponent implements OnInit {
     if(this.testCaseService.testCaseDetails && this.testCaseService.testCaseDetails.testCaseId) {
       const testCaseId = this.testCaseService.testCaseDetails.testCaseId;
       this.testCaseService.getTestCaseById(testCaseId).subscribe(
-        response => {
-          this.testCase = this.testCaseService.setTitleForImportedCase(response);
+        response => {this.testCase = this.testCaseService.setTitleForImportedCase(response);
+          if(this.testCase.executionHistory && this.testCase.executionHistory.length > 0) {
+            this.lastExecutedOn = this.testCase.executionHistory[this.testCase.executionHistory.length - 1].updated_at;
+          }
         },
         error => {
           console.log(error);
@@ -52,6 +57,11 @@ export class TestCaseDetailsComponent implements OnInit {
         this.toggleModal();
       }
     )
+  }
+
+  onExecute(){
+    this.executionService.testCaseId = this.testCase.testCaseId;
+    this.router.navigate(['execution'], { skipLocationChange: true });
   }
 
   onEdit(){

@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ExecutionHistory } from 'src/app/interfaces/execution-history.interface';
 import { MoreButtonAction } from 'src/app/interfaces/more-button-action.interface';
 import { TestStep } from 'src/app/interfaces/test-step.interface';
 import { ExecutionService } from 'src/app/services/execution.service';
@@ -13,7 +14,8 @@ export class StepComponent implements OnInit {
 
   step: TestStep = {};
   isModalOn: boolean = false;
-  actualResultsToEdit: string;
+  isPassModalOn: boolean = false;
+  actualResultToEdit: string;
   actions: MoreButtonAction[] = [
     {
       name: 'Edit',
@@ -21,6 +23,8 @@ export class StepComponent implements OnInit {
       display: true
     },
   ]
+
+  @Input() executionHistory: ExecutionHistory;
 
   constructor(private executionService: ExecutionService) { }
 
@@ -56,19 +60,19 @@ export class StepComponent implements OnInit {
   }
 
   editActualResults(){
-    this.actualResultsToEdit = this.step.actualResults;
+    this.actualResultToEdit = this.step.actualResult;
     this.toggleModal();
   }
 
-  saveActualResults(actualResults: string){
-    this.step.actualResults = actualResults;
-    this.step.status = 1;
-    this.actualResultsToEdit = '';
+  saveActualResults(actualResult: string){
+    this.step.actualResult = actualResult;
+    this.step.result = "Fail";
+    this.actualResultToEdit = '';
     this.toggleModal();
   }
 
   onFail(){
-    if(this.step.actualResults) {
+    if(this.step.actualResult) {
       this.editActualResults();
     } else {
       this.toggleModal();
@@ -76,8 +80,23 @@ export class StepComponent implements OnInit {
   }
 
   onPass(){
-    this.step.status = 0
+    if(this.step.result == "Fail") {
+      this.togglePassModal();
+    } else {
+      this.step.result = "Pass"
+      this.executionService.nextStepSource.next(this.step.index);
+    }
+  }
+
+  passFailed() {
+    this.step.actualResult = '';
+    this.step.result = "Pass";
     this.executionService.nextStepSource.next(this.step.index);
+    this.togglePassModal();
+  }
+
+  togglePassModal() {
+    this.isPassModalOn = !this.isPassModalOn
   }
 
   toggleModal(){
@@ -88,6 +107,10 @@ export class StepComponent implements OnInit {
     switch (event) {
       case 'edit': this.editActualResults(); break;
     }
+  }
+
+  onComplete(){
+
   }
 
 }

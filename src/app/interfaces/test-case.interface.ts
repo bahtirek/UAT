@@ -1,3 +1,4 @@
+import { ExecutionHistory } from "./execution-history.interface";
 import { TestStep } from "./test-step.interface";
 
 export interface TestCase {
@@ -11,6 +12,7 @@ export interface TestCase {
     projectId?: number,
     importedTestCases?: TestCase[],
     testStepOrder?: TestStepOrder[]
+    executionHistory?: ExecutionHistory[]
 }
 
 export interface TestStepOrder {
