@@ -83,16 +83,36 @@ export class StepComponent implements OnInit {
     if(this.step.result == "Fail") {
       this.togglePassModal();
     } else {
-      this.step.result = "Pass"
-      this.executionService.nextStepSource.next(this.step.index);
+      this.submitPass()
     }
   }
 
+  submitPass(){
+    const executedStep: TestStep = {testStepExecutionId: this.step.testStepExecutionId, result: 'pass', actualResult: null}
+      this.executionService.patchStepResult(executedStep).subscribe({
+        next: (result)=>{
+          this.step.result = "Pass"
+          this.executionService.nextStepSource.next(this.step.index);
+        },
+        error: (error)=>{
+          console.log(error);
+        }
+      })
+  }
+
   passFailed() {
-    this.step.actualResult = '';
-    this.step.result = "Pass";
-    this.executionService.nextStepSource.next(this.step.index);
-    this.togglePassModal();
+    const executedStep: TestStep = {testStepExecutionId: this.step.testStepExecutionId, result: 'pass', actualResult: null}
+      this.executionService.patchStepResult(executedStep).subscribe({
+        next: (result)=>{
+          this.step.actualResult = null;
+          this.step.result = "Pass"
+          this.executionService.nextStepSource.next(this.step.index);
+          this.togglePassModal();
+        },
+        error: (error)=>{
+          console.log(error);
+        }
+      })
   }
 
   togglePassModal() {
