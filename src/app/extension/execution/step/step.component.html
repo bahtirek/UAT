@@ -63,7 +63,7 @@
   </div>
 </div>
 <app-modal *ngIf="isModalOn" (closeModal)="toggleModal()" [propClass]="'width-full'">
-  <app-actual-result (cancel)="toggleModal()" (save)="saveActualResults($event)" [resultsToEdit]="actualResultToEdit"></app-actual-result>
+  <app-actual-result (cancel)="toggleModal()" (save)="saveActualResults($event)" [resultsToEdit]="actualResultToEdit" [step]="step"></app-actual-result>
 </app-modal>
 <app-modal *ngIf="isPassModalOn" (closeModal)="togglePassModal()" >
   <h3>Result update</h3>

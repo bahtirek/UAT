@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TestStep } from 'src/app/interfaces/test-step.interface';
+import { ExecutionService } from 'src/app/services/execution.service';
 
 @Component({
   selector: 'app-actual-result',
@@ -23,23 +25,28 @@ export class ActualResultComponent implements OnInit {
     jira: [false]
   });
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private executionService: ExecutionService) { }
 
   ngOnInit(): void {
     this.setStepFormValue();
   }
 
+  @Input() step: TestStep;
   @Input() resultsToEdit: string;
   @Output() cancel = new EventEmitter<null>();
   @Output() save = new EventEmitter<string>();
 
   onResultsSave(){
     if(this.resultsForm.valid) {
-      if(this.resultsToEdit) {
-        this.updateResults()
-      } else {
-        this.addResults()
-      }
+      const executedStep: TestStep = {testStepExecutionId: this.step.testStepExecutionId, actualResult: this.actualResult.value, result: 'fail'}
+      this.executionService.patchStepResult(executedStep).subscribe({
+        next: (result)=>{
+          this.save.emit(result.actualResult);
+        },
+        error: (error)=>{
+          console.log(error);
+        }
+      })
     }
   }
 

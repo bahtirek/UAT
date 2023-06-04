@@ -21,6 +21,13 @@ export class ExecutionService {
     .pipe(map(response => response?.result))
   }
 
+  patchStepResult(executedStep: TestStep): Observable<any> {
+    return this.http.patch<any>(this.url + '/test-step-execution', executedStep)
+    .pipe(map(response => response?.result))
+  }
+
+
+
   /* getTestCaseExecution(id: number){
     const params = new HttpParams().set('testCaseExecutionId', id);
     return this.http.get<ServerResponse<TestCase>>(this.url + '/test-case', {params})
