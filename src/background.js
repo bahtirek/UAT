@@ -18,7 +18,7 @@ function getCurrentWindow() {
 
 browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.todo == 'getImage') {
-      browser.tabs.captureVisibleTab(currentWindowId, {format: 'png'}, (dataUrl) => {
+      browser.tabs.captureVisibleTab(currentWindowId, {format: 'jpeg'}, (dataUrl) => {
         sendResponse({imgSrc:dataUrl});
       }
     );
