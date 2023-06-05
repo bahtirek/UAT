@@ -3,7 +3,7 @@ import { ExecutionHistory } from 'src/app/interfaces/execution-history.interface
 import { MoreButtonAction } from 'src/app/interfaces/more-button-action.interface';
 import { TestStep } from 'src/app/interfaces/test-step.interface';
 import { ExecutionService } from 'src/app/services/execution.service';
-import  screenshotService  from 'src/app/services/screenshot';
+import  screenshotService  from 'src/app/services/browserScreenshot';
 
 @Component({
   selector: 'app-step',
@@ -41,18 +41,28 @@ export class StepComponent implements OnInit {
 
   @Output() editScreenshot = new EventEmitter<string>();
 
-  onScreenshotEdit(index: number){
-    const dataUrl = this.step.screenshots[index];
-    this.editScreenshot.emit(dataUrl);
+  onScreenshotEdit(blob: string){
+    this.editScreenshot.emit(blob);
   }
 
-  saveEditedScreenshot(dataUrl: string){
-    this.step.screenshots.push(dataUrl) ;
+  saveEditedScreenshot(blob: string){
+    this.postScreenshot(blob)
   }
 
   async getScreenshot (){
-    const screenshot = await screenshotService.getScreenshot();
-    this.step.screenshots.push(screenshot);
+    const blob = await screenshotService.getScreenshot();
+    this.postScreenshot(blob);
+  }
+
+  postScreenshot(blob: string){
+    this.executionService.postScreenshot(this.step.testStepExecutionId, blob).subscribe({
+      next: (response) => {
+        this.step.screenshots.push(response);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
   }
 
   deleteScreenshot(index: number){

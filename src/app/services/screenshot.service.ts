@@ -1,43 +1,35 @@
 ///<reference types="chrome"/>
 import { Injectable } from '@angular/core';
-import { dataUrl } from '../data/dataUrl';
-import  screenshot  from './screenshot';
+import { Screenshot, ServerResponse } from '../interfaces/screenshot.interface';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable, map } from 'rxjs';
+import { api } from '../data/api-url';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScreenshotService {
 
-  constructor() { }
+  url = api.url;
 
-  dataUrl = dataUrl;
+  constructor(private http: HttpClient) { }
 
-  async getScreenshot(){
-
-    return new Promise<string>(async (resolve, reject) => {
-      const dataUrl = await screenshot.getScreenshot()
-      if(dataUrl) {
-        resolve(dataUrl);
-      } else {
-        reject();
-      }
-    })
+  postScreenshot(testStepExecutionId: number, blob: string): Observable<Screenshot> {
+    return this.http.post<ServerResponse<Screenshot>>(this.url + '/test-step-screenshot', {testStepExecutionId: testStepExecutionId, blob: blob})
+    .pipe(map(response => response?.result))
   }
 
-  setDelay(timeout: number){
-    return new Promise<void>((resolve) => {
-      setTimeout(() => {
-        resolve();
-      }, timeout);
-    })
+  getScreenshot(uuid: string){
+    const params = new HttpParams().set('uuid', uuid);
+    return this.http.get<ServerResponse<Screenshot>>(this.url + '/test-step-screenshot', {params})
+    .pipe(map(response => response?.result))
   }
 
-  async screenshotLink(id: string, dataUrl: string, filename: string) {
-    let dlLink: any = document.getElementById(id);
-    let MIME_TYPE = "image/png";
-    dlLink.download = filename;
-    dlLink.href = dataUrl;
-    dlLink.dataset.downloadurl = [MIME_TYPE, dlLink.download, dlLink.href].join(':');
-    dlLink.click();
+  deleteScreenshot(uuid: string, testStepExecutionId: number){
+    const params = new HttpParams()
+    .set('uuid', uuid)
+    .set('testStepExecutionId', testStepExecutionId);
+    return this.http.delete<any>(this.url + '/test-step-screenshot', {params})
+    .pipe(map(response => response?.result))
   }
 }

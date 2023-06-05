@@ -39,13 +39,13 @@ export class ExecutionComponent implements OnInit {
     this.isEditing = false
   }
 
-  saveScreenshot(dataUrl: string){
+  saveScreenshot(blob: string){
     this.isEditing = false
-    this.step.saveEditedScreenshot(dataUrl);
+    this.step.saveEditedScreenshot(blob);
   }
 
-  edit(dataUrl: string){
-    this.screenshotToEdit = dataUrl;
+  edit(blob: string){
+    this.screenshotToEdit = blob;
     this.isEditing = true;
   }
 

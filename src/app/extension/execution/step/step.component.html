@@ -55,7 +55,7 @@
       <div class="screenshots-container" *ngIf="step && step.screenshots && step.screenshots.length > 0">
         <ng-container *ngIf="step && step.screenshots">
           <ng-container *ngFor="let screenshot of step.screenshots; index as i">
-            <app-screenshot [screenshot]="screenshot" (deleteScreenshot)="deleteScreenshot(i)" (edit)="onScreenshotEdit(i)"></app-screenshot>
+            <app-screenshot [screenshot]="screenshot" (deleteScreenshot)="deleteScreenshot(i)" (edit)="onScreenshotEdit($event)"></app-screenshot>
           </ng-container>
         </ng-container>
       </div>

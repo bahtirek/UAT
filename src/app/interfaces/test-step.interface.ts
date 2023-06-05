@@ -1,3 +1,5 @@
+import { Screenshot } from "./screenshot.interface";
+
 export interface TestStep {
     testStepId?: number,
     description?: string,
@@ -7,7 +9,7 @@ export interface TestStep {
     createdBY?: number,
     deleted?: boolean,
     actualResult?: string,
-    screenshots?: string[],
+    screenshots?: Screenshot[],
     importedTestCaseId?: number,
     status?: string,
     index?: number,
