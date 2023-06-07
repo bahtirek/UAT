@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { EventsComponent } from './events.component';
 import { EventsDashComponent } from './events-dash/events-dash.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
-import { CreateEventModule } from './create-event/create-event.module';
 import { RouterModule, Routes } from '@angular/router';
+import { CreateEventComponent } from './create-event/create-event.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CreateEventModule } from './create-event/create-event.module';
 
 const routes: Routes = [
   {
@@ -18,7 +20,7 @@ const routes: Routes = [
         path: 'details', component: EventDetailsComponent
       },
       {
-        path: 'create', loadChildren: () => CreateEventModule,
+        path: 'create', component: CreateEventComponent,
       },
     ]
   }
@@ -26,10 +28,12 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    EventsComponent
+    EventsComponent,
   ],
   imports: [
     CommonModule,
+    CreateEventModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
   ]
 })
