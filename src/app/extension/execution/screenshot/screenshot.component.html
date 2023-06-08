@@ -1,6 +1,5 @@
 <div class="screenshot-box" [ngClass]="{'display-image': showImage}">
   <img [src]="blob" alt="screenshot" (click)="toggleImage()">
-  <span>{{screenshot.uuid}}</span>
   <div class="screenshot-more-btn">
     <app-more-button-menu [actions]="actions" (onAction)="onAction($event)"></app-more-button-menu>
   </div>

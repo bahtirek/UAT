@@ -24,13 +24,11 @@ export class ExecutionComponent implements OnInit {
     const testCaseId = this.executionService.testCaseId;
     this.executionService.executeTest(testCaseId).subscribe({
       next: (response) => {
-        console.log(response);
         this.executionHistory = response.testCaseExecution;
         this.steps = response.executionSteps;
       },
       error: (error) => {
         console.log(error);
-
       },
     })
   }

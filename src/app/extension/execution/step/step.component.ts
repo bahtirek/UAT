@@ -57,6 +57,7 @@ export class StepComponent implements OnInit {
   postScreenshot(blob: string){
     this.executionService.postScreenshot(this.step.testStepExecutionId, blob).subscribe({
       next: (response) => {
+        response.testStepExecutionId = this.step.testStepExecutionId;
         this.step.screenshots.push(response);
       },
       error: (error) => {
@@ -66,7 +67,15 @@ export class StepComponent implements OnInit {
   }
 
   deleteScreenshot(index: number){
-    this.step.screenshots.splice(index, 1);
+    const screenshot = this.step.screenshots[index]
+    this.executionService.deleteScreenshot(screenshot.testStepExecutionId, screenshot.screenshotId).subscribe({
+      next: (response) => {
+        this.step.screenshots.splice(index, 1);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
   }
 
   editActualResults(){
@@ -125,6 +134,11 @@ export class StepComponent implements OnInit {
       })
   }
 
+  onStatusClick(status: string){
+    console.log(status);
+
+  }
+
   togglePassModal() {
     this.isPassModalOn = !this.isPassModalOn
   }
@@ -137,10 +151,6 @@ export class StepComponent implements OnInit {
     switch (event) {
       case 'edit': this.editActualResults(); break;
     }
-  }
-
-  onComplete(){
-
   }
 
 }

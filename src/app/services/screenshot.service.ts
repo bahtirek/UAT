@@ -25,9 +25,9 @@ export class ScreenshotService {
     .pipe(map(response => response?.result))
   }
 
-  deleteScreenshot(uuid: string, testStepExecutionId: number){
+  deleteScreenshot(testStepExecutionId: number, screenshotId: number){
     const params = new HttpParams()
-    .set('uuid', uuid)
+    .set('screenshotId', screenshotId)
     .set('testStepExecutionId', testStepExecutionId);
     return this.http.delete<any>(this.url + '/test-step-screenshot', {params})
     .pipe(map(response => response?.result))

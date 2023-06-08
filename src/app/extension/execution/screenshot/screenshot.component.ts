@@ -29,7 +29,9 @@ export class ScreenshotComponent implements OnInit {
   ]
 
   ngOnInit(): void {
-    this.executionService.getScreenshot(this.screenshot.uuid).subscribe({
+    console.log(this.screenshot.testStepExecutionId, this.screenshot.screenshotId);
+
+    this.executionService.getScreenshot(this.screenshot.testStepExecutionId, this.screenshot.screenshotId).subscribe({
       next: (response) => {
         this.blob = response.blob
       },
