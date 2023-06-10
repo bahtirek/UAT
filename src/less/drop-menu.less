@@ -1,70 +1,72 @@
-.drop-menu {
-  width: 29px;
-  position: relative;
+.uat-body {
+  .drop-menu {
+    width: 29px;
+    position: relative;
 
-  .more-btn {
-    cursor: pointer;
-    display: flex;
+    .more-btn {
+      cursor: pointer;
+      display: flex;
 
-    &:hover svg {
-      color: var(--text-dark);
-      transform: scale(1.2);
-    }
-
-    &.active {
-      svg {
-        color: #00ad55;
+      &:hover svg {
+        color: var(--text-dark);
         transform: scale(1.2);
       }
-    }
-  }
 
-  .drop-menu-body {
-    position: absolute;
-    background-color: #ffffff;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    top: 20px;
-    right: 0;
-    border-radius: 3px;
-    width: max-content;
-    z-index: 100;
-    padding-block: 10px;
-    color: var(--text);
-
-    &.left {
-      left: 0;
-      right: initial;
+      &.active {
+        svg {
+          color: #00ad55;
+          transform: scale(1.2);
+        }
+      }
     }
 
-    &.top {
-      bottom: 25px;
-      top: initial;
-    }
+    .drop-menu-body {
+      position: absolute;
+      background-color: #ffffff;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      top: 20px;
+      right: 0;
+      border-radius: 3px;
+      width: max-content;
+      z-index: 100;
+      padding-block: 10px;
+      color: var(--text);
 
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
+      &.left {
+        left: 0;
+        right: initial;
+      }
 
-      li {
-        padding: 8px 16px;
-        cursor: pointer;
+      &.top {
+        bottom: 25px;
+        top: initial;
+      }
 
-        &:not(:only-child) {
-          &:hover {
-            background-color: #f1f1f1;
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+          padding: 8px 16px;
+          cursor: pointer;
+
+          &:not(:only-child) {
+            &:hover {
+              background-color: #f1f1f1;
+            }
           }
         }
       }
     }
   }
-}
 
-.left-container.dark-mode {
-  .drop-menu {
-    .more-btn {
-      &:hover svg {
-        color: var(--primary-inverse);
+  .left-container.dark-mode {
+    .drop-menu {
+      .more-btn {
+        &:hover svg {
+          color: var(--primary-inverse);
+        }
       }
     }
   }

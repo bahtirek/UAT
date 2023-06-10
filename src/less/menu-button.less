@@ -1,84 +1,85 @@
-.nav-menu-btn {
-  padding: 3px 2px;
-  margin: 0px 14px 0;
-  display: flex !important;
-  position: relative;
+.uat-body {
+  .nav-menu-btn {
+    padding: 3px 2px;
+    margin: 0px 14px 0;
+    display: flex !important;
+    position: relative;
 
-  @media(max-width: 767px) {
-    margin: 0px 8px 0;
-  }
+    @media(max-width: 767px) {
+      margin: 0px 8px 0;
+    }
 
-  &.ui-br-ext-hint {
-    font-size: 12px;
-    color: #404040;
-    padding-left: 20px;
-  }
+    &.ui-br-ext-hint {
+      font-size: 12px;
+      color: #404040;
+      padding-left: 20px;
+    }
 
-  &:hover {
-    cursor: pointer;
+    &:hover {
+      cursor: pointer;
 
-    &::before {
-      color: var(--text-dark);
-      font-size: 10px;
-      top: -16px;
+      &::before {
+        color: var(--text-dark);
+        font-size: 10px;
+        top: -16px;
+      }
+
+      svg {
+        color: var(--text-dark);
+        transform: scale(1.2);
+      }
     }
 
     svg {
-      color: var(--text-dark);
-      transform: scale(1.2);
+      color: var(--text);
+      height: 20px;
+      width: 20px;
+      transition: 0.1s ease-out;
+
+      &.review {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+      }
     }
-  }
 
-  svg {
-    color: var(--text);
-    height: 20px;
-    width: 20px;
-    transition: 0.1s ease-out;
+    &.active {
+      svg {
+        color: var(--primary);
+        stroke: var(--primary);
+        transform: scale(1.3);
+      }
 
-    &.review {
+      &::before {
+        color: transparent;
+        background: none;
+      }
+    }
+
+    &:before {
+      content: attr(data-title);
       position: absolute;
-      top: 2px;
-      left: 2px;
+      text-align: center;
+      left: 50%;
+      top: -8px;
+      transform: translate(-50%);
+      color: #404040;
+      font-size: 0px;
+      width: fit-content;
+      transition: 0.1s ease-out;
+      background: #ffffff;
+      padding: 2px 4px;
+      border-radius: 3px;
+      white-space: nowrap;
     }
-  }
 
-  &.active {
-    svg {
-      color: var(--primary);
-      stroke: var(--primary);
-      transform: scale(1.3);
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
     }
-
-    &::before {
-      color: transparent;
-      background: none;
-    }
-  }
-
-  &:before {
-    content: attr(data-title);
-    position: absolute;
-    text-align: center;
-    left: 50%;
-    top: -8px;
-    transform: translate(-50%);
-    color: #404040;
-    font-size: 0px;
-    width: fit-content;
-    transition: 0.1s ease-out;
-    background: #ffffff;
-    padding: 2px 4px;
-    border-radius: 3px;
-    white-space: nowrap;
-  }
-
-  &:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
   }
 }
-
