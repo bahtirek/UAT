@@ -10,12 +10,14 @@ import { filter, map } from 'rxjs';
 export class TestCaseComponent implements OnInit {
 
   pageTitle: string = 'Test Case / Dashboard';
+  navigationEvent: NavigationStart
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 
-
   ngOnInit(): void {
-    this.router.navigate(['dashboard'], { relativeTo: this.route, skipLocationChange: true });
+    if(this.router.routerState.snapshot.url !== '/test-case/details') {
+      this.router.navigate(['../test-case/dashboard'], { relativeTo: this.route, skipLocationChange: true });
+    }
   }
 
 }

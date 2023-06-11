@@ -54,7 +54,7 @@
             </div>
           </div>
           <div class="flex justify-between items-center btn-link-group">
-            <a [routerLink]="['../details']" [skipLocationChange]="true" routerLinkActive="active">Back to Details</a>
+            <a (click)="backToDetails()">Back to Details</a>
             <div class="btn-group">
               <button class=""  data-listener="off" (click)="getScreenshot()" >
                 <span>Screenshot</span>
