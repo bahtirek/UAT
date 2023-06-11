@@ -48,6 +48,11 @@ export class ExecutionService {
     .pipe(map(response => response?.result))
   }
 
+  patchTestCaseExecutionStatus(testCaseExecutionId: number, status: string){
+    return this.http.patch<ServerResponse<any>>(this.url + '/test-case-status', {testCaseExecutionId: testCaseExecutionId, status: status})
+    .pipe(map(response => response?.result))
+  }
+
 
   /* getTestCaseExecution(id: number){
     const params = new HttpParams().set('testCaseExecutionId', id);

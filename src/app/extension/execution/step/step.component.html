@@ -3,20 +3,23 @@
     <h3>Test case execution</h3>
     <ul>
       <li>{{executionHistory?.testCaseTitle}}</li>
+      <li>{{executionHistory?.status}}</li>
     </ul>
+    <div class="status-choice">
+      <div class="form-container">
+        <label for="status">Status</label>
+        <select id="status" name="status" [(ngModel)]="caseExecutionStatus">
+          <option *ngFor="let status of statuses; index as i" [ngValue]="status">{{status}}</option>
+        </select>
+      </div>
+      <button class=""  data-listener="off" (click)="onStatusChange()">
+        <span>Update status</span>
+      </button>
+    </div>
+  </div>
+  <div class="flex justify-between items-center btn-link-group">
+    <a (click)="backToDetails()">Back to Details</a>
     <div class="btn-group">
-      <button class=""  data-listener="off" (click)="onStatusClick('complete')" >
-        <span>Complete</span>
-      </button>
-      <button class=""  data-listener="off" (click)="onStatusClick('in-progress')" >
-        <span>In-progress</span>
-      </button>
-      <button class=""  data-listener="off" (click)="onStatusClick('not-executed')" >
-        <span>Not-executed</span>
-      </button>
-      <button class="btn-danger"  data-listener="off" (click)="onStatusClick('cancel')" >
-        <span>Cancel</span>
-      </button>
     </div>
   </div>
   <div *ngIf="step?.index >= 0">
@@ -50,33 +53,20 @@
               <div class="text-pre">{{step.actualResult}}</div>
             </div>
           </div>
-          <div class="btn-group">
-            <!-- <div class="margin-auto-right" >
-              <div class="form-container">
-                <label for="status">Environment:</label>
-                <select id="status" formControlName="status">
-                  <option *ngFor="let status of statuses; index as i" [ngValue]="status.statusId">{{status}}</option>
-                </select>
-                <div *ngIf="status.invalid && (status.dirty || status.touched)" class="form-error-message">
-                  <div *ngIf="status.errors?.['required']">
-                    Environment is required.
-                  </div>
-                </div>
-              </div>
-            </div> -->
-<!--             <button data-listener="off" (click)="onComplete()" >
-                <span>Complete execution</span>
-            </button> -->
-            <button class=""  data-listener="off" (click)="getScreenshot()" >
+          <div class="flex justify-between items-center btn-link-group">
+            <a [routerLink]="['../details']" [skipLocationChange]="true" routerLinkActive="active">Back to Details</a>
+            <div class="btn-group">
+              <button class=""  data-listener="off" (click)="getScreenshot()" >
                 <span>Screenshot</span>
-            </button>
-            <button class=""  data-listener="off" (click)="onPass()" >
+              </button>
+              <button class=""  data-listener="off" (click)="onPass()" >
                 <span>Pass</span>
-            </button>
-            <button class="btn-danger"  data-listener="off" (click)="onFail()" >
+              </button>
+              <button class="btn-danger"  data-listener="off" (click)="onFail()" >
                 <span>Fail</span>
-            </button>
-        </div>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       <div class="screenshots-container" *ngIf="step && step.screenshots && step.screenshots.length > 0">
