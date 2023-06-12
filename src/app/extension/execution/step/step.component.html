@@ -17,12 +17,8 @@
       </button>
     </div>
   </div>
-  <div class="flex justify-between items-center btn-link-group">
-    <a (click)="backToDetails()">Back to Details</a>
-    <div class="btn-group">
-    </div>
-  </div>
-  <div *ngIf="step?.index >= 0">
+
+  <div *ngIf="step?.index >= 0; else showBackLinkWhenNoStep">
     <div class="header">
       <h2>Step # {{1 + step.index}}</h2>
     </div>
@@ -78,6 +74,13 @@
       </div>
     </div>
   </div>
+  <ng-template #showBackLinkWhenNoStep>
+    <div class="flex justify-between items-center btn-link-group">
+      <a (click)="backToDetails()">Back to Details</a>
+      <div class="btn-group">
+      </div>
+    </div>
+  </ng-template>
 </div>
 <app-modal *ngIf="isModalOn" (closeModal)="toggleModal()" [propClass]="'width-full'">
   <app-actual-result (cancel)="toggleModal()" (save)="saveActualResults($event)" [resultsToEdit]="actualResultToEdit" [step]="step"></app-actual-result>
