@@ -8,7 +8,7 @@
     <div class="cursor-pointer truncate"
       [ngClass]="{'pass': step.result == 'Pass', 'fail': step.result == 'Fail'}"
       (click)="chooseStep()">
-      {{step.description}}
+      #{{index + 1}} - {{step.description}}
     </div>
   </div>
 </div>
