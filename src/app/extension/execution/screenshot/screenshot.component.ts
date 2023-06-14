@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MoreButtonAction } from 'src/app/interfaces/more-button-action.interface';
+import { Screenshot } from 'src/app/interfaces/screenshot.interface';
+import { ExecutionService } from 'src/app/services/execution.service';
 
 @Component({
   selector: 'app-screenshot',
@@ -8,9 +10,10 @@ import { MoreButtonAction } from 'src/app/interfaces/more-button-action.interfac
 })
 export class ScreenshotComponent implements OnInit {
 
-  constructor() { }
+  constructor(private executionService: ExecutionService) { }
 
   showImage: boolean = false;
+  blob: string;
 
   actions: MoreButtonAction[] = [
     {
@@ -26,13 +29,22 @@ export class ScreenshotComponent implements OnInit {
   ]
 
   ngOnInit(): void {
+    console.log(this.screenshot.testStepExecutionId, this.screenshot.screenshotId);
+
+    this.executionService.getScreenshot(this.screenshot.testStepExecutionId, this.screenshot.screenshotId).subscribe({
+      next: (response) => {
+        this.blob = response.blob
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
   }
 
-  @Input() screenshot: string;
-  //@Input() index: number;
+  @Input() screenshot: Screenshot;
 
   @Output() deleteScreenshot = new EventEmitter<void>()
-  @Output() edit = new EventEmitter<void>()
+  @Output() edit = new EventEmitter<string>()
 
   onAction(event: string){
     switch (event) {
@@ -41,7 +53,7 @@ export class ScreenshotComponent implements OnInit {
     }
   }
   onEdit() {
-    this.edit.emit()
+    this.edit.emit(this.blob)
   }
   onDelete() {
     this.deleteScreenshot.emit()

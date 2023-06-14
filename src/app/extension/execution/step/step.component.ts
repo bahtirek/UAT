@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { ExecutionHistory } from 'src/app/interfaces/execution-history.interface';
 import { MoreButtonAction } from 'src/app/interfaces/more-button-action.interface';
 import { TestStep } from 'src/app/interfaces/test-step.interface';
 import { ExecutionService } from 'src/app/services/execution.service';
-import  screenshotService  from 'src/app/services/screenshot';
+import  screenshotService  from 'src/app/services/browserScreenshot';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-step',
@@ -16,6 +17,7 @@ export class StepComponent implements OnInit {
   isModalOn: boolean = false;
   isPassModalOn: boolean = false;
   actualResultToEdit: string;
+  caseExecutionStatus: string;
   actions: MoreButtonAction[] = [
     {
       name: 'Edit',
@@ -26,7 +28,9 @@ export class StepComponent implements OnInit {
 
   @Input() executionHistory: ExecutionHistory;
 
-  constructor(private executionService: ExecutionService) { }
+  @Output() editScreenshot = new EventEmitter<string>();
+
+  constructor(private router: Router, private executionService: ExecutionService) { }
 
   ngOnInit(): void {
     this.executionService.activeStepSource.subscribe({
@@ -39,24 +43,49 @@ export class StepComponent implements OnInit {
     })
   }
 
-  @Output() editScreenshot = new EventEmitter<string>();
+  ngOnChanges(changes: SimpleChanges) {
+    if (!changes.executionHistory.firstChange) {
+      console.log(this.executionHistory);
 
-  onScreenshotEdit(index: number){
-    const dataUrl = this.step.screenshots[index];
-    this.editScreenshot.emit(dataUrl);
+      this.caseExecutionStatus = changes.executionHistory.currentValue.status
+    }
   }
 
-  saveEditedScreenshot(dataUrl: string){
-    this.step.screenshots.push(dataUrl) ;
+  onScreenshotEdit(blob: string){
+    this.editScreenshot.emit(blob);
+  }
+
+  saveEditedScreenshot(blob: string){
+    this.postScreenshot(blob)
   }
 
   async getScreenshot (){
-    const screenshot = await screenshotService.getScreenshot();
-    this.step.screenshots.push(screenshot);
+    const blob = await screenshotService.getScreenshot();
+    this.postScreenshot(blob);
+  }
+
+  postScreenshot(blob: string){
+    this.executionService.postScreenshot(this.step.testStepExecutionId, blob).subscribe({
+      next: (response) => {
+        response.testStepExecutionId = this.step.testStepExecutionId;
+        this.step.screenshots.push(response);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
   }
 
   deleteScreenshot(index: number){
-    this.step.screenshots.splice(index, 1);
+    const screenshot = this.step.screenshots[index]
+    this.executionService.deleteScreenshot(screenshot.testStepExecutionId, screenshot.screenshotId).subscribe({
+      next: (response) => {
+        this.step.screenshots.splice(index, 1);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
   }
 
   editActualResults(){
@@ -129,8 +158,31 @@ export class StepComponent implements OnInit {
     }
   }
 
-  onComplete(){
+  statuses = [
+    'Not executed',
+    'Complete',
+    'Cancel',
+    'In progress'
+  ]
 
+  onStatusChange(){
+    const status = this.caseExecutionStatus.replace(/\s+/g, '-').toLowerCase();
+    console.log(status);
+
+    this.executionService.patchTestCaseExecutionStatus(this.executionHistory.testCaseExecutionId, status).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.executionHistory.status = this.caseExecutionStatus;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
+
+  backToDetails(){
+    const testCaseId = this.executionService.testCaseId;
+    this.router.navigate([`test-case/details`], { skipLocationChange: true });
   }
 
 }

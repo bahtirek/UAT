@@ -1,118 +1,120 @@
-input,
-optgroup,
-select,
-textarea {
-  margin: 0;
-  font-family: inherit;
-  letter-spacing: inherit;
-}
-
-// Remove the inner padding in Chrome and Safari on macOS
-[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
-
-// Remove the inner padding in Chrome and Safari on macOS
-[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
-
-// Commons styles
-input:not([type="checkbox"]):not([type="radio"]),
-select,
-textarea {
-  border: 1px solid var(--text-lightest);
-  padding: 7px 10px;
-  border-radius: 5px;
-  outline: none;
-  background-color: var(--background-color);
-  box-shadow: var(--box-shadow);
-  color: var(--text);
-  width: 100%;
-  box-sizing: border-box;
-  white-space: pre-wrap !important;
-
-  &:focus {
-    border-color: var(--primary);
+.uat-body {
+  input,
+  optgroup,
+  select,
+  textarea {
+    margin: 0;
+    font-family: inherit;
+    letter-spacing: inherit;
   }
-}
 
-[type="checkbox"], [type="radio"] {
-  margin-right: 20px;
-}
-
-label:not(.checkbox):not(.radio) {
-  position: absolute;
-  top: -7px;
-  left: 7px;
-  padding: 0px 3px;
-  background-color: #ffffff;
-  font-size: 11px;
-  font-weight: normal !important;
-}
-.dark-mode {
-  label {
-    color: var(--text) !important;
+  // Remove the inner padding in Chrome and Safari on macOS
+  [type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
   }
-}
 
-.main-container {
-  .form-container {
-    position: relative;
+  // Remove the inner padding in Chrome and Safari on macOS
+  [type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+
+  // Commons styles
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea {
+    border: 1px solid var(--text-lightest);
+    padding: 7px 10px;
+    border-radius: 5px;
+    outline: none;
+    background-color: var(--background-color);
+    box-shadow: var(--box-shadow);
+    color: var(--text);
     width: 100%;
-    padding-bottom: 20px;
+    box-sizing: border-box;
+    white-space: pre-wrap !important;
 
-    .search-icon {
-      position: absolute;
-      right: 6px;
-      top: 5px;
-      svg {
-          height: 20px;
-      }
-    }
-    .note-message {
-      color: red;
-      margin-top: 6px;
-    }
-
-    .radio-container {
-
+    &:focus {
+      border-color: var(--primary);
     }
   }
-}
 
-.form-error-message {
-  font-size: 10px;
-  position: absolute;
-  top: 34px;
-  left: 10px;
-  display: block;
-  color: red;
-}
+  [type="checkbox"], [type="radio"] {
+    margin-right: 20px;
+  }
 
-.search-results {
-  width: 100%;
-  position: relative;
-  ul {
-      margin: 0;
-      padding: 0;
-      position: absolute;
-      background-color: #ffffff;
-      top: 4px;
-      z-index: 2;
+  label:not(.checkbox):not(.radio) {
+    position: absolute;
+    top: -7px;
+    left: 7px;
+    padding: 0px 3px;
+    background-color: #ffffff;
+    font-size: 11px;
+    font-weight: normal !important;
+  }
+  .dark-mode {
+    label {
+      color: var(--text) !important;
+    }
+  }
+
+  .main-container {
+    .form-container {
+      position: relative;
       width: 100%;
-      box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
-      border-radius: 3px;
-      li {
-          padding: 0 10px;
-          display: flex;
-          align-items: center;
-          height: 34px;
-          justify-content: space-between;
-          &:hover, &.ui-br-ext-hovered {
-              background-color: #f7f7f7;
-              cursor: pointer;
-          }
+      padding-bottom: 20px;
+
+      .search-icon {
+        position: absolute;
+        right: 6px;
+        top: 5px;
+        svg {
+            height: 20px;
+        }
       }
+      .note-message {
+        color: red;
+        margin-top: 6px;
+      }
+
+      .radio-container {
+
+      }
+    }
+  }
+
+  .form-error-message {
+    font-size: 10px;
+    position: absolute;
+    top: 34px;
+    left: 10px;
+    display: block;
+    color: red;
+  }
+
+  .search-results {
+    width: 100%;
+    position: relative;
+    ul {
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        background-color: #ffffff;
+        top: 4px;
+        z-index: 2;
+        width: 100%;
+        box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+        border-radius: 3px;
+        li {
+            padding: 0 10px;
+            display: flex;
+            align-items: center;
+            height: 34px;
+            justify-content: space-between;
+            &:hover, &.ui-br-ext-hovered {
+                background-color: #f7f7f7;
+                cursor: pointer;
+            }
+        }
+    }
   }
 }

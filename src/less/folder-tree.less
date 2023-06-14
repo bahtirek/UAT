@@ -1,71 +1,73 @@
-.folder-tree {
-  padding-left: 20px;
-  .folder-name {
-    display: flex;
-    align-items: center;
-    margin-block: 4px;
-    white-space: nowrap;
-
-    .folder-svg  {
-      width: 16px;
-      height: 16px;
-      margin-right: 8px;
-      svg {
-        transition: all .1s ease-in-out;
-      }
-      &.expand {
-        svg {
-          transform: rotate(90deg);
-        }
-      }
-    }
-    .form-container {
-      padding-bottom: 0;
-      display: flex;
-      align-items: center;
-      margin-left: 10px;
-      padding-top: 1px;
-    }
-
-    &.active, &:hover {
-      background-color: #dddddd;
-    }
-
-    .folder-settings {
+.uat-body {
+  .folder-tree {
+    padding-left: 20px;
+    .folder-name {
       display: flex;
       align-items: center;
       margin-block: 4px;
-      &:hover {
-        app-more-button-menu {
-          visibility: visible;
+      white-space: nowrap;
+
+      .folder-svg  {
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
+        svg {
+          transition: all .1s ease-in-out;
+        }
+        &.expand {
+          svg {
+            transform: rotate(90deg);
+          }
         }
       }
-
-      app-more-button-menu {
-        visibility: hidden;
+      .form-container {
+        padding-bottom: 0;
+        display: flex;
+        align-items: center;
         margin-left: 10px;
+        padding-top: 1px;
       }
+
+      &.active, &:hover {
+        background-color: #dddddd;
+      }
+
+      .folder-settings {
+        display: flex;
+        align-items: center;
+        margin-block: 4px;
+        &:hover {
+          app-more-button-menu {
+            visibility: visible;
+          }
+        }
+
+        app-more-button-menu {
+          visibility: hidden;
+          margin-left: 10px;
+        }
+      }
+    }
+
+    .hide {
+      display: none;
+    }
+
+    .sub-folders {
     }
   }
 
-  .hide {
-    display: none;
-  }
+  .dark-mode {
+    .folder-tree {
+      .folder-name {
+        &.active {
+          background-color: #565656;
+          color: var(--primary-inverse);
+        }
 
-  .sub-folders {
-  }
-}
-
-.dark-mode {
-  .folder-tree {
-    .folder-name {
-      &.active {
-        background-color: #565656;
-        color: var(--primary-inverse);
-      }
-
-      &:hover {
-        background-color: #565656;
+        &:hover {
+          background-color: #565656;
+        }
       }
     }
   }

@@ -24,13 +24,11 @@ export class ExecutionComponent implements OnInit {
     const testCaseId = this.executionService.testCaseId;
     this.executionService.executeTest(testCaseId).subscribe({
       next: (response) => {
-        console.log(response);
         this.executionHistory = response.testCaseExecution;
         this.steps = response.executionSteps;
       },
       error: (error) => {
         console.log(error);
-
       },
     })
   }
@@ -39,13 +37,13 @@ export class ExecutionComponent implements OnInit {
     this.isEditing = false
   }
 
-  saveScreenshot(dataUrl: string){
+  saveScreenshot(blob: string){
     this.isEditing = false
-    this.step.saveEditedScreenshot(dataUrl);
+    this.step.saveEditedScreenshot(blob);
   }
 
-  edit(dataUrl: string){
-    this.screenshotToEdit = dataUrl;
+  edit(blob: string){
+    this.screenshotToEdit = blob;
     this.isEditing = true;
   }
 

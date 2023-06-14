@@ -1,9 +1,10 @@
-export class Screenshot {
-    imgSrc: string;
-    filename: string;
-  
-    constructor (imgSrc: string, filename: string){
-      this.imgSrc = imgSrc;
-      this.filename = filename;
-    }
-  }
+export interface Screenshot {
+  uuid?: string,
+  screenshotId?: number,
+  blob?: string,
+  testStepExecutionId?: number
+}
+
+export interface ServerResponse <T> {
+  result: T
+}

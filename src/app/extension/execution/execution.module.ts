@@ -9,8 +9,9 @@ import { MoreButtonMenuModule } from 'src/app/shared/more-button-menu/more-butto
 import { EditorModule } from '../editor/editor.module';
 import { ModalModule } from 'src/app/shared/modal/modal.module';
 import { ActualResultComponent } from './step/actual-result/actual-result.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StepDetailsComponent } from './step-list/step-details/step-details.component';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 
 const routes: Routes = [
   {
@@ -34,6 +35,8 @@ const routes: Routes = [
     EditorModule,
     ModalModule,
     ReactiveFormsModule,
+    FormsModule,
+    PipesModule,
     RouterModule.forChild(routes)
   ],
   exports: [

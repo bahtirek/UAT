@@ -8,6 +8,7 @@ import { ExecutionService } from 'src/app/services/execution.service';
   styleUrls: ['./step-list.component.less']
 })
 export class StepListComponent implements OnInit {
+  importsReviewModalOn: boolean;
 
   constructor(private executionService: ExecutionService) { }
 
@@ -30,6 +31,15 @@ export class StepListComponent implements OnInit {
     } else {
       this.switchStep(step.index + 1)
     }
+  }
+
+  switchStepFromModal(index: number){
+    this.importsReviewModalOn = false;
+    this.switchStep(index)
+  }
+
+  toggleModal(){
+    this.importsReviewModalOn = !this.importsReviewModalOn;
   }
 
 }

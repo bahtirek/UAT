@@ -3,9 +3,22 @@
     <h3>Test case execution</h3>
     <ul>
       <li>{{executionHistory?.testCaseTitle}}</li>
+      <li>{{executionHistory?.status}}</li>
     </ul>
+    <div class="status-choice">
+      <div class="form-container">
+        <label for="status">Status</label>
+        <select id="status" name="status" [(ngModel)]="caseExecutionStatus">
+          <option *ngFor="let status of statuses; index as i" [ngValue]="status">{{status}}</option>
+        </select>
+      </div>
+      <button class=""  data-listener="off" (click)="onStatusChange()">
+        <span>Update status</span>
+      </button>
+    </div>
   </div>
-  <div *ngIf="step?.index >= 0">
+
+  <div *ngIf="step?.index >= 0; else showBackLinkWhenNoStep">
     <div class="header">
       <h2>Step # {{1 + step.index}}</h2>
     </div>
@@ -36,31 +49,38 @@
               <div class="text-pre">{{step.actualResult}}</div>
             </div>
           </div>
-          <div class="btn-group">
-            <button class="margin-auto-right"  data-listener="off" (click)="onComplete()" >
-                <span>Complete execution</span>
-            </button>
-            <button class=""  data-listener="off" (click)="getScreenshot()" >
+          <div class="flex justify-between items-center btn-link-group">
+            <a (click)="backToDetails()">Back to Details</a>
+            <div class="btn-group">
+              <button class=""  data-listener="off" (click)="getScreenshot()" >
                 <span>Screenshot</span>
-            </button>
-            <button class=""  data-listener="off" (click)="onPass()" >
+              </button>
+              <button class=""  data-listener="off" (click)="onPass()" >
                 <span>Pass</span>
-            </button>
-            <button class="btn-danger"  data-listener="off" (click)="onFail()" >
+              </button>
+              <button class="btn-danger"  data-listener="off" (click)="onFail()" >
                 <span>Fail</span>
-            </button>
-        </div>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       <div class="screenshots-container" *ngIf="step && step.screenshots && step.screenshots.length > 0">
         <ng-container *ngIf="step && step.screenshots">
           <ng-container *ngFor="let screenshot of step.screenshots; index as i">
-            <app-screenshot [screenshot]="screenshot" (deleteScreenshot)="deleteScreenshot(i)" (edit)="onScreenshotEdit(i)"></app-screenshot>
+            <app-screenshot [screenshot]="screenshot" (deleteScreenshot)="deleteScreenshot(i)" (edit)="onScreenshotEdit($event)"></app-screenshot>
           </ng-container>
         </ng-container>
       </div>
     </div>
   </div>
+  <ng-template #showBackLinkWhenNoStep>
+    <div class="flex justify-between items-center btn-link-group">
+      <a (click)="backToDetails()">Back to Details</a>
+      <div class="btn-group">
+      </div>
+    </div>
+  </ng-template>
 </div>
 <app-modal *ngIf="isModalOn" (closeModal)="toggleModal()" [propClass]="'width-full'">
   <app-actual-result (cancel)="toggleModal()" (save)="saveActualResults($event)" [resultsToEdit]="actualResultToEdit" [step]="step"></app-actual-result>

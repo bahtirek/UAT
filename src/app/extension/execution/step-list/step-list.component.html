@@ -1,1 +1,15 @@
+<div class="flex justify-end">
+  <a (click)="toggleModal()" >
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+</a>
+</div>
 <app-step-details *ngFor="let step of steps; index as i" [step]="step" [index]="i"></app-step-details>
+
+<app-modal *ngIf="importsReviewModalOn" (closeModal)="toggleModal()"  [propClass]="'width-full'">
+  <div class="spacer-2"></div>
+  <div class="ui-uat-ext-step cursor-pointer" *ngFor="let step of steps; index as i" (click)="switchStepFromModal(i)" >
+    <div class="ui-uat-ext-step-number">{{i + 1}}</div>
+    <div class="ui-uat-ext-step-description">{{step.description}}</div>
+    <div class="ui-uat-ext-step-expectedResults">{{step.expected}}</div>
+  </div>
+</app-modal>
