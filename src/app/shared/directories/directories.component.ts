@@ -18,6 +18,7 @@ export class DirectoriesComponent implements OnInit {
   constructor(private directoryService: DirectoryService, private router: Router) { }
 
   @Input() folderType: string;
+  @Input() chooseFolder: boolean = false;
 
   ngOnInit(): void {
     this.directoryService.directoriesSource.subscribe({

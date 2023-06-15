@@ -12,7 +12,6 @@ import { TestCaseService } from 'src/app/services/test-case.service';
 export class DirectoryComponent implements OnInit {
   expand: boolean;
   actions: MoreButtonAction[] = [
-
     {
       name: 'New folder',
       action: 'addFolder',
@@ -34,6 +33,18 @@ export class DirectoryComponent implements OnInit {
       display: true
     },
   ]
+  actionsForChooseFolder: MoreButtonAction[] = [
+    {
+      name: 'New folder',
+      action: 'addFolder',
+      display: true
+    },
+    {
+      name: 'Move Here',
+      action: 'moveHere',
+      display: true
+    },
+  ]
   isModalOn: boolean;
   isDeleteModalOn: boolean;
   projectId: number;
@@ -43,12 +54,17 @@ export class DirectoryComponent implements OnInit {
   constructor(private testCaseService: TestCaseService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.expand = this.directory.expand
+    this.expand = this.directory.expand;
+    if(this.chooseFolder) {
+      this.actions = this.actionsForChooseFolder
+    }
+
   }
 
   @Input() directory: Directory;
   @Input() directoryToEdit: Directory;
   @Input() folderType: string;
+  @Input() chooseFolder: boolean = false;
 
   toggleFolder(){
     this.expand = !this.expand
@@ -91,8 +107,30 @@ export class DirectoryComponent implements OnInit {
       case 'addFolder': this.onFolderAdd(); break;
       case 'deleteFolder': this.onFolderDelete(); break;
       case 'addTestCase': this.onTestCaseAdd(); break;
+      case 'moveHere': this.onMove(); break;
     }
   }
+
+  onMove() {
+    const testCase = this.testCaseService.testCaseDetails
+    testCase.directoryId = this.directory.directoryId;
+    if(this.directory.isProject) {
+      testCase.projectId = this.directory.directoryId
+    } else {
+      testCase.projectId = this.directory.projectId
+    }
+    this.testCaseService.updateTestCase(testCase).subscribe({
+      next: (response) => {
+        response.directoryId = this.directory.directoryId;
+        this.testCaseService.moveTestCaseSource.next(response);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    }
+    )
+  }
+
   onFolderDelete() {
     if(this.directory.childDirectories.length == 0 && this.directory.testCases.length == 0){
       this.toggleDeleteModal()

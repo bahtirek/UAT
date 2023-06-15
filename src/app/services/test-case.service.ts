@@ -31,6 +31,7 @@ export class TestCaseService {
     }
 
   testCaseSource = new Subject<TestCase>()
+  moveTestCaseSource = new Subject<TestCase>()
 
   getTestCaseById(id: number){
     const params = new HttpParams().set('testCaseId', id);
