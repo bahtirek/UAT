@@ -35,7 +35,7 @@
   </div>
 </div>
 <div class="flex justify-between items-center btn-link-group">
-  <a [routerLink]="['../dashboard']" [skipLocationChange]="true" routerLinkActive="active">Back to Dashboard</a>
+  <a (click)="backToDetails()">Back to Details</a>
   <div class="btn-group">
     <button (click)="onImportSteps()">Import steps</button>
     <button (click)="onStepAdd()">Add new step</button>

@@ -31,6 +31,7 @@ export class TestCaseService {
     }
 
   testCaseSource = new Subject<TestCase>()
+  moveTestCaseSource = new Subject<TestCase>()
 
   getTestCaseById(id: number){
     const params = new HttpParams().set('testCaseId', id);
@@ -40,6 +41,13 @@ export class TestCaseService {
 
   addTestCase(testCase: TestCase): Observable<TestCase> {
     return this.http.post<ServerResponse<TestCase>>(this.url + '/test-case', testCase)
+    .pipe(map(response => response?.result))
+  }
+
+  deleteTestCase(testCaseId: number){
+    const params = new HttpParams()
+    .set('testCaseId', testCaseId)
+    return this.http.delete<ServerResponse<TestCase>>(this.url + '/test-case', {params: params})
     .pipe(map(response => response?.result))
   }
 

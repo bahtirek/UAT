@@ -45,11 +45,11 @@ export class DirectoryService {
   }
 
   expand(directory: Directory, directoryId: number){
-    if(directory.directoryId === directoryId) {
+    if(directory && directory.directoryId === directoryId) {
       directory.expand = true;
       return true;
     }
-    if(directory.childDirectories && directory.childDirectories.length > 0) {
+    if(directory && directory.childDirectories && directory.childDirectories.length > 0) {
       for (let i = 0; i < directory.childDirectories.length; i++) {
         const childDir = directory.childDirectories[i];
         let result = this.expand(childDir, directoryId);

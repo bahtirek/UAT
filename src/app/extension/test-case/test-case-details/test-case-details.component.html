@@ -43,15 +43,19 @@
   <div class="flex justify-between items-center btn-link-group">
     <a [routerLink]="['../dashboard']" [skipLocationChange]="true" routerLinkActive="active">Back to Dashboard</a>
     <div class="btn-group">
-      <button (click)="onExecute()">Execute</button>
+      <button (click)="onExecute()" [disabled]="testCase?.testStepOrder.length==0">Execute</button>
       <button (click)="onEdit()">Edit</button>
-      <button (click)="onEdit()">Move</button>
+      <button (click)="onMove()">Move</button>
       <button class="btn-danger" (click)="toggleDeleteModal()">Delete</button>
     </div>
   </div>
 </div>
 <app-modal *ngIf="importsReviewModalOn" (closeModal)="toggleModal()"  [propClass]="'width-full'">
   <app-review-steps [testCase]="testCaseToReview"></app-review-steps>
+</app-modal>
+<app-modal *ngIf="isFoldersModalOn" (closeModal)="toggleFoldersModal()"  [propClass]="'width-full'">
+  <h3>Choose folder to move</h3>
+  <app-directories [chooseFolder]="true"></app-directories>
 </app-modal>
 
 <app-modal *ngIf="deleteModalOn" (closeModal)="toggleDeleteModal()" >

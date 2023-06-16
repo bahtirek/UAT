@@ -3,6 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { TestCase, TestStepOrder } from 'src/app/interfaces/test-case.interface';
 import { ExecutionService } from 'src/app/services/execution.service';
 import { TestCaseService } from 'src/app/services/test-case.service';
+import { DirectoryService } from 'src/app/shared/directories/directory.service';
 
 @Component({
   selector: 'app-test-case-details',
@@ -18,10 +19,12 @@ export class TestCaseDetailsComponent implements OnInit {
   navigationSubscription;
   lastExecutedOn: string;
   testCaseId: any;
+  isFoldersModalOn: boolean;
 
-  constructor(private router: Router, private testCaseService: TestCaseService, private executionService: ExecutionService) {
+  constructor(private router: Router, private testCaseService: TestCaseService, private executionService: ExecutionService, private directoryService: DirectoryService) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initalise the component
+      // Need for reload the page
       if (e instanceof NavigationEnd) {
         this.onInit()
       }
@@ -74,12 +77,36 @@ export class TestCaseDetailsComponent implements OnInit {
   }
 
   onDeleteTestCase(){
-    console.log('deleted');
+    this.testCaseService.deleteTestCase(this.testCase.testCaseId).subscribe({
+      next: (response) => {
+        this.directoryService.setDirectories(this.testCaseService.directory.directoryId, this.testCase.projectId);
+        this.router.navigate(['test-case/dashboard'], { skipLocationChange: true });
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
     this.deleteModalOn = false
   }
 
   toggleDeleteModal(){
     this.deleteModalOn = !this.deleteModalOn;
+  }
+
+  onMove(){
+    this.toggleFoldersModal();
+    const moveTestCaseSubscription = this.testCaseService.moveTestCaseSource.subscribe({
+      next: (response) => {
+        this.toggleFoldersModal();
+        this.testCase = response;
+        this.directoryService.setDirectories(response.directoryId, response.projectId);
+        moveTestCaseSubscription.unsubscribe();
+      }
+    })
+  }
+
+  toggleFoldersModal() {
+    this.isFoldersModalOn = !this.isFoldersModalOn
   }
 
   toggleModal(){
