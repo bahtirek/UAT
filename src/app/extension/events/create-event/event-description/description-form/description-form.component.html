@@ -1,0 +1,44 @@
+<div>
+  <h3>Event details</h3>
+  <div class="spacer-1"></div>
+  <div class="width-full">
+    <form [formGroup]="descriptionForm" novalidate #form autocomplete="off">
+      <div class="form-container">
+        <label for="title">Title:</label>
+        <input type="text" id="title" formControlName="title">
+        <div *ngIf="title.invalid && (title.dirty || title.touched)" class="form-error-message">
+          <div *ngIf="title.errors?.['required']">
+            Title is required.
+          </div>
+        </div>
+      </div>
+      <div class="spacer-2"></div>
+      <div class="form-container">
+        <label for="description">Description:</label>
+        <textarea  rows="6" data-gramm="false" maxlength="1000" id="description" formControlName="description" required></textarea>
+        <div *ngIf="description.invalid && (description.dirty || description.touched)" class="form-error-message">
+          <div *ngIf="description.errors?.['required']">
+            Description is required.
+          </div>
+        </div>
+      </div><div class="spacer-2"></div>
+      <div class="form-container">
+        <label for="environment">Environment:</label>
+        <select id="environment" formControlName="environment">
+          <option *ngFor="let env of environments; index as i" [ngValue]="env.environmentId">{{env.name}}</option>
+        </select>
+        <div *ngIf="environment.invalid && (environment.dirty || environment.touched)" class="form-error-message">
+          <div *ngIf="environment.errors?.['required']">
+            Environment is required.
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="btn-group">
+      <button class="" data-listener="off" (click)="onSubmit()">
+        <span>Submit</span>
+      </button>
+    </div>
+  </div>
+</div>
+

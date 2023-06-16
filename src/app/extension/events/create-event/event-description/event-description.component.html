@@ -1,0 +1,13 @@
+<div>
+  <div class="card ">
+    <div class="case-title flex items-center">
+      <span class="title-sm ">Case title: </span>
+      <span><!-- {{event.title}} --></span>
+      <app-more-button-menu [actions]="actions" (onAction)="onAction($event)"></app-more-button-menu>
+    </div>
+  </div>
+</div>
+<app-modal *ngIf="isDescriptionModalOn" (closeModal)="onCreateCancel()" [propClass]="'width-full'">
+  <app-description-form (cancel)="onCreateCancel()" (onDescriptionSaved)="onDescriptionSaved($event)"
+    [eventDescription]="descriptionToEdit"></app-description-form>
+</app-modal>
