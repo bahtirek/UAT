@@ -40,8 +40,6 @@ export class TestCaseDetailsComponent implements OnInit {
       const testCaseId = this.testCaseService.testCaseDetails.testCaseId;
       this.testCaseService.getTestCaseById(testCaseId).subscribe(
         response => {this.testCase = this.testCaseService.setTitleForImportedCase(response);
-          console.log(response);
-
           if(this.testCase.executionHistory && this.testCase.executionHistory.length > 0) {
             this.lastExecutedOn = this.testCase.executionHistory[this.testCase.executionHistory.length - 1].updated_at;
           }
@@ -79,7 +77,15 @@ export class TestCaseDetailsComponent implements OnInit {
   }
 
   onDeleteTestCase(){
-    console.log('deleted');
+    this.testCaseService.deleteTestCase(this.testCase.testCaseId).subscribe({
+      next: (response) => {
+        this.directoryService.setDirectories(this.testCaseService.directory.directoryId, this.testCase.projectId);
+        this.router.navigate(['test-case/dashboard'], { skipLocationChange: true });
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
     this.deleteModalOn = false
   }
 

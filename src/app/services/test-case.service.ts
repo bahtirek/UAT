@@ -44,6 +44,13 @@ export class TestCaseService {
     .pipe(map(response => response?.result))
   }
 
+  deleteTestCase(testCaseId: number){
+    const params = new HttpParams()
+    .set('testCaseId', testCaseId)
+    return this.http.delete<ServerResponse<TestCase>>(this.url + '/test-case', {params: params})
+    .pipe(map(response => response?.result))
+  }
+
   importTestCase(importedTestCase: ImportedTestCase): Observable<TestCase> {
     return this.http.post<ServerResponse<TestCase>>(this.url + '/import-test-case', importedTestCase)
     .pipe(map(response => response?.result))
