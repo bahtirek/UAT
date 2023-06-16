@@ -43,7 +43,7 @@
   <div class="flex justify-between items-center btn-link-group">
     <a [routerLink]="['../dashboard']" [skipLocationChange]="true" routerLinkActive="active">Back to Dashboard</a>
     <div class="btn-group">
-      <button (click)="onExecute()">Execute</button>
+      <button (click)="onExecute()" [disabled]="testCase?.testStepOrder.length==0">Execute</button>
       <button (click)="onEdit()">Edit</button>
       <button (click)="onMove()">Move</button>
       <button class="btn-danger" (click)="toggleDeleteModal()">Delete</button>

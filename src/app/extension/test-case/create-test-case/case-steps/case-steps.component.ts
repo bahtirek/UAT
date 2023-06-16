@@ -4,6 +4,7 @@ import { TestCase, TestStepOrder } from 'src/app/interfaces/test-case.interface'
 import { TestStep } from 'src/app/interfaces/test-step.interface';
 import { TestCaseService } from 'src/app/services/test-case.service';
 import { ImportStepsComponent } from './import-steps/import-steps.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-case-steps',
@@ -87,7 +88,7 @@ export class CaseStepsComponent implements OnInit {
   testCaseToReview: TestCase;
   importedTestCaseIdToReview: number;
 
-  constructor(private testCaseService: TestCaseService) { }
+  constructor(private router: Router, private testCaseService: TestCaseService) { }
 
   ngOnInit(): void {
     this.testCaseService.testCaseSource.subscribe((testCase: TestCase) => {
@@ -114,9 +115,9 @@ export class CaseStepsComponent implements OnInit {
     } else if(val == 'importsReviewModal'){
       this.importsReviewModalOn = !this.importsReviewModalOn;
       if(!this.importsReviewModalOn) {
-        
+
       }
-    } 
+    }
   }
 
   onStepEdit(step: TestStep){
@@ -196,10 +197,10 @@ export class CaseStepsComponent implements OnInit {
       },
     )
   }
-  
+
   onImportSteps(index?: number){
     console.log(index);
-    
+
     if(index == undefined) {
       let length = this.testCase.testStepOrder?.length || 0;
       this.testCaseService.stepOrderForImport = length + 1;
@@ -224,7 +225,11 @@ export class CaseStepsComponent implements OnInit {
     this.stepToDelete.order = this.testCase.testStepOrder[index].order;
     this.isDeleteModalOn = true;
   }
-  
+
+  backToDetails(){
+    this.router.navigate([`test-case/details`], { skipLocationChange: true });
+  }
+
   onAction(event: string, index: number){
     switch (event) {
       case 'edit': this.onStepEdit(this.testCase.testStepOrder[index].test_step); break;
@@ -235,7 +240,7 @@ export class CaseStepsComponent implements OnInit {
       case 'delete': this.onDeleteStep(index); break;
     }
   }
-  
+
   onImportAction(event: string, step: TestStepOrder, index: number){
     switch (event) {
       case 'review': this.onImportsReview(step); break;

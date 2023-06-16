@@ -61,6 +61,7 @@ export class CreateCaseTitleComponent implements OnInit {
         this.submitInProgress = false;
         this.onTestCaseTitleSaved.emit(response);
         this.testCase = {};
+        this.testCaseService.testCaseDetails.testCaseId = response.testCaseId;
         this.directoryService.setDirectories(this.testCaseService.directory.directoryId, this.testCaseService.directory.projectId);
       },
       error => {
