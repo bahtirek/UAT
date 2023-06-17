@@ -14,7 +14,7 @@ export class ExtensionComponent implements OnInit, AfterContentChecked {
   constructor(private router: Router, private route: ActivatedRoute, private loader: LoaderService, private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.router.navigate(['events'], { relativeTo: this.route, skipLocationChange: true });
+    this.router.navigate(['settings'], { relativeTo: this.route, skipLocationChange: true });
   }
 
   ngAfterContentChecked(): void {

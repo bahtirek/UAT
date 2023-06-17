@@ -12,6 +12,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SearchTestCaseModule } from '../shared/search-test-case/search-test-case.module';
 import { ExecutionModule } from './execution/execution.module';
 import { EventsModule } from './events/events.module';
+import { SettingsModule } from './settings/settings.module';
 
 const routes: Routes = [
   {
@@ -33,11 +34,11 @@ const routes: Routes = [
           /* {
             path: 'regression',
             loadChildren: () => RegressionModule
-          },
+          }, */
           {
             path: 'settings',
             loadChildren: () => SettingsModule
-          }, */
+          },
           {
             path: 'execution',
             loadChildren: () => ExecutionModule
