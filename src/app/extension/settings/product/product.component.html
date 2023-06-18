@@ -13,10 +13,15 @@
         <div class="ui-uat-ext-step ui-uat-ext-table-header">
           <div class="ui-uat-ext-step-description border-none width-40">Name</div>
           <div class="ui-uat-ext-step-expectedResults">Description</div>
+          <div class="ui-uat-ext-step-more"></div>
         </div>
         <div class="ui-uat-ext-step" *ngFor="let product of products; index as i">
           <div class="ui-uat-ext-step-expectedResults border-none width-40">{{product.name}}</div>
           <div class="ui-uat-ext-step-description">{{product.description}}</div>
+          <div class="ui-uat-ext-step-more">
+            <app-more-button-menu [actions]="actions" (onAction)="onAction($event, product.productId)" class="flex justify-center">
+            </app-more-button-menu>
+          </div>
         </div>
       </div>
     </div>
@@ -27,6 +32,7 @@
     </div>
   </div>
 </div>
+
 <app-modal *ngIf="createModalOn" (closeModal)="toggleCreateModal()"  [propClass]="'width-full'">
   <app-create-product
     (cancel)="toggleCreateModal()"
@@ -34,19 +40,11 @@
     [productToEdit]="productToEdit">
   </app-create-product>
 </app-modal>
-<!-- <app-modal *ngIf="isFoldersModalOn" (closeModal)="toggleFoldersModal()"  [propClass]="'width-full'">
-  <h3>Choose folder to move</h3>
-  <app-directories [chooseFolder]="true"></app-directories>
-</app-modal>
 
 <app-modal *ngIf="deleteModalOn" (closeModal)="toggleDeleteModal()" >
-  <h3>Delete test case</h3>
-  <div class="btn-group">
-    <button class=""  data-listener="off" (click)="onDeleteTestCase()"  >
-        <span>Delete</span>
-    </button>
-    <button class="btn-danger"  data-listener="off" (click)="toggleDeleteModal()">
-        <span>Cancel</span>
-    </button>
-</div>
-</app-modal> -->
+  <app-delete-product
+    (cancel)="toggleDeleteModal()"
+    (onProductDeleted)="onProductDeleted()"
+    [productToDelete]="productToDelete">
+  </app-delete-product>
+</app-modal>

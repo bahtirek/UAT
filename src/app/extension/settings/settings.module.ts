@@ -7,6 +7,8 @@ import { ProductDetailsComponent } from './product/product-details/product-detai
 import { CreateProductComponent } from './product/create-product/create-product.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'src/app/shared/modal/modal.module';
+import { MoreButtonMenuModule } from 'src/app/shared/more-button-menu/more-button-menu.module';
+import { DeleteProductComponent } from './product/delete-product/delete-product.component';
 
 const routes: Routes = [
   {
@@ -26,12 +28,14 @@ const routes: Routes = [
     SettingsComponent,
     ProductComponent,
     ProductDetailsComponent,
-    CreateProductComponent
+    CreateProductComponent,
+    DeleteProductComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     ModalModule,
+    MoreButtonMenuModule,
     RouterModule.forChild(routes),
   ]
 })
