@@ -1,29 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { MoreButtonAction } from 'src/app/interfaces/more-button-action.interface';
 import { Product } from 'src/app/interfaces/product.interface';
+import { Version } from 'src/app/interfaces/version.interface';
 import { ProductsService } from 'src/app/services/products.service';
 import { VersionService } from 'src/app/services/version.service';
 
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.less']
+  selector: 'app-version',
+  templateUrl: './version.component.html',
+  styleUrls: ['./version.component.less']
 })
-export class ProductComponent implements OnInit {
+export class VersionComponent implements OnInit {
 
-  products: Product[] = []
+  versions: Version[] = []
   createModalOn: boolean;
-  productToEdit: number;
+  versionToEdit: number;
   actions: MoreButtonAction[] = [
     {
       name: 'Edit',
       action: 'edit',
-      display: true
-    },
-    {
-      name: 'Versions',
-      action: 'versions',
       display: true
     },
     {
@@ -33,17 +28,33 @@ export class ProductComponent implements OnInit {
     },
   ];
   deleteModalOn: boolean;
-  productToDelete: number;
-  constructor(private productService: ProductsService, private versionService: VersionService, private router: Router, private route: ActivatedRoute) { }
+  versionToDelete: number;
+  product: Product;
+
+  constructor(private productService: ProductsService, private versionService: VersionService) { }
 
   ngOnInit(): void {
-    this.getProducts()
+    this.getVersions();
+    this.getProduct();
   }
-  getProducts() {
-    this.productService.getAllProducts().subscribe({
+
+  getProduct() {
+    this.productService.getProductById(this.versionService.productId).subscribe({
       next: (response) => {
         console.log(response);
-        this.products = response
+        this.product = response
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
+
+  getVersions() {
+    this.versionService.getAllVersions().subscribe({
+      next: (response) => {
+        console.log(response);
+        this.versions = response
       },
       error: (error) => {
         console.log(error)
@@ -54,36 +65,30 @@ export class ProductComponent implements OnInit {
   onAction(event: string, id: number){
     switch (event) {
       case 'edit': this.onEdit(id); break;
-      case 'versions': this.goToVersions(id); break;
       case 'delete': this.onDelete(id); break;
     }
   }
 
-  goToVersions(id: number) {
-    this.versionService.productId = id;
-    this.router.navigate(['../version'], { relativeTo: this.route, skipLocationChange: true });
-  }
-
   onDelete(id: number) {
-    this.productToDelete = id;
+    this.versionToDelete = id;
     this.toggleDeleteModal();
   }
 
   onEdit(id: number) {
-    this.productToEdit = id;
+    this.versionToEdit = id;
     this.toggleCreateModal()
   }
 
-  onProductSaved() {
+  onVersionSaved() {
     this.toggleCreateModal();
-    this.getProducts();
-    this.productToEdit = null;
+    this.getVersions();
+    this.versionToEdit = null;
   }
 
-  onProductDeleted() {
+  onVersionDeleted() {
     this.toggleDeleteModal();
-    this.getProducts();
-    this.productToDelete = null;
+    this.getVersions();
+    this.versionToDelete = null;
   }
 
   toggleCreateModal(){

@@ -1,0 +1,55 @@
+<div class="right-content">
+  <div class="header">
+    <h2>Versions</h2>
+  </div>
+  <div>
+    <div class="card">
+      <h3>Product details</h3>
+      <div class="ui-uat-ext-step-expectedResults border-none text-bold">{{product?.name}}</div>
+      <div class="spacer-1"></div>
+      <div class="ui-uat-ext-step-description">{{product?.description}}</div>
+    </div>
+  </div>
+  <div>
+    <div class="card">
+      <div class="ui-uat-ext-steps">
+        <div class="ui-uat-ext-step ui-uat-ext-table-header">
+          <div class="ui-uat-ext-step-description border-none width-full">Title</div>
+          <div class="ui-uat-ext-step-more"></div>
+        </div>
+        <div class="ui-uat-ext-step" *ngFor="let version of versions; index as i">
+          <div class="ui-uat-ext-step-expectedResults border-none width-full">{{version.name}}</div>
+          <div class="ui-uat-ext-step-more">
+            <app-more-button-menu [actions]="actions" (onAction)="onAction($event, version.versionId)" class="flex justify-center">
+            </app-more-button-menu>
+          </div>
+        </div>
+        <div class="ui-uat-ext-step no-pointer-events" *ngIf="versions.length==0">
+          <div class="ui-uat-ext-step-expectedResults border-none width-full">No versions found</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-between items-center btn-link-group">
+    <a [routerLink]="['../product']" [skipLocationChange]="true" routerLinkActive="active">Back to Products</a>
+    <div class="btn-group">
+      <button (click)="toggleCreateModal()">Add version</button>
+    </div>
+  </div>
+</div>
+
+<app-modal *ngIf="createModalOn" (closeModal)="toggleCreateModal()"  [propClass]="'width-full'">
+  <app-create-version
+    (cancel)="toggleCreateModal()"
+    (onVersionSaved)="onVersionSaved()"
+    [versionToEdit]="versionToEdit">
+  </app-create-version>
+</app-modal>
+
+<app-modal *ngIf="deleteModalOn" (closeModal)="toggleDeleteModal()" >
+  <app-delete-version
+    (cancel)="toggleDeleteModal()"
+    (onVersionDeleted)="onVersionDeleted()"
+    [versionToDelete]="versionToDelete">
+  </app-delete-version>
+</app-modal>

@@ -9,6 +9,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'src/app/shared/modal/modal.module';
 import { MoreButtonMenuModule } from 'src/app/shared/more-button-menu/more-button-menu.module';
 import { DeleteProductComponent } from './product/delete-product/delete-product.component';
+import { VersionComponent } from './version/version.component';
+import { CreateVersionComponent } from './version/create-version/create-version.component';
+import { DeleteVersionComponent } from './version/delete-version/delete-version.component';
 
 const routes: Routes = [
   {
@@ -18,6 +21,10 @@ const routes: Routes = [
       {
         path: 'product',
         component: ProductComponent
+      },
+      {
+        path: 'version',
+        component: VersionComponent
       },
     ]
   }
@@ -29,7 +36,10 @@ const routes: Routes = [
     ProductComponent,
     ProductDetailsComponent,
     CreateProductComponent,
-    DeleteProductComponent
+    DeleteProductComponent,
+    VersionComponent,
+    CreateVersionComponent,
+    DeleteVersionComponent
   ],
   imports: [
     CommonModule,
