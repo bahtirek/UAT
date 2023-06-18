@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/interfaces/product.interface';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-product',
@@ -7,9 +9,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductComponent implements OnInit {
 
-  constructor() { }
+  products: Product[] = []
+  createModalOn: boolean;
+  productToEdit: number;
+  constructor(private productService: ProductsService) { }
 
   ngOnInit(): void {
+    this.getProducts()
+
+  }
+  getProducts() {
+    this.productService.getAllProducts().subscribe({
+      next: (response) => {
+        console.log(response);
+        this.products = response
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
+
+  onAdd(){
+
+  }
+
+  onProductSaved() {
+    this.toggleCreateModal();
+    this.getProducts();
+  }
+
+  toggleCreateModal(){
+    this.createModalOn = !this.createModalOn
   }
 
 }

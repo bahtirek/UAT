@@ -3,7 +3,10 @@ import { CommonModule } from '@angular/common';
 import { SettingsComponent } from './settings.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductComponent } from './product/product.component';
-import { ProductModule } from './product/product.module';
+import { ProductDetailsComponent } from './product/product-details/product-details.component';
+import { CreateProductComponent } from './product/create-product/create-product.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ModalModule } from 'src/app/shared/modal/modal.module';
 
 const routes: Routes = [
   {
@@ -20,11 +23,15 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    SettingsComponent
+    SettingsComponent,
+    ProductComponent,
+    ProductDetailsComponent,
+    CreateProductComponent
   ],
   imports: [
     CommonModule,
-    ProductModule,
+    ReactiveFormsModule,
+    ModalModule,
     RouterModule.forChild(routes),
   ]
 })

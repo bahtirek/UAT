@@ -1,0 +1,36 @@
+<div>
+  <h3>Event details</h3>
+  <div class="spacer-1"></div>
+  <div class="width-full">
+    <form [formGroup]="productForm" novalidate #form autocomplete="off">
+      <div class="form-container">
+        <label for="name">Name:</label>
+        <input type="text" id="name" formControlName="name">
+        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="form-error-message">
+          <div *ngIf="name.errors?.['required']">
+            Name is required.
+          </div>
+        </div>
+      </div>
+      <div class="spacer-2"></div>
+      <div class="form-container">
+        <label for="description">Description:</label>
+        <textarea  rows="6" data-gramm="false" maxlength="1000" id="description" formControlName="description" required></textarea>
+        <div *ngIf="description.invalid && (description.dirty || description.touched)" class="form-error-message">
+          <div *ngIf="description.errors?.['required']">
+            Description is required.
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="btn-group">
+      <button class="" data-listener="off" (click)="onSubmit()">
+        <span>Submit</span>
+      </button>
+      <button class="btn-danger"  data-listener="off" (click)="onCancel()"  >
+        <span>Cancel</span>
+    </button>
+    </div>
+  </div>
+</div>
+
