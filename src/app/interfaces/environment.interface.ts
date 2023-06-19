@@ -1,5 +1,9 @@
 export interface Environment {
-    allowDelete?: number,
     environmentId?: number,
+    productId?: number,
     name?: string
+}
+
+export interface ServerResponse <T> {
+  result: T
 }

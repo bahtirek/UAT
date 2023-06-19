@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MoreButtonAction } from 'src/app/interfaces/more-button-action.interface';
 import { Product } from 'src/app/interfaces/product.interface';
+import { EnvironmentService } from 'src/app/services/environment.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { VersionService } from 'src/app/services/version.service';
 
@@ -27,6 +28,11 @@ export class ProductComponent implements OnInit {
       display: true
     },
     {
+      name: 'Environments',
+      action: 'environments',
+      display: true
+    },
+    {
       name: 'Delete',
       action: 'delete',
       display: true
@@ -34,7 +40,7 @@ export class ProductComponent implements OnInit {
   ];
   deleteModalOn: boolean;
   productToDelete: number;
-  constructor(private productService: ProductsService, private versionService: VersionService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private productService: ProductsService, private versionService: VersionService, private router: Router, private route: ActivatedRoute, private environmentService: EnvironmentService) { }
 
   ngOnInit(): void {
     this.getProducts()
@@ -55,8 +61,13 @@ export class ProductComponent implements OnInit {
     switch (event) {
       case 'edit': this.onEdit(id); break;
       case 'versions': this.goToVersions(id); break;
+      case 'environments': this.goToEnvironment(id); break;
       case 'delete': this.onDelete(id); break;
     }
+  }
+  goToEnvironment(id: number) {
+    this.environmentService.productId = id;
+    this.router.navigate(['../environment'], { relativeTo: this.route, skipLocationChange: true });
   }
 
   goToVersions(id: number) {

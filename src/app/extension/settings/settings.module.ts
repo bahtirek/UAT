@@ -12,6 +12,9 @@ import { DeleteProductComponent } from './product/delete-product/delete-product.
 import { VersionComponent } from './version/version.component';
 import { CreateVersionComponent } from './version/create-version/create-version.component';
 import { DeleteVersionComponent } from './version/delete-version/delete-version.component';
+import { EnvironmentComponent } from './environment/environment.component';
+import { CreateEnvironmentComponent } from './environment/create-environment/create-environment.component';
+import { DeleteEnvironmentComponent } from './environment/delete-environment/delete-environment.component';
 
 const routes: Routes = [
   {
@@ -26,6 +29,10 @@ const routes: Routes = [
         path: 'version',
         component: VersionComponent
       },
+      {
+        path: 'environment',
+        component: EnvironmentComponent
+      },
     ]
   }
 ];
@@ -39,7 +46,10 @@ const routes: Routes = [
     DeleteProductComponent,
     VersionComponent,
     CreateVersionComponent,
-    DeleteVersionComponent
+    DeleteVersionComponent,
+    EnvironmentComponent,
+    CreateEnvironmentComponent,
+    DeleteEnvironmentComponent
   ],
   imports: [
     CommonModule,
