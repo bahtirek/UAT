@@ -20,7 +20,8 @@ export class SettingsComponent implements OnInit {
   }
 
   onNavigationClick(navElement: string){
-    this.activeNavElement = navElement
+    this.activeNavElement = navElement;
+    this.router.navigate([`../settings/${navElement}`], { relativeTo: this.route, skipLocationChange: true });
   }
 
 }
