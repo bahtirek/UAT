@@ -99,4 +99,8 @@ export class VersionComponent implements OnInit {
     this.deleteModalOn = !this.deleteModalOn
   }
 
+  cancel(){
+    this.toggleCreateModal()
+    this.versionToEdit = null;
+  }
 }

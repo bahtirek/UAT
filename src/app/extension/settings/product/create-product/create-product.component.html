@@ -1,5 +1,6 @@
 <div>
-  <h3>Event details</h3>
+  <h3 *ngIf="!productToEdit">Create product</h3>
+  <h3 *ngIf="productToEdit">Edit product</h3>
   <div class="spacer-1"></div>
   <div class="width-full">
     <form [formGroup]="productForm" novalidate #form autocomplete="off">

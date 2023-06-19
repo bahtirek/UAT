@@ -1,5 +1,6 @@
 <div>
-  <h3>Create environment</h3>
+  <h3 *ngIf="!environmentToEdit">Create environment</h3>
+  <h3 *ngIf="environmentToEdit">Edit environment</h3>
   <div class="spacer-1"></div>
   <div class="width-full">
     <form [formGroup]="environmentForm" novalidate #form autocomplete="off">

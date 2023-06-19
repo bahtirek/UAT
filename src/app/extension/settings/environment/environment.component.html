@@ -38,9 +38,9 @@
   </div>
 </div>
 
-<app-modal *ngIf="createModalOn" (closeModal)="toggleCreateModal()"  [propClass]="'width-full'">
+<app-modal *ngIf="createModalOn" (closeModal)="cancel()"  [propClass]="'width-full'">
   <app-create-environment
-    (cancel)="toggleCreateModal()"
+    (cancel)="cancel()"
     (onEnvironmentSaved)="onEnvironmentSaved()"
     [environmentToEdit]="environmentToEdit">
   </app-create-environment>

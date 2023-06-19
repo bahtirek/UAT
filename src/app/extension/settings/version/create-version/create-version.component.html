@@ -1,5 +1,6 @@
 <div>
-  <h3>Event details</h3>
+  <h3 *ngIf="!versionToEdit">Create version</h3>
+  <h3 *ngIf="versionToEdit">Edit version</h3>
   <div class="spacer-1"></div>
   <div class="width-full">
     <form [formGroup]="versionForm" novalidate #form autocomplete="off">

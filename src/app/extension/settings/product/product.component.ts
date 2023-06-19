@@ -105,4 +105,8 @@ export class ProductComponent implements OnInit {
     this.deleteModalOn = !this.deleteModalOn
   }
 
+  cancel(){
+    this.toggleCreateModal()
+    this.productToEdit = null;
+  }
 }

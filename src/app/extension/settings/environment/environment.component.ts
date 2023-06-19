@@ -99,5 +99,9 @@ export class EnvironmentComponent implements OnInit {
     this.deleteModalOn = !this.deleteModalOn
   }
 
+  cancel(){
+    this.toggleCreateModal()
+    this.environmentToEdit = null;
+  }
 
 }

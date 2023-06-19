@@ -24,7 +24,8 @@ export class CreateProductComponent implements OnInit {
   });
 
 
-  @Input() productToEdit: number;
+  @Input() productToEdit: number = null;
+  @Input() editing: boolean = false;
   @Output() onProductSaved = new EventEmitter<void>()
   @Output() cancel = new EventEmitter<void>()
 
