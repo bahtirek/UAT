@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MoreButtonAction } from 'src/app/interfaces/more-button-action.interface';
 import { Product } from 'src/app/interfaces/product.interface';
-import { EnvironmentService } from 'src/app/services/environment.service';
 import { ProductsService } from 'src/app/services/products.service';
-import { VersionService } from 'src/app/services/version.service';
 
 @Component({
   selector: 'app-product',
@@ -38,19 +36,16 @@ export class ProductComponent implements OnInit {
       display: true
     },
   ];
-/*   deleteModalOn: boolean;
-  productToDelete: number; */
-  constructor(private productService: ProductsService, private versionService: VersionService, private router: Router, private route: ActivatedRoute, private environmentService: EnvironmentService) { }
+
+  constructor(private productService: ProductsService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log('product');
-
     this.getProducts()
   }
+
   getProducts() {
     this.productService.getAllProducts().subscribe({
       next: (response) => {
-        console.log(response);
         this.products = response
       },
       error: (error) => {
@@ -59,34 +54,15 @@ export class ProductComponent implements OnInit {
     })
   }
 
-
-  goToEnvironment(id: number) {
-    this.environmentService.productId = id;
-    this.router.navigate(['../environment'], { relativeTo: this.route, skipLocationChange: true });
-  }
-
-  goToVersions(id: number) {
-    this.versionService.productId = id;
-    this.router.navigate(['../version'], { relativeTo: this.route, skipLocationChange: true });
-  }
-
-
-
-
-
   onProductSaved() {
     this.toggleCreateModal();
     this.getProducts();
     this.productToEdit = null;
   }
 
-
-
   toggleCreateModal(){
     this.createModalOn = !this.createModalOn
   }
-
-
 
   cancel(){
     this.toggleCreateModal()

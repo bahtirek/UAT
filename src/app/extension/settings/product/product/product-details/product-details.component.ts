@@ -38,7 +38,6 @@ export class ProductDetailsComponent implements OnInit {
     const productId = this.productService.productId;
     this.productService.getProductById(productId).subscribe({
       next: (response) => {
-        console.log(response);
         this.product = response
       },
       error: (error) => {
