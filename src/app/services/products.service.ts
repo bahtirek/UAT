@@ -11,6 +11,7 @@ export class ProductsService {
 
   url = api.url;
   product: Product;
+  productId: number;
 
   constructor(private http: HttpClient) { }
 

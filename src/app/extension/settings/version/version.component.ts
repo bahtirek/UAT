@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { MoreButtonAction } from 'src/app/interfaces/more-button-action.interface';
 import { Product } from 'src/app/interfaces/product.interface';
 import { Version } from 'src/app/interfaces/version.interface';
@@ -29,29 +29,22 @@ export class VersionComponent implements OnInit {
   ];
   deleteModalOn: boolean;
   versionToDelete: number;
-  product: Product;
+
+  @Input() product: Product;
 
   constructor(private productService: ProductsService, private versionService: VersionService) { }
 
   ngOnInit(): void {
-    this.getVersions();
-    this.getProduct();
   }
 
-  getProduct() {
-    this.productService.getProductById(this.versionService.productId).subscribe({
-      next: (response) => {
-        console.log(response);
-        this.product = response
-      },
-      error: (error) => {
-        console.log(error)
-      }
-    })
+  ngOnChanges(changes: SimpleChanges) {
+    if (!changes.product.firstChange) {
+      this.getVersions(changes.product.currentValue.productId);
+    }
   }
 
-  getVersions() {
-    this.versionService.getAllVersions().subscribe({
+  getVersions(productId: number) {
+    this.versionService.getAllVersions(productId).subscribe({
       next: (response) => {
         console.log(response);
         this.versions = response
@@ -81,13 +74,13 @@ export class VersionComponent implements OnInit {
 
   onVersionSaved() {
     this.toggleCreateModal();
-    this.getVersions();
+    this.getVersions(this.product.productId);
     this.versionToEdit = null;
   }
 
   onVersionDeleted() {
     this.toggleDeleteModal();
-    this.getVersions();
+    this.getVersions(this.product.productId);
     this.versionToDelete = null;
   }
 

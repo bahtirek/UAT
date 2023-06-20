@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Environment } from 'src/app/interfaces/environment.interface';
 import { MoreButtonAction } from 'src/app/interfaces/more-button-action.interface';
 import { Product } from 'src/app/interfaces/product.interface';
@@ -29,29 +29,24 @@ export class EnvironmentComponent implements OnInit {
   ];
   deleteModalOn: boolean;
   environmentToDelete: number;
-  product: Product;
+
+  @Input() product: Product;
 
   constructor(private productService: ProductsService, private environmentService: EnvironmentService) { }
 
   ngOnInit(): void {
-    this.getEnvironments();
-    this.getProduct();
   }
 
-  getProduct() {
-    this.productService.getProductById(this.environmentService.productId).subscribe({
-      next: (response) => {
-        console.log(response);
-        this.product = response
-      },
-      error: (error) => {
-        console.log(error)
-      }
-    })
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (!changes.product.firstChange) {
+      this.getEnvironments();
+    }
   }
+
 
   getEnvironments() {
-    this.environmentService.getAllEnvironments().subscribe({
+    this.environmentService.getAllEnvironments(this.product.productId).subscribe({
       next: (response) => {
         console.log(response);
         this.environments = response

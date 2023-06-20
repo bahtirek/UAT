@@ -11,17 +11,10 @@
     <div class="card">
       <div class="ui-uat-ext-steps">
         <div class="ui-uat-ext-step ui-uat-ext-table-header">
-          <div class="ui-uat-ext-step-description border-none width-40">Name</div>
-          <div class="ui-uat-ext-step-expectedResults">Description</div>
-          <div class="ui-uat-ext-step-more"></div>
+          <div class="ui-uat-ext-step-description border-none width-full">Name</div>
         </div>
         <div class="ui-uat-ext-step" *ngFor="let product of products; index as i">
-          <div class="ui-uat-ext-step-expectedResults border-none width-40">{{product.name}}</div>
-          <div class="ui-uat-ext-step-description">{{product.description}}</div>
-          <div class="ui-uat-ext-step-more">
-            <app-more-button-menu [actions]="actions" (onAction)="onAction($event, product.productId)" class="flex justify-center">
-            </app-more-button-menu>
-          </div>
+          <div class="ui-uat-ext-step-expectedResults border-none width-full cursor-pointer" (click)="goToDetails(product.productId)">{{product.name}}</div>
         </div>
         <div class="ui-uat-ext-step no-pointer-events" *ngIf="products.length==0">
           <div class="ui-uat-ext-step-expectedResults border-none width-full">No products found</div>
@@ -44,10 +37,10 @@
   </app-create-product>
 </app-modal>
 
-<app-modal *ngIf="deleteModalOn" (closeModal)="toggleDeleteModal()" >
+<!-- <app-modal *ngIf="deleteModalOn" (closeModal)="toggleDeleteModal()" >
   <app-delete-product
     (cancel)="toggleDeleteModal()"
     (onProductDeleted)="onProductDeleted()"
     [productToDelete]="productToDelete">
   </app-delete-product>
-</app-modal>
+</app-modal> -->

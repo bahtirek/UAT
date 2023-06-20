@@ -1,1 +1,39 @@
-<p>product-details works!</p>
+<div class="right-content">
+  <div class="header">
+    <h2>Product details</h2>
+  </div>
+  <div>
+    <div class="card">
+      <div class="case-title flex items-center">
+        <div>
+          <div class="ui-uat-ext-step-expectedResults border-none text-bold">{{product?.name}}</div>
+          <div class="spacer-1"></div>
+          <div class="ui-uat-ext-step-description">{{product?.description}}</div>
+        </div>
+        <app-more-button-menu [actions]="actions" (onAction)="onAction($event)" class="item-start"></app-more-button-menu>
+      </div>
+    </div>
+  </div>
+  <app-version [product]="product"></app-version>
+  <app-environment [product]="product"></app-environment>
+  <div class="flex justify-between items-center btn-link-group">
+    <a [routerLink]="['..']" [skipLocationChange]="true" routerLinkActive="active">Back to Products</a>
+  </div>
+</div>
+
+<app-modal *ngIf="createModalOn" (closeModal)="cancel()"  [propClass]="'width-full'">
+  <app-create-product
+    (cancel)="cancel()"
+    (onProductSaved)="onProductSaved()"
+    [productToEdit]="productToEdit">
+  </app-create-product>
+</app-modal>
+
+<app-modal *ngIf="deleteModalOn" (closeModal)="toggleDeleteModal()" >
+  <app-delete-product
+    (cancel)="toggleDeleteModal()"
+    (onProductDeleted)="onProductDeleted()"
+    [productToDelete]="productToDelete">
+  </app-delete-product>
+</app-modal>
+

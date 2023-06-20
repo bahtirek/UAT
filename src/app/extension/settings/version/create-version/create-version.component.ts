@@ -22,6 +22,7 @@ export class CreateVersionComponent implements OnInit {
 
 
   @Input() versionToEdit: number;
+  @Input() productId: number;
   @Output() onVersionSaved = new EventEmitter<void>()
   @Output() cancel = new EventEmitter<void>()
 
@@ -65,7 +66,11 @@ export class CreateVersionComponent implements OnInit {
   }
 
   addVersion(){
-    this.versionService.addVersion(this.versionForm.value).subscribe({
+    const version: Version = {
+      name: this.name.value,
+      productId: this.productId
+    }
+    this.versionService.addVersion(version).subscribe({
       next: (response) => {
         console.log(response);
         this.onVersionSaved.next();
@@ -77,7 +82,12 @@ export class CreateVersionComponent implements OnInit {
   }
 
   updateVersion(){
-    this.versionService.updateVersion({...this.versionForm.value, versionId: this.version.versionId}).subscribe({
+    const version: Version = {
+      name: this.name.value,
+      productId: this.productId,
+      versionId: this.version.versionId
+    }
+    this.versionService.updateVersion(version).subscribe({
       next: (response) => {
         console.log(response);
         this.onVersionSaved.next();

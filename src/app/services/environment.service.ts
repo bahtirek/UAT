@@ -18,8 +18,8 @@ export class EnvironmentService {
 
   environmentSource = new Subject<Environment>()
 
-  getAllEnvironments(){
-    const params = new HttpParams().set('productId', this.productId);
+  getAllEnvironments(productId: number){
+    const params = new HttpParams().set('productId', productId);
     return this.http.get<any>(this.url + '/environment-list', {params})
     .pipe(map(response => response?.result))
   }
@@ -31,13 +31,11 @@ export class EnvironmentService {
   }
 
   addEnvironment(environment: Environment) {
-    environment.productId = this.productId
     return this.http.post<ServerResponse<Environment>>(this.url + '/environment', environment)
     .pipe(map(response => response?.result))
   }
 
   updateEnvironment(environment: Environment) {
-    environment.productId = this.productId
     return this.http.patch<ServerResponse<Environment>>(this.url + '/environment', environment)
     .pipe(map(response => response?.result))
   }

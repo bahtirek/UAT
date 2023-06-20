@@ -22,6 +22,7 @@ export class CreateEnvironmentComponent implements OnInit {
 
 
   @Input() environmentToEdit: number;
+  @Input() productId: number;
   @Output() onEnvironmentSaved = new EventEmitter<void>()
   @Output() cancel = new EventEmitter<void>()
 
@@ -65,7 +66,11 @@ export class CreateEnvironmentComponent implements OnInit {
   }
 
   addEnvironment(){
-    this.environmentService.addEnvironment(this.environmentForm.value).subscribe({
+    const environment: Environment = {
+      name: this.name.value,
+      productId: this.productId
+    }
+    this.environmentService.addEnvironment(environment).subscribe({
       next: (response) => {
         console.log(response);
         this.onEnvironmentSaved.next();
@@ -77,7 +82,12 @@ export class CreateEnvironmentComponent implements OnInit {
   }
 
   updateEnvironment(){
-    this.environmentService.updateEnvironment({...this.environmentForm.value, environmentId: this.environment.environmentId}).subscribe({
+    const environment: Environment = {
+      name: this.name.value,
+      productId: this.productId,
+      environmentId: this.environment.environmentId
+    }
+    this.environmentService.updateEnvironment(environment).subscribe({
       next: (response) => {
         console.log(response);
         this.onEnvironmentSaved.next();

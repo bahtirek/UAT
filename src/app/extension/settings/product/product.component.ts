@@ -38,11 +38,13 @@ export class ProductComponent implements OnInit {
       display: true
     },
   ];
-  deleteModalOn: boolean;
-  productToDelete: number;
+/*   deleteModalOn: boolean;
+  productToDelete: number; */
   constructor(private productService: ProductsService, private versionService: VersionService, private router: Router, private route: ActivatedRoute, private environmentService: EnvironmentService) { }
 
   ngOnInit(): void {
+    console.log('product');
+
     this.getProducts()
   }
   getProducts() {
@@ -57,14 +59,7 @@ export class ProductComponent implements OnInit {
     })
   }
 
-  onAction(event: string, id: number){
-    switch (event) {
-      case 'edit': this.onEdit(id); break;
-      case 'versions': this.goToVersions(id); break;
-      case 'environments': this.goToEnvironment(id); break;
-      case 'delete': this.onDelete(id); break;
-    }
-  }
+
   goToEnvironment(id: number) {
     this.environmentService.productId = id;
     this.router.navigate(['../environment'], { relativeTo: this.route, skipLocationChange: true });
@@ -75,15 +70,9 @@ export class ProductComponent implements OnInit {
     this.router.navigate(['../version'], { relativeTo: this.route, skipLocationChange: true });
   }
 
-  onDelete(id: number) {
-    this.productToDelete = id;
-    this.toggleDeleteModal();
-  }
 
-  onEdit(id: number) {
-    this.productToEdit = id;
-    this.toggleCreateModal()
-  }
+
+
 
   onProductSaved() {
     this.toggleCreateModal();
@@ -91,22 +80,21 @@ export class ProductComponent implements OnInit {
     this.productToEdit = null;
   }
 
-  onProductDeleted() {
-    this.toggleDeleteModal();
-    this.getProducts();
-    this.productToDelete = null;
-  }
+
 
   toggleCreateModal(){
     this.createModalOn = !this.createModalOn
   }
 
-  toggleDeleteModal(){
-    this.deleteModalOn = !this.deleteModalOn
-  }
+
 
   cancel(){
     this.toggleCreateModal()
     this.productToEdit = null;
+  }
+
+  goToDetails(id: number) {
+    this.productService.productId = id;
+    this.router.navigate(['details'], { relativeTo: this.route, skipLocationChange: true });
   }
 }

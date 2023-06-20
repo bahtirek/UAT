@@ -15,6 +15,7 @@ import { DeleteVersionComponent } from './version/delete-version/delete-version.
 import { EnvironmentComponent } from './environment/environment.component';
 import { CreateEnvironmentComponent } from './environment/create-environment/create-environment.component';
 import { DeleteEnvironmentComponent } from './environment/delete-environment/delete-environment.component';
+import { ProductModule } from './product/product.module';
 
 const routes: Routes = [
   {
@@ -23,16 +24,16 @@ const routes: Routes = [
     children: [
       {
         path: 'product',
-        component: ProductComponent
+        loadChildren: () => ProductModule
       },
-      {
+      /* {
         path: 'version',
         component: VersionComponent
       },
       {
         path: 'environment',
         component: EnvironmentComponent
-      },
+      }, */
     ]
   }
 ];
@@ -40,16 +41,16 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     SettingsComponent,
-    ProductComponent,
-    ProductDetailsComponent,
-    CreateProductComponent,
+    //ProductComponent,
+    //ProductDetailsComponent,
+    /* CreateProductComponent,
     DeleteProductComponent,
     VersionComponent,
     CreateVersionComponent,
     DeleteVersionComponent,
     EnvironmentComponent,
     CreateEnvironmentComponent,
-    DeleteEnvironmentComponent
+    DeleteEnvironmentComponent */
   ],
   imports: [
     CommonModule,

@@ -18,8 +18,8 @@ export class VersionService {
 
   versionSource = new Subject<Version>()
 
-  getAllVersions(){
-    const params = new HttpParams().set('productId', this.productId);
+  getAllVersions(id: number){
+    const params = new HttpParams().set('productId', id);
     return this.http.get<any>(this.url + '/version-list', {params})
     .pipe(map(response => response?.result))
   }
@@ -31,13 +31,11 @@ export class VersionService {
   }
 
   addVersion(version: Version) {
-    version.productId = this.productId
     return this.http.post<ServerResponse<Version>>(this.url + '/version', version)
     .pipe(map(response => response?.result))
   }
 
   updateVersion(version: Version) {
-    version.productId = this.productId
     return this.http.patch<ServerResponse<Version>>(this.url + '/version', version)
     .pipe(map(response => response?.result))
   }
