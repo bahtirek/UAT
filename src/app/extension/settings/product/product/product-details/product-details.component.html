@@ -14,8 +14,11 @@
       </div>
     </div>
   </div>
-  <app-version [product]="product"></app-version>
-  <app-environment [product]="product"></app-environment>
+
+  <app-tabs [tabs]="tabs" [(tab)]="activeTab"></app-tabs>
+  <app-version [product]="product" class="hide" [ngClass]="{'show': activeTab == 'versions'}"></app-version>
+  <app-environment [product]="product" class="hide" [ngClass]="{'show': activeTab == 'environments'}"></app-environment>
+
   <div class="flex justify-between items-center btn-link-group">
     <a [routerLink]="['..']" [skipLocationChange]="true" routerLinkActive="active">Back to Products</a>
   </div>

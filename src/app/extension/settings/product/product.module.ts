@@ -14,6 +14,7 @@ import { DeleteVersionComponent } from './version/delete-version/delete-version.
 import { EnvironmentComponent } from './environment/environment.component';
 import { CreateEnvironmentComponent } from './environment/create-environment/create-environment.component';
 import { DeleteEnvironmentComponent } from './environment/delete-environment/delete-environment.component';
+import { TabsModule } from 'src/app/shared/tabs/tabs.module';
 
 const routes: Routes = [
   {
@@ -49,6 +50,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     ModalModule,
     MoreButtonMenuModule,
+    TabsModule,
     RouterModule.forChild(routes),
   ],
   exports: [

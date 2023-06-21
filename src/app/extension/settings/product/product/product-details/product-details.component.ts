@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MoreButtonAction } from 'src/app/interfaces/more-button-action.interface';
 import { Product } from 'src/app/interfaces/product.interface';
+import { Tab } from 'src/app/interfaces/tab.interface';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -13,6 +14,9 @@ export class ProductDetailsComponent implements OnInit {
   product: Product;
   deleteModalOn: boolean;
   productToDelete: number;
+  activeTab: string = 'versions';
+  productToEdit: number;
+  createModalOn: boolean;
   actions: MoreButtonAction[] = [
     {
       name: 'Edit',
@@ -25,8 +29,10 @@ export class ProductDetailsComponent implements OnInit {
       display: true
     },
   ];
-  productToEdit: number;
-  createModalOn: boolean;
+  tabs: Tab[] = [
+    {id: 'versions', label: 'Versions', isActive: true},
+    {id: 'environments', label: 'Environments', isActive: false}
+  ];
 
   constructor(private productService: ProductsService,) { }
 
@@ -84,6 +90,10 @@ export class ProductDetailsComponent implements OnInit {
       case 'edit': this.onEdit(); break;
       case 'delete': this.onDelete(); break;
     }
+  }
+
+  setActiveTab(activeTab: string){
+    this.activeTab = activeTab
   }
 
 }
