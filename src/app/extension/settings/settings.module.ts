@@ -12,6 +12,7 @@ import { DeleteBrowserComponent } from './browsers/delete-browser/delete-browser
 import { DevicesComponent } from './devices/devices.component';
 import { CreateDeviceComponent } from './devices/create-device/create-device.component';
 import { DeleteDeviceComponent } from './devices/delete-device/delete-device.component';
+import { UsersModule } from './users/users.module';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: 'product',
         loadChildren: () => ProductModule
+      },
+      {
+        path: 'users',
+        loadChildren: () => UsersModule
       },
       {
         path: 'browsers',
