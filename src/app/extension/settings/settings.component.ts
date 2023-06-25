@@ -15,7 +15,7 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.router.routerState.snapshot.url !== '/test-case/details') {
-      this.router.navigate(['../settings/product'], { relativeTo: this.route, skipLocationChange: true });
+      this.router.navigate(['../settings/users'], { relativeTo: this.route, skipLocationChange: true });
     }
   }
 

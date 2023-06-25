@@ -1,1 +1,60 @@
-<p>create-user works!</p>
+<div>
+  <h3 *ngIf="!userToEdit">Create user</h3>
+  <h3 *ngIf="userToEdit">Edit user</h3>
+  <div class="spacer-1"></div>
+  <div class="width-full">
+    <form [formGroup]="userForm" novalidate #form autocomplete="off">
+      <div class="form-container">
+        <label for="firstname">First name:</label>
+        <input type="text" id="firstname" formControlName="firstname"/>
+        <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" class="form-error-message">
+          <div *ngIf="firstname.errors?.['required']">
+            First name is required.
+          </div>
+        </div>
+      </div>
+      <div class="spacer-2"></div>
+      <div class="form-container">
+        <label for="lastname">Last name:</label>
+        <input type="text" id="lastname" formControlName="lastname"/>
+        <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" class="form-error-message">
+          <div *ngIf="lastname.errors?.['required']">
+            Last name is required.
+          </div>
+        </div>
+      </div>
+      <div class="spacer-2"></div>
+      <div class="form-container">
+        <label for="email">Email:</label>
+        <input type="text" id="email" formControlName="email"/>
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="form-error-message">
+          <div *ngIf="email.errors?.['required']">
+            Email is required.
+          </div>
+          <div *ngIf="email.errors?.['pattern']">
+            Wrong email format
+          </div>
+        </div>
+      </div>
+      <div class="spacer-2"></div>
+      <div class="form-container">
+        <label for="userrole">userrole:</label>
+        <input type="text" id="userrole" formControlName="userrole"/>
+        <div *ngIf="userrole.invalid && (userrole.dirty || userrole.touched)" class="form-error-message">
+          <div *ngIf="userrole.errors?.['required']">
+            User role is required.
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="btn-group">
+      <button class="" data-listener="off" (click)="onSubmit()">
+        <span>Submit</span>
+      </button>
+      <button class="btn-danger"  data-listener="off" (click)="onCancel()"  >
+        <span>Cancel</span>
+    </button>
+    </div>
+  </div>
+</div>
+

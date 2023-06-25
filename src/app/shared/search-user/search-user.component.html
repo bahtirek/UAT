@@ -1,6 +1,6 @@
 <div class="width-full">
   <div class="form-container">
-      <label for="label">User</label>
+      <label for="label">Search user</label>
       <input type="text" name="label" [(ngModel)]="searchQuery" (ngModelChange)="userSearch.next($event)"/>
       <div  class="form-error-message" *ngIf="searchError">{{searchError}}</div>
       <span class="search-icon">

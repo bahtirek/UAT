@@ -5,6 +5,9 @@ import { CreateUserComponent } from './create-user/create-user.component';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { UsersDashComponent } from './users-dash/users-dash.component';
 import { RouterModule, Routes } from '@angular/router';
+import { SearchUserModule } from 'src/app/shared/search-user/search-user.module';
+import { ModalModule } from 'src/app/shared/modal/modal.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -31,6 +34,9 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    SearchUserModule,
+    ModalModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
   ]
 })

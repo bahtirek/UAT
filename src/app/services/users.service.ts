@@ -9,6 +9,7 @@ import { User } from '../interfaces/user.inteface';
 })
 export class UsersService {
   url = api.url;
+  userId: number;
 
   constructor(private http: HttpClient) { }
 
@@ -23,7 +24,7 @@ export class UsersService {
       .set('title', event)
       .set('includeDeleted', includeDeleted);
       return this.http.get<User[]>(this.url + '/test-case-search', {params})
-  
+
   }
 
   setEvent(event: Event){
