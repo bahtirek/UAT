@@ -11,6 +11,7 @@ import { SearchTestCaseModule } from 'src/app/shared/search-test-case/search-tes
 import { ModalModule } from 'src/app/shared/modal/modal.module';
 import { ReviewStepsModule } from 'src/app/shared/review-steps/review-steps.module';
 import { DirectoriesModule } from 'src/app/shared/directories/directories.module';
+import { SeparatorModule } from 'src/app/shared/separator/separator.module';
 
 const routes: Routes = [
   {
@@ -45,6 +46,7 @@ const routes: Routes = [
     ModalModule,
     ReviewStepsModule,
     DirectoriesModule,
+    SeparatorModule,
     RouterModule.forChild(routes),
   ]
 })

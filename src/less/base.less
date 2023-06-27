@@ -25,13 +25,14 @@
     height: calc(100vh - 60px);
     background-color: #f3f4f5;
     .left-container {
-      height: 100%;
-      width: 100%;
-      min-width: 300px;
-      flex-basis: 30%;
       overflow: auto;
       display: flex;
-      flex-direction: column;
+      position: relative;
+      height: 100%;
+      min-width: 200px;
+      max-width: 40%;
+      //width: 100%;
+      width: clamp(200px, var(--uat-left-conatiner-width), 40%);
       .left-top-navigation {
         padding: 0px 20px 0px 20px;
         ul {
@@ -72,7 +73,7 @@
 
     .right-container {
       width: 100%;
-      flex-basis: 70%;
+      max-width: var(--uat-right-conatiner-width);
       overflow: auto;
       .right-content {
         padding: 40px 14px 40px 40px;
@@ -155,4 +156,10 @@
 }
 .left-container::-webkit-scrollbar-thumb:hover {
   background: #64866b;
+}
+
+:root {
+  --uat-left-conatiner-width: 30%;
+  --uat-right-conatiner-width: 70%;
+  --uat-resize-cursor: col-resize;
 }
