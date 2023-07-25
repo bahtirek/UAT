@@ -24,8 +24,10 @@ export class ErrorInterceptor implements HttpInterceptor {
         if (error.status == 401) {
           // 401 should be handled in auth.interceptor
           this.router.navigate(['/'], { skipLocationChange: true });
+        } else if (error.error.result.message){
+          this.toastr.show('error', error.error.result.message)
         } else {
-          this.toastr.show('error', 'Sorry!', 'Something went wrong. Please try later. ')
+          this.toastr.show('error', 'Something went wrong. Please try later. ')
         }
         return throwError(error);
       })
