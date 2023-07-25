@@ -13,6 +13,9 @@ import { DevicesComponent } from './devices/devices.component';
 import { CreateDeviceComponent } from './devices/create-device/create-device.component';
 import { DeleteDeviceComponent } from './devices/delete-device/delete-device.component';
 import { UsersModule } from './users/users.module';
+import { ProjectsComponent } from './projects/projects.component';
+import { CreateProjectComponent } from './projects/create-project/create-project.component';
+import { DeleteProjectComponent } from './projects/delete-project/delete-project.component';
 
 const routes: Routes = [
   {
@@ -20,8 +23,8 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     children: [
       {
-        path: 'product',
-        loadChildren: () => ProductModule
+        path: 'project',
+        component: ProjectsComponent
       },
       {
         path: 'users',
@@ -48,6 +51,9 @@ const routes: Routes = [
     DevicesComponent,
     CreateDeviceComponent,
     DeleteDeviceComponent,
+    ProjectsComponent,
+    CreateProjectComponent,
+    DeleteProjectComponent,
   ],
   imports: [
     CommonModule,
