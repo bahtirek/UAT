@@ -35,7 +35,7 @@ export class MoreButtonMenuComponent implements OnInit {
       const menuPosition = this.moreButton.nativeElement.getBoundingClientRect();
       const menuHeight = this.actions.length * 35;
       if(menuPosition.y < windowWidth / 2) {
-        this.align.push('left')
+        this.align.push('right')
       }
       if(windowHieght + menuPosition.x < menuHeight + 100) {
         this.align.push('top')
@@ -44,7 +44,7 @@ export class MoreButtonMenuComponent implements OnInit {
     } else {
       this.showMenu = false;
     }
-  } 
+  }
 
   onMouseLeave(){
     this.mouseLeaveTimer = setTimeout(()=>{
@@ -54,7 +54,7 @@ export class MoreButtonMenuComponent implements OnInit {
   onMouseEnter = () => {
     clearTimeout(this.mouseLeaveTimer)
   }
-  
+
   toggleMenu(){
     this.showMenu = !this.showMenu
   }

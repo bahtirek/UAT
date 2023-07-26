@@ -14,7 +14,8 @@
           <div class="ui-uat-ext-step-description border-none width-full">Name</div>
         </div>
         <div class="ui-uat-ext-step" *ngFor="let project of projects; index as i">
-          <div class="ui-uat-ext-step-expectedResults border-none width-full cursor-pointer">{{project.name}}</div>
+          <div class="ui-uat-ext-step-expectedResults border-none width-full">{{project?.name}}</div>
+          <app-more-button-menu [actions]="actions" (onAction)="onAction($event, project.projectId)" class="item-start"></app-more-button-menu>
         </div>
         <div class="ui-uat-ext-step no-pointer-events" *ngIf="projects.length==0">
           <div class="ui-uat-ext-step-expectedResults border-none width-full">No project found</div>
@@ -37,10 +38,10 @@
   </app-create-project>
 </app-modal>
 
-<!-- <app-modal *ngIf="deleteModalOn" (closeModal)="toggleDeleteModal()" >
-  <app-delete-projects
+<app-modal *ngIf="deleteModalOn" (closeModal)="toggleDeleteModal()" >
+  <app-delete-project
     (cancel)="toggleDeleteModal()"
-    (onprojectsDeleted)="onprojectsDeleted()"
-    [projectsToDelete]="projectsToDelete">
-  </app-delete-projects>
-</app-modal> -->
+    (onProjectDeleted)="onProjectDeleted()"
+    [projectToDelete]="projectToDelete">
+  </app-delete-project>
+</app-modal>

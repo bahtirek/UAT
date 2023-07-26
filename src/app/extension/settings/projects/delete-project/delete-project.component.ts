@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ProjectService } from 'src/app/services/projects.service';
 
 @Component({
   selector: 'app-delete-project',
@@ -7,9 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeleteProjectComponent implements OnInit {
 
-  constructor() { }
+  @Input() projectToDelete: number;
+  @Output() onProductDeleted = new EventEmitter<void>()
+  @Output() cancel = new EventEmitter<void>()
+
+  constructor(private projectService: ProjectService) { }
 
   ngOnInit(): void {
   }
 
+  onCancel(){
+    this.cancel.emit();
+  }
+
+  onDelete(){
+    this.projectService.deleteProject(this.projectToDelete).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.onProductDeleted.next();
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
 }

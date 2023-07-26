@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject, map } from 'rxjs';
 
@@ -20,6 +20,13 @@ export class ProjectService {
 
   getAllProjects(){
     return this.http.get<any>(this.url + '/projects')
+    .pipe(map(response => response?.result))
+  }
+
+  deleteProject(projectId: number) {
+    const params = new HttpParams()
+    .set('projectId', projectId)
+    return this.http.delete<ServerResponse<Directory>>(this.url + '/project', {params: params})
     .pipe(map(response => response?.result))
   }
 
