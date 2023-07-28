@@ -15,6 +15,8 @@ export class EnvironmentComponent implements OnInit {
   environments: Environment[] = []
   createModalOn: boolean;
   environmentToEdit: number;
+  deleteModalOn: boolean;
+  environmentToDelete: number;
   actions: MoreButtonAction[] = [
     {
       name: 'Edit',
@@ -27,8 +29,6 @@ export class EnvironmentComponent implements OnInit {
       display: true
     },
   ];
-  deleteModalOn: boolean;
-  environmentToDelete: number;
 
   @Input() product: Product;
 
@@ -44,9 +44,8 @@ export class EnvironmentComponent implements OnInit {
     }
   }
 
-
   getEnvironments() {
-    this.environmentService.getAllEnvironments(this.product.productId).subscribe({
+    this.environmentService.getAllEnvironments().subscribe({
       next: (response) => {
         this.environments = response
       },

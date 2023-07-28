@@ -5,7 +5,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'src/app/shared/modal/modal.module';
 import { MoreButtonMenuModule } from 'src/app/shared/more-button-menu/more-button-menu.module';
-import { ProductModule } from './product/product.module';
 import { BrowsersComponent } from './browsers/browsers.component';
 import { CreateBrowserComponent } from './browsers/create-browser/create-browser.component';
 import { DeleteBrowserComponent } from './browsers/delete-browser/delete-browser.component';
@@ -16,6 +15,9 @@ import { UsersModule } from './users/users.module';
 import { ProjectsComponent } from './projects/projects.component';
 import { CreateProjectComponent } from './projects/create-project/create-project.component';
 import { DeleteProjectComponent } from './projects/delete-project/delete-project.component';
+import { EnvironmentComponent } from './environment/environment.component';
+import { CreateEnvironmentComponent } from './environment/create-environment/create-environment.component';
+import { DeleteEnvironmentComponent } from './environment/delete-environment/delete-environment.component';
 
 const routes: Routes = [
   {
@@ -38,6 +40,10 @@ const routes: Routes = [
         path: 'devices',
         component: DevicesComponent
       },
+      {
+        path: 'environments',
+        component: EnvironmentComponent
+      },
     ]
   }
 ];
@@ -54,6 +60,9 @@ const routes: Routes = [
     ProjectsComponent,
     CreateProjectComponent,
     DeleteProjectComponent,
+    EnvironmentComponent,
+    CreateEnvironmentComponent,
+    DeleteEnvironmentComponent
   ],
   imports: [
     CommonModule,

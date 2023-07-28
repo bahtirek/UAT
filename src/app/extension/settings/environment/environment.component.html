@@ -1,4 +1,7 @@
-
+<div class="right-content">
+  <div class="header">
+    <h2>Environments</h2>
+  </div>
   <div>
     <div class="card">
       <div class="ui-uat-ext-steps">
@@ -24,13 +27,12 @@
       </div>
     </div>
   </div>
-
+</div>
 <app-modal *ngIf="createModalOn" (closeModal)="cancel()"  [propClass]="'width-full'">
   <app-create-environment
     (cancel)="cancel()"
     (onEnvironmentSaved)="onEnvironmentSaved()"
-    [environmentToEdit]="environmentToEdit"
-    [productId]="product.productId">
+    [environmentToEdit]="environmentToEdit">
   </app-create-environment>
 </app-modal>
 
@@ -38,7 +40,6 @@
   <app-delete-environment
     (cancel)="toggleDeleteModal()"
     (onEnvironmentDeleted)="onEnvironmentDeleted()"
-    [environmentToDelete]="environmentToDelete"
-    [productId]="product.productId">
+    [environmentToDelete]="environmentToDelete">
   </app-delete-environment>
 </app-modal>

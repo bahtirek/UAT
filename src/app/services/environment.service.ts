@@ -11,16 +11,13 @@ export class EnvironmentService {
 
   url = api.url;
   environment: Environment;
-  productId: number;
 
   constructor(private http: HttpClient) { }
 
-
   environmentSource = new Subject<Environment>()
 
-  getAllEnvironments(productId: number){
-    const params = new HttpParams().set('productId', productId);
-    return this.http.get<any>(this.url + '/environment-list', {params})
+  getAllEnvironments(){
+    return this.http.get<any>(this.url + '/environment-list')
     .pipe(map(response => response?.result))
   }
 

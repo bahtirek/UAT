@@ -46,7 +46,7 @@ export class EnvironmentComponent implements OnInit {
 
 
   getEnvironments() {
-    this.environmentService.getAllEnvironments(this.product.productId).subscribe({
+    this.environmentService.getAllEnvironments().subscribe({
       next: (response) => {
         this.environments = response
       },

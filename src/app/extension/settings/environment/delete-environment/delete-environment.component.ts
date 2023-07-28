@@ -9,7 +9,6 @@ import { EnvironmentService } from 'src/app/services/environment.service';
 export class DeleteEnvironmentComponent implements OnInit {
 
   @Input() environmentToDelete: number;
-  @Input() productId: number;
   @Output() onEnvironmentDeleted = new EventEmitter<void>()
   @Output() cancel = new EventEmitter<void>()
 
