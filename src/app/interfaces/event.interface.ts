@@ -1,4 +1,4 @@
-import { Browser } from "./device.interface";
+import { Browser } from "./browser.interface";
 import { Environment } from "./environment.interface";
 import { Tester } from "./tester.interface";
 

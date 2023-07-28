@@ -1,1 +1,42 @@
-<p>browsers works!</p>
+<div class="right-content">
+  <div class="header">
+    <h2>Browsers</h2>
+  </div>
+  <div>
+    <div class="card">
+      <div class="ui-uat-ext-steps">
+        <div class="ui-uat-ext-step ui-uat-ext-table-header">
+          <div class="ui-uat-ext-step-description border-none width-full">Browser</div>
+        </div>
+        <div class="ui-uat-ext-step" *ngFor="let browser of browsers; index as i">
+          <div class="ui-uat-ext-step-expectedResults border-none width-full">{{browser?.name}}</div>
+          <app-more-button-menu [actions]="actions" (onAction)="onAction($event, browser.browserId)" class="item-start"></app-more-button-menu>
+        </div>
+        <div class="ui-uat-ext-step no-pointer-events" *ngIf="browsers.length==0">
+          <div class="ui-uat-ext-step-expectedResults border-none width-full">No browser found</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-between items-center btn-link-group">
+    <div class="btn-group">
+      <button (click)="toggleCreateModal()">Add browser</button>
+    </div>
+  </div>
+</div>
+
+<app-modal *ngIf="createModalOn" (closeModal)="cancel()"  [propClass]="'width-full'">
+  <app-create-browser
+    (cancel)="cancel()"
+    (onBrowserSaved)="onBrowserSaved()"
+    [browserToEdit]="browserToEdit">
+  </app-create-browser>
+</app-modal>
+
+<app-modal *ngIf="deleteModalOn" (closeModal)="toggleDeleteModal()" >
+  <app-delete-browser
+    (cancel)="toggleDeleteModal()"
+    (onBrowserDeleted)="onBrowserDeleted()"
+    [browserToDelete]="browserToDelete">
+  </app-delete-browser>
+</app-modal>

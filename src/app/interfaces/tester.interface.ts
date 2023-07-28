@@ -1,4 +1,4 @@
-import { Browser } from "./device.interface";
+import { Browser } from "./browser.interface";
 
 export interface Tester {
     testerId?: number,
