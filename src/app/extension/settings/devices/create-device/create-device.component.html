@@ -1,1 +1,27 @@
-<p>create-device works!</p>
+<div>
+  <h3 *ngIf="!deviceToEdit">Create device</h3>
+  <h3 *ngIf="deviceToEdit">Edit device</h3>
+  <div class="spacer-1"></div>
+  <div class="width-full">
+    <form [formGroup]="deviceForm" novalidate #form autocomplete="off">
+      <div class="form-container">
+        <label for="name">Name:</label>
+        <input type="text" id="name" formControlName="name">
+        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="form-error-message">
+          <div *ngIf="name.errors?.['required']">
+            Name is required.
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="btn-group">
+      <button class="" data-listener="off" (click)="onSubmit()">
+        <span>Submit</span>
+      </button>
+      <button class="btn-danger"  data-listener="off" (click)="onCancel()"  >
+        <span>Cancel</span>
+    </button>
+    </div>
+  </div>
+</div>
+

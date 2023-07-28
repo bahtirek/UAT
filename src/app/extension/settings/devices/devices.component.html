@@ -1,1 +1,42 @@
-<p>devices works!</p>
+<div class="right-content">
+  <div class="header">
+    <h2>Devices</h2>
+  </div>
+  <div>
+    <div class="card">
+      <div class="ui-uat-ext-steps">
+        <div class="ui-uat-ext-step ui-uat-ext-table-header">
+          <div class="ui-uat-ext-step-description border-none width-full">Device</div>
+        </div>
+        <div class="ui-uat-ext-step" *ngFor="let device of devices; index as i">
+          <div class="ui-uat-ext-step-expectedResults border-none width-full">{{device?.name}}</div>
+          <app-more-button-menu [actions]="actions" (onAction)="onAction($event, device.deviceId)" class="item-start"></app-more-button-menu>
+        </div>
+        <div class="ui-uat-ext-step no-pointer-events" *ngIf="devices.length==0">
+          <div class="ui-uat-ext-step-expectedResults border-none width-full">No device found</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-between items-center btn-link-group">
+    <div class="btn-group">
+      <button (click)="toggleCreateModal()">Add device</button>
+    </div>
+  </div>
+</div>
+
+<app-modal *ngIf="createModalOn" (closeModal)="cancel()"  [propClass]="'width-full'">
+  <app-create-device
+    (cancel)="cancel()"
+    (onDeviceSaved)="onDeviceSaved()"
+    [deviceToEdit]="deviceToEdit">
+  </app-create-device>
+</app-modal>
+
+<app-modal *ngIf="deleteModalOn" (closeModal)="toggleDeleteModal()" >
+  <app-delete-device
+    (cancel)="toggleDeleteModal()"
+    (onDeviceDeleted)="onDeviceDeleted()"
+    [deviceToDelete]="deviceToDelete">
+  </app-delete-device>
+</app-modal>
