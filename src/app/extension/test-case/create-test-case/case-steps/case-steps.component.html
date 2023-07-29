@@ -38,7 +38,7 @@
   <a (click)="backToDetails()">Back to Details</a>
   <div class="btn-group">
     <button (click)="onImportSteps()">Import steps</button>
-    <button (click)="onStepAdd()">Add new step</button>
+    <button (click)="onStepAdd()">Create new step</button>
   </div>
 </div>
 <app-modal *ngIf="isAddStepModalOn" (closeModal)="toggleModal('addNewStepModal')" [propClass]="'width-full'">
