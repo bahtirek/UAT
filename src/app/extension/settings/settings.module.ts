@@ -18,6 +18,7 @@ import { DeleteProjectComponent } from './projects/delete-project/delete-project
 import { EnvironmentComponent } from './environment/environment.component';
 import { CreateEnvironmentComponent } from './environment/create-environment/create-environment.component';
 import { DeleteEnvironmentComponent } from './environment/delete-environment/delete-environment.component';
+import { ProjectDetailsComponent } from './projects/project-details/project-details.component';
 
 const routes: Routes = [
   {
@@ -62,7 +63,8 @@ const routes: Routes = [
     DeleteProjectComponent,
     EnvironmentComponent,
     CreateEnvironmentComponent,
-    DeleteEnvironmentComponent
+    DeleteEnvironmentComponent,
+    ProjectDetailsComponent
   ],
   imports: [
     CommonModule,

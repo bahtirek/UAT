@@ -11,6 +11,7 @@ import { Directory, ServerResponse } from '../interfaces/directory.interface';
 export class ProjectService {
 
   url = api.url;
+  projectId: number;
 
   constructor(private http: HttpClient) { }
 

@@ -45,3 +45,9 @@
     [projectToDelete]="projectToDelete">
   </app-delete-project>
 </app-modal>
+
+<app-modal *ngIf="detailsModalOn" (closeModal)="toggleDetailsModal()" [propClass]="'width-full'">
+  <app-project-details
+    (cancel)="toggleDetailsModal()">
+  </app-project-details>
+</app-modal>
