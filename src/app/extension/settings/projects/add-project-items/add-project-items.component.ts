@@ -9,7 +9,7 @@ import { DeviceService } from 'src/app/services/device.service';
 })
 export class AddProjectItemsComponent implements OnInit {
 
-  addItemModalOn: any;
+  createItemModalOn: any;
 
 
   constructor(private deviceService: DeviceService) { }
@@ -138,8 +138,20 @@ export class AddProjectItemsComponent implements OnInit {
   toggleDeleteModal(){
     this.deleteModalOn = !this.deleteModalOn
   }
-  toggleAddItemModal(){
-    this.addItemModalOn = !this.addItemModalOn
+
+  toggleCreateItemModal(){
+    this.createItemModalOn = !this.createItemModalOn
+  }
+
+  cancel(){
+    this.toggleCreateItemModal()
+  }
+
+  onDeviceSaved(item: any) {
+    item.state = true;
+    this.projectItems.push(item)
+    this.items.push(item)
+    this.toggleCreateItemModal();
   }
 
   onAction(event: string, itemId: number){

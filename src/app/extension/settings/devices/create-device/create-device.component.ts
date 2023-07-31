@@ -23,7 +23,7 @@ export class CreateDeviceComponent implements OnInit {
 
   @Input() deviceToEdit: number;
   @Input() productId: number;
-  @Output() onDeviceSaved = new EventEmitter<void>()
+  @Output() onDeviceSaved = new EventEmitter<Device>()
   @Output() cancel = new EventEmitter<void>()
 
   constructor(private fb: FormBuilder, private deviceService: DeviceService) { }
@@ -72,7 +72,7 @@ export class CreateDeviceComponent implements OnInit {
     this.deviceService.addDevice(device).subscribe({
       next: (response) => {
         console.log(response);
-        this.onDeviceSaved.next();
+        this.onDeviceSaved.next(response);
       },
       error: (error) => {
         console.log(error)
@@ -88,7 +88,7 @@ export class CreateDeviceComponent implements OnInit {
     this.deviceService.updateDevice(device).subscribe({
       next: (response) => {
         console.log(response);
-        this.onDeviceSaved.next();
+        this.onDeviceSaved.next(response);
       },
       error: (error) => {
         console.log(error)

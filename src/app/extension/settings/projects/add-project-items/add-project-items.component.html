@@ -22,6 +22,12 @@
 </div>
 <div class="flex justify-between items-center btn-link-group">
   <div class="btn-group">
-    <button (click)="toggleAddItemModal()">Create {{itemName}}</button>
+    <button (click)="toggleCreateItemModal()">Create {{itemName}}</button>
   </div>
 </div>
+<app-modal *ngIf="createItemModalOn" (closeModal)="cancel()"  [propClass]="'width-full'">
+  <app-create-device
+    (cancel)="cancel()"
+    (onDeviceSaved)="onDeviceSaved($event)">
+  </app-create-device>
+</app-modal>
