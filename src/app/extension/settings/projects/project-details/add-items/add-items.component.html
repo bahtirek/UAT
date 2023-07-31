@@ -7,7 +7,9 @@
       </div>
       <div class="ui-uat-ext-step" *ngFor="let item of items; index as i">
         <div class="ui-uat-ext-step-expectedResults border-none width-full">{{item?.name}}</div>
-        <app-more-button-menu [actions]="actions" (onAction)="onAction($event, item.itemId)" class="item-start"></app-more-button-menu>
+        <div class="">
+          <input type="checkbox" name="jira">
+        </div>
       </div>
       <div class="ui-uat-ext-step no-pointer-events" *ngIf="items.length==0">
         <div class="ui-uat-ext-step-expectedResults border-none width-full">No item found</div>
@@ -16,14 +18,14 @@
   </div>
   <div class="flex justify-between items-center btn-link-group">
     <div class="btn-group">
-      <button (click)="toggleAddItemModal()">Add {{itemName}}</button>
+      <button (click)="toggleCreateModal()">Creat {{itemName}}</button>
     </div>
   </div>
 </div>
-<app-modal *ngIf="addItemModalOn" (closeModal)="toggleAddItemModal()" [propClass]="'width-full'">
-  <app-add-items
-    (cancel)="toggleAddItemModal()"
-    [setItemName]="itemName"
-  >
-  </app-add-items>
+
+<app-modal *ngIf="createModalOn" (closeModal)="cancel()"  [propClass]="'width-full'">
+  <app-create-device
+    (cancel)="cancel()"
+    (onDeviceSaved)="onDeviceSaved()">
+  </app-create-device>
 </app-modal>

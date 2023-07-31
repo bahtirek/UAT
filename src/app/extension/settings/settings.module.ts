@@ -19,6 +19,8 @@ import { EnvironmentComponent } from './environment/environment.component';
 import { CreateEnvironmentComponent } from './environment/create-environment/create-environment.component';
 import { DeleteEnvironmentComponent } from './environment/delete-environment/delete-environment.component';
 import { ProjectDetailsComponent } from './projects/project-details/project-details.component';
+import { AddItemsComponent } from './projects/project-details/add-items/add-items.component';
+import { AddProjectItemsComponent } from './projects/add-project-items/add-project-items.component';
 
 const routes: Routes = [
   {
@@ -64,7 +66,9 @@ const routes: Routes = [
     EnvironmentComponent,
     CreateEnvironmentComponent,
     DeleteEnvironmentComponent,
-    ProjectDetailsComponent
+    ProjectDetailsComponent,
+    AddItemsComponent,
+    AddProjectItemsComponent
   ],
   imports: [
     CommonModule,

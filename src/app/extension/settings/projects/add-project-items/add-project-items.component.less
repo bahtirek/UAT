@@ -1,0 +1,24 @@
+.project-items-card {
+  min-height: 200px;
+  padding: 0 !important;
+  width: 100%;
+  .add-project-item {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    .width-full {
+      padding-left: 10px;
+    }
+    .add-project-item-icon {
+      display: none;
+      cursor: pointer;
+      padding-right: 10px;
+    }
+    &:hover {
+      background-color: #f7f7f7;
+      .add-project-item-icon {
+        display: flex;
+      }
+    }
+  }
+}

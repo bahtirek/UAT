@@ -46,8 +46,18 @@
   </app-delete-project>
 </app-modal>
 
-<app-modal *ngIf="detailsModalOn" (closeModal)="toggleDetailsModal()" [propClass]="'width-full'">
+<!-- <app-modal *ngIf="detailsModalOn" (closeModal)="toggleDetailsModal()" [propClass]="'width-full'">
   <app-project-details
-    (cancel)="toggleDetailsModal()">
+    (cancel)="toggleDetailsModal()"
+    [setItemName]="itemName"
+  >
   </app-project-details>
+</app-modal>
+ -->
+<app-modal *ngIf="detailsModalOn" (closeModal)="toggleDetailsModal()" [propClass]="'width-full'">
+  <app-add-project-items
+  (cancel)="toggleDetailsModal()"
+    [setItemName]="itemName"
+  >
+  </app-add-project-items>
 </app-modal>

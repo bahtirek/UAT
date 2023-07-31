@@ -1,0 +1,27 @@
+<div class="spacer-2"></div>
+<h3 class="text-primary capital">{{itemName}}s</h3>
+<div class="flex flex-gap">
+  <div class="card project-items-card">
+    <div *ngFor="let item of items; index as i">
+      <div class="add-project-item" *ngIf="!item.state">
+        <div class="width-full">{{item?.name}}</div>
+        <span class="add-project-item-icon" (click)="onAddItemClick(item)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#17b564" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-right"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="card project-items-card">
+    <div class="add-project-item" *ngFor="let projectItem of projectItems; index as i">
+      <div class="width-full">{{projectItem?.name}}</div>
+      <span class="add-project-item-icon" (click)="onDeleteItemClick(projectItem, i)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fd3e3e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+      </span>
+    </div>
+  </div>
+</div>
+<div class="flex justify-between items-center btn-link-group">
+  <div class="btn-group">
+    <button (click)="toggleAddItemModal()">Create {{itemName}}</button>
+  </div>
+</div>

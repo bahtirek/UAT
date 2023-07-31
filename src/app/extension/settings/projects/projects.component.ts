@@ -46,6 +46,7 @@ export class ProjectsComponent implements OnInit {
   projectToDelete: number;
   deleteModalOn: boolean;
   detailsModalOn: any;
+  itemName: string;
 
   constructor(private projectService: ProjectService, private router: Router, private route: ActivatedRoute) { }
 
@@ -104,7 +105,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   onDetails(item: string){
-    console.log(item);
+    this.itemName = item
     this.toggleDetailsModal()
   }
 
@@ -112,9 +113,9 @@ export class ProjectsComponent implements OnInit {
     switch (event) {
       case 'edit': this.onEdit(projectId); break;
       case 'delete': this.onDelete(projectId); break;
-      case 'environments': this.onDetails('environments'); break;
-      case 'devices': this.onDetails('devices'); break;
-      case 'browsers': this.onDetails('browsers'); break;
+      case 'environments': this.onDetails('environment'); break;
+      case 'devices': this.onDetails('device'); break;
+      case 'browsers': this.onDetails('browser'); break;
     }
   }
 }
